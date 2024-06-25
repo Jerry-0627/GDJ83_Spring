@@ -3,6 +3,8 @@ package com.jerry.app.departments;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -20,7 +22,7 @@ public class DepartmentDAO {
 	@Autowired
 	private DBConnection dbConnection;
 
-	public void getList() throws Exception {
+	public List<DepartmentDTO> getList() throws Exception {
 		Connection con = dbConnection.getConnection();
 		System.out.println(con);
 
@@ -37,10 +39,18 @@ public class DepartmentDAO {
 		// st.executeQuery()가 최종 전송이고 결과는 rs에 담겠다는 것
 		ResultSet rs = st.executeQuery();
 
+		ArrayList<DepartmentDTO> ar = new ArrayList<DepartmentDTO>();
+
 		while (rs.next()) {
+			DepartmentDTO departmentDTO = new DepartmentDTO();
 			int id = rs.getInt("DEPARTMENT_ID");
 			String name = rs.getString("DEPARTMENT_NAME");
-			System.out.println(id + " : " + name);
+
+			departmentDTO.setDepartment_id(id);
+			departmentDTO.setDepartment_name(name);
+			departmentDTO.setManager_id(rs.getLong("MANAGER_ID"));
+			departmentDTO.setLocation_id(rs.getInt("LOCATION_ID"));
+			ar.add(departmentDTO);
 		}
 
 		// 끝났으면 자원 해제 (db랑 연결되어 있으니꼐)
@@ -48,5 +58,7 @@ public class DepartmentDAO {
 		st.close();
 		con.close();
 
+		// 데이터를 return 해줘야 하는데 그거 때문에 DTO가 필요하다
+		return ar;
 	}
 }

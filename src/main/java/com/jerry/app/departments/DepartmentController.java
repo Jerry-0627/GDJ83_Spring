@@ -1,10 +1,12 @@
 package com.jerry.app.departments;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-//컨트롤러는 service가 있어야일할 수 있음.
 
 @Controller
 @RequestMapping("/department/*")
@@ -21,12 +23,32 @@ public class DepartmentController {
 	private DepartmentService departmentService;
 
 	@RequestMapping(value = "list", method = RequestMethod.GET)
+	// 위에 @RequestMapping(value = "list", method = RequestMethod.GET) 에서 method는
+	// 기본적으로 get 메소드이기 떄문에
+	// @RequestMapping("list")와 같이 써도 옳다.
 	// 어떤 유알엘이 왔을 떄 하라.
-	public void getList() throws Exception {
+	public void getList(Model model) throws Exception {
 		// 접근지정자 그외지정자 리턴타입(void)
 		System.out.println("department list");
 		// url 경로와 jsp 경로가 같으면 리턴을 따로 해주지 않아도 됨.
-		departmentService.getList();
+		List<DepartmentDTO> ar = departmentService.getList();
+
+		// request와 비슷한 역할을 함.
+		model.addAttribute("list", ar);
 	}
+
+//	방법 1
+//	public ModelAndView getList() throws Exception {
+//		// 접근지정자 그외지정자 리턴타입(void)
+//		System.out.println("department list");
+//		// url 경로와 jsp 경로가 같으면 리턴을 따로 해주지 않아도 됨.
+//		List<DepartmentDTO> ar = departmentService.getList();
+//
+//		// Model+ View
+//		ModelAndView mv = new ModelAndView();
+//		// setAttribute와 같은거임
+//		mv.addObject("list", ar);
+//
+//		return mv;
 
 }
