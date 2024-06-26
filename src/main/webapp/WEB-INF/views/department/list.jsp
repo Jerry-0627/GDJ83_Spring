@@ -11,7 +11,7 @@
 <body>
 	<h1>부서 리스트</h1>
 	
-	<div class="row col-md-8">
+	<div>
 		<div>
 			<a href="./add" class = "btn btn-outline-success">부서등록</a>
 		</div>

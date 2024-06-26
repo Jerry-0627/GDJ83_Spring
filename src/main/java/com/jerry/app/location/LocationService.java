@@ -18,4 +18,8 @@ public class LocationService {
 	public LocationDTO getDetail(int num) throws Exception {
 		return locationDAO.getDetail(num);
 	}
+
+	public int add(LocationDTO locationDTO) throws Exception {
+		return locationDAO.add(locationDTO);
+	}
 }

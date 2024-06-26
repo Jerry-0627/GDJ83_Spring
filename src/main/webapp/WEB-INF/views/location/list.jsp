@@ -11,7 +11,11 @@
 </head>
 <body>
 	<h1>위치 리스트</h1>
+	<div>
+		<a href="./add" class = "btn btn-outline-success">부서등록</a>
+	</div>
 	<table Class="table table-dark table-hover">
+	
 		<thead>
 			<tr>
 				<th>지역 ID</th>

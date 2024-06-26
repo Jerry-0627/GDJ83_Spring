@@ -26,6 +26,24 @@ public class LocationController {
 		System.out.println("로케이션 디테일");
 		LocationDTO dto = locationService.getDetail(location_id);
 		model.addAttribute("detail", dto);
-
 	}
+
+	@RequestMapping(value = "add", method = RequestMethod.GET)
+	public void add() {
+	}
+
+	@RequestMapping(value = "add", method = RequestMethod.POST)
+	public String add(LocationDTO locationDTO, Model model) throws Exception {
+		int result = locationService.add(locationDTO);
+		String url = "";
+		if (result > 0) {
+			url = "redirect:list";
+		} else {
+			url = "commons/message";
+			model.addAttribute("result", "지역 등록 실패");
+			model.addAttribute("url", "./list");
+		}
+		return url;
+	}
+
 }

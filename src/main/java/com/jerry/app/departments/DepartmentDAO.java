@@ -106,8 +106,8 @@ public class DepartmentDAO {
 	public int add(DepartmentDTO departmentDTO) throws Exception {
 		// 1. DB 연결
 		Connection con = dbConnection.getConnection();
-		String sql = "INSERT INTO DEPARTMENTS " + " (DEPARMENT_ID, DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID)"
-				+ " VALUES(DEPARTMENT_SEQ.NEXTVALUE, ?, ?, ?)";
+		String sql = "INSERT INTO DEPARTMENTS" + " (DEPARTMENT_ID, DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID)"
+				+ " VALUES(DEPARTMENTS_SEQ.NEXTVAL, ?, ?, ?)";
 
 		PreparedStatement st = con.prepareStatement(sql);
 		st.setString(1, departmentDTO.getDepartment_name());
@@ -116,6 +116,37 @@ public class DepartmentDAO {
 
 		// st.executeQuery() 데이터를 보내서 받아오는 것, insert는 데이터를 받아오는 것이 아님 그래서 메서드가 다름
 		int result = st.executeUpdate();
+
+		st.close();
+		con.close();
+
+		return result;
+	}
+
+	public int delete(DepartmentDTO departmentDTO) throws Exception {
+		Connection con = dbConnection.getConnection();
+		String sql = "DELETE DEPARTMENTS WHERE DEPARTMENT_ID = ?";
+		PreparedStatement st = con.prepareStatement(sql);
+		st.setInt(1, departmentDTO.getDepartment_id());
+		int result = st.executeUpdate();
+
+		st.close();
+		con.close();
+
+		return result;
+	}
+
+	public int update(DepartmentDTO departmentDTO) throws Exception {
+		int result = 0;
+		Connection con = dbConnection.getConnection();
+		String sql = "UPDATE DEPARTMENTS SET DEPARTMENT_NAME=?, MANAGER_ID=?, LOCATION_ID=? WHERE DEPARTMENT_ID=?";
+		PreparedStatement st = con.prepareStatement(sql);
+		st.setString(1, departmentDTO.getDepartment_name());
+		st.setLong(2, departmentDTO.getManager_id());
+		st.setInt(3, departmentDTO.getLocation_id());
+		st.setInt(4, departmentDTO.getLocation_id());
+
+		result = st.executeUpdate();
 
 		st.close();
 		con.close();

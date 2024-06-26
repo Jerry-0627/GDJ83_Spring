@@ -66,4 +66,25 @@ public class LocationDAO {
 
 		return dto;
 	}
+
+	public int add(LocationDTO locationDTO) throws Exception {
+
+		Connection con = dbconnection.getConnection();
+		String sql = "INSERT INTO LOCATIONS (LOCATION_ID, STREET_ADDRESS, POSTAL_CODE, CITY, STATE_PROVINCE, COUNTRY_ID) "
+				+ " VALUES(LOCATIONS_SEQ.NEXTVAL, ?, ?, ?, ?, ?)";
+		PreparedStatement st = con.prepareStatement(sql);
+		st.setString(1, locationDTO.getStreet_address());
+		st.setString(2, locationDTO.getPostal_code());
+		st.setString(3, locationDTO.getCity());
+		st.setString(4, locationDTO.getState_province());
+		st.setString(5, locationDTO.getCountry_id());
+
+		int result = st.executeUpdate();
+
+		st.close();
+		con.close();
+
+		return result;
+
+	}
 }

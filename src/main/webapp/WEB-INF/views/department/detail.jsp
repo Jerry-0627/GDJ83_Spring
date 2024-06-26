@@ -14,5 +14,10 @@
 	<h3>${dto.manager_id}</h3>
 	<h3>${dto.location_id}</h3>
 	
+	<a href="./delete?department_id=${dto.department_id}">삭제</a>
+	
+	<a href="./update?department_id=${dto.department_id}">수정</a>
+	
+	
 </body>
 </html>

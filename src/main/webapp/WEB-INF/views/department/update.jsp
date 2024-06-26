@@ -10,21 +10,23 @@
 <body>
 	<div class="container">
 		<div class="row">
-			<h1>부서 등록 폼</h1>
+			<h1>부서 수정 폼</h1>
 		</div>
 		<div class = "row">
-			<form action="./add" method="post">
+			<form action="./update" method="post">
+				<input type = "hidden" name = "department_id" value = "${update.department_id}">
+			
 				<div class="mb-3">
 				 	<label for="department_name" class="form-label">부서명</label>
-				  	<input type="text" class="form-control" id="department_name" name = "department_name">
+				  	<input type="text" value="${update.department_name}" class="form-control" id="department_name" name = "department_name">
 				</div>
 				<div class="mb-3">
 				 	<label for="manager_id" class="form-label">관리자 번호</label>
-				  	<input type="text" class="form-control" id="manager_id" name = "manager_id">
+				  	<input type="text" value="${update.manager_id}"  class="form-control" id="manager_id" name = "manager_id">
 				</div>
 							<div class="mb-3">
 				 	<label for="location_id" class="form-label">지역 번호</label>
-				  	<input type="text" class="form-control" id="location_id" name = "location_id">
+				  	<input type="text" value="${update.location_id}"  class="form-control" id="location_id" name = "location_id">
 				</div>
 				
 				
