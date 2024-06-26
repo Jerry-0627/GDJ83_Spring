@@ -12,6 +12,9 @@
 	<h1>부서 리스트</h1>
 	
 	<div class="row col-md-8">
+		<div>
+			<a href="./add" class = "btn btn-outline-success">부서등록</a>
+		</div>
 		<table Class="table table-dark table-hover">
 			<thead>
 				<tr>
@@ -29,13 +32,17 @@
 					<tr>
 					<!-- get 뺴고 세터게터 첫번째 문자를 소문자.. -->
 						<td>${dto.department_id}</td>
-						<td>${dto.department_name}</td>
+						<%-- <td><a href = "./detail}">${dto.department_name}</a></td> --%>
+						<td><a href = "./detail?department_id=${dto.department_id}">${dto.department_name}</a></td>
+						<!-- href = "detail" 으로 써도됨. ./ 는 생략 가능 -->
 						<td>${dto.manager_id}</td>
 						<td>${dto.location_id}</td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
+
+		
 	</div>
 
 

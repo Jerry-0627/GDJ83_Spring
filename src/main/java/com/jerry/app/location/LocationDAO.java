@@ -42,4 +42,28 @@ public class LocationDAO {
 
 		return ar;
 	}
+
+	public LocationDTO getDetail(int num) throws Exception {
+		Connection con = dbconnection.getConnection();
+		String sql = "SELECT * FROM LOCATIONS WHERE LOCATION_ID = ?";
+		PreparedStatement st = con.prepareStatement(sql);
+		st.setInt(1, num);
+		ResultSet rs = st.executeQuery();
+		LocationDTO dto = null;
+		if (rs.next()) {
+			dto = new LocationDTO();
+			dto.setLocation_id(rs.getInt("LOCATION_ID"));
+			dto.setStreet_address(rs.getString("STREET_ADDRESS"));
+			dto.setPostal_code(rs.getString("POSTAL_CODE"));
+			dto.setCity(rs.getString("CITY"));
+			dto.setState_province(rs.getString("STATE_PROVINCE"));
+			dto.setCountry_id(rs.getString("COUNTRY_ID"));
+		}
+
+		rs.close();
+		st.close();
+		con.close();
+
+		return dto;
+	}
 }

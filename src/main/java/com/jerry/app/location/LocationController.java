@@ -20,4 +20,12 @@ public class LocationController {
 		System.out.println(ar);
 		model.addAttribute("list", ar);
 	}
+
+	@RequestMapping("detail")
+	public void getDetail(Model model, int location_id) throws Exception {
+		System.out.println("로케이션 디테일");
+		LocationDTO dto = locationService.getDetail(location_id);
+		model.addAttribute("detail", dto);
+
+	}
 }

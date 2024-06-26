@@ -27,6 +27,8 @@ public class DepartmentController {
 	// 기본적으로 get 메소드이기 떄문에
 	// @RequestMapping("list")와 같이 써도 옳다.
 	// 어떤 유알엘이 왔을 떄 하라.
+
+// 방법 1
 	public void getList(Model model) throws Exception {
 		// 접근지정자 그외지정자 리턴타입(void)
 		System.out.println("department list");
@@ -37,18 +39,59 @@ public class DepartmentController {
 		model.addAttribute("list", ar);
 	}
 
-//	방법 1
+//	방법 2
 //	public ModelAndView getList() throws Exception {
 //		// 접근지정자 그외지정자 리턴타입(void)
 //		System.out.println("department list");
 //		// url 경로와 jsp 경로가 같으면 리턴을 따로 해주지 않아도 됨.
 //		List<DepartmentDTO> ar = departmentService.getList();
-//
 //		// Model+ View
 //		ModelAndView mv = new ModelAndView();
 //		// setAttribute와 같은거임
 //		mv.addObject("list", ar);
-//
 //		return mv;
+
+//	방법 3
+//	public String getList() throws Exception {
+//		// 접근지정자 그외지정자 리턴타입(void)
+//		System.out.println("department list");
+//		List<DepartmentDTO> ar = departmentService.getList();
+//		// Model+ View
+//		ModelAndView mv = new ModelAndView();
+//		mv.setViewName("department/list");
+//		return mv;
+
+	@RequestMapping("detail")
+	// @RequestParam(name = "num") int department_id 파라미터 이름이 num이 들어오면 num으로 들어온 값을
+	// int department_id 를 넣어라.
+	// 파라미터의 이름과 컨트롤에 선언된 이름이 일치하지 않은 경우 이런 식으로 매칭해줌.
+	// defaultValue를 통해 기본값을 정할 수 있다.
+//	public void getDetail(Model model, @RequestParam(name = "num", defaultValue = "10") int department_id)
+//			throws Exception {
+// 	없는 department_id가 왔을 떄 message로 가려면 리턴 타입을 void로 하면 안됨.
+	public String getDetail(Model model, int department_id) throws Exception {
+		System.out.println("Detail 실행됨.");
+		DepartmentDTO departmentDTO = departmentService.getDetail(department_id);
+		String path = "commons/message";
+		if (departmentDTO != null) {
+			model.addAttribute("dto", departmentDTO);
+			path = "department/detail";
+		} else {
+			model.addAttribute("result", "부서를 찾을수가 없다.");
+//			path = "commons/message";
+			model.addAttribute("url", "./list");
+		}
+		return path;
+	}
+
+	@RequestMapping(value = "add", method = RequestMethod.GET)
+	public void add() {
+		System.out.println("애드 get");
+	}
+
+	@RequestMapping(value = "add", method = RequestMethod.POST)
+	public void add2() {
+
+	}
 
 }
