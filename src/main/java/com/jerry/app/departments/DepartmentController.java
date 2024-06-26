@@ -123,9 +123,11 @@ public class DepartmentController {
 		DepartmentDTO departmentDTO = departmentService.getDetail(department_id);
 		String url = "commons/message";
 		if (departmentDTO != null) {
+			System.out.println("실행됨");
 			model.addAttribute("update", departmentDTO);
 			url = "department/update";
 		} else {
+			System.out.println("실행 안됨");
 			model.addAttribute("result", "없는 부서");
 			model.addAttribute("url", "list");
 		}
@@ -134,7 +136,7 @@ public class DepartmentController {
 
 	@RequestMapping(value = "update", method = RequestMethod.POST)
 	public String update(DepartmentDTO departmentDTO) throws Exception {
-
+		System.out.println("아아아!");
 		int result = departmentService.update(departmentDTO);
 		return "redirect:list";
 	}

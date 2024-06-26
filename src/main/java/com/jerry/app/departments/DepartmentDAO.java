@@ -144,7 +144,7 @@ public class DepartmentDAO {
 		st.setString(1, departmentDTO.getDepartment_name());
 		st.setLong(2, departmentDTO.getManager_id());
 		st.setInt(3, departmentDTO.getLocation_id());
-		st.setInt(4, departmentDTO.getLocation_id());
+		st.setInt(4, departmentDTO.getDepartment_id());
 
 		result = st.executeUpdate();
 
