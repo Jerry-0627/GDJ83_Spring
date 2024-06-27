@@ -19,7 +19,6 @@ public class LocationDAO {
 
 	public List<LocationDTO> getList() throws Exception {
 		Connection con = dbconnection.getConnection();
-		System.out.println(con);
 		String sql = "SELECT * FROM LOCATIONS ORDER BY LOCATION_ID ASC";
 		PreparedStatement st = con.prepareStatement(sql);
 		ResultSet rs = st.executeQuery();

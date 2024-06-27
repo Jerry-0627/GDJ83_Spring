@@ -11,6 +11,15 @@
 <body>
 	<h1>부서 리스트</h1>
 	
+	<div class="row">
+		<!-- items= 속성명 -->
+		<c:forEach items="${info}" var="m">
+			<h3>${m.id}</h3>
+			<h3>${m.sum}</h3>
+			<h3>${m.avg}</h3>
+		</c:forEach>
+	</div>
+	
 	<div>
 		<div>
 			<a href="./add" class = "btn btn-outline-success">부서등록</a>

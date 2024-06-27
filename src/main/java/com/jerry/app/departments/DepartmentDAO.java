@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -24,8 +26,6 @@ public class DepartmentDAO {
 
 	public List<DepartmentDTO> getList() throws Exception {
 		Connection con = dbConnection.getConnection();
-		System.out.println(con);
-
 		// SQL(Query)문 작성
 		// SQL 끝엔 원래 ; 붙였는데 자바에선느 안씀
 		String sql = "SELECT * FROM DEPARTMENTS ORDER BY DEPARTMENT_ID ASC";
@@ -152,5 +152,32 @@ public class DepartmentDAO {
 		con.close();
 
 		return result;
+	}
+
+	public List<Map<String, Object>> getInfo() throws Exception {
+		Connection con = dbConnection.getConnection();
+		String sql = "SELECT DEPARTMENT_ID , SUM(SALARY), AVG(SALARY) a FROM EMPLOYEES GROUP BY DEPARTMENT_ID";
+		PreparedStatement st = con.prepareStatement(sql);
+		ResultSet rs = st.executeQuery();
+
+		// map 만들고 값을 담아야함
+		List<Map<String, Object>> ar = new ArrayList<Map<String, Object>>();
+
+		while (rs.next()) {
+			// dto쓸 때 자원 낭비가 발생하면 보통 이것들 처럼 한번만 쓰고 버릴 것들은 Map을 쓴다
+			Map<String, Object> map = new HashMap<String, Object>();
+			int id = rs.getInt("DEPARTMENT_ID");
+			int sum = rs.getInt(2);
+			double avg = rs.getDouble("a");
+			map.put("id", id);
+			map.put("sum", sum);
+			map.put("avg", avg);
+			ar.add(map);
+		}
+		rs.close();
+		st.close();
+		con.close();
+
+		return ar;
 	}
 }

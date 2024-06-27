@@ -1,6 +1,7 @@
 package com.jerry.app.departments;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,9 +35,11 @@ public class DepartmentController {
 		System.out.println("department list");
 		// url 경로와 jsp 경로가 같으면 리턴을 따로 해주지 않아도 됨.
 		List<DepartmentDTO> ar = departmentService.getList();
+		List<Map<String, Object>> list = departmentService.getinfo();
 
 		// request와 비슷한 역할을 함.
 		model.addAttribute("list", ar);
+		model.addAttribute("info", list);
 	}
 
 //	방법 2
@@ -140,4 +143,5 @@ public class DepartmentController {
 		int result = departmentService.update(departmentDTO);
 		return "redirect:list";
 	}
+
 }

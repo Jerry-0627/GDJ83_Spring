@@ -17,7 +17,6 @@ public class LocationController {
 	@RequestMapping(value = "list", method = RequestMethod.GET)
 	public void getList(Model model) throws Exception {
 		List<LocationDTO> ar = locationService.getList();
-		System.out.println(ar);
 		model.addAttribute("list", ar);
 	}
 
