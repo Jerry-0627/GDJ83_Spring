@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/product/*")
 public class ProductController {
 	@Autowired
+	// 객체를 주입해라. ProductService 타입인
 	private ProductService productService;
 
 	@RequestMapping(value = "list", method = RequestMethod.GET)
@@ -31,9 +32,20 @@ public class ProductController {
 
 	}
 
-	@RequestMapping(value = "add")
-	public void getadd() {
+	@RequestMapping(value = "add", method = RequestMethod.GET)
+	public void doadd() {
+		System.out.println("add의 Get 타입");
+	}
 
+	@RequestMapping(value = "add", method = RequestMethod.POST)
+	public String doadd(ProductDTO productDTO, Model model) throws Exception {
+		int result = productService.doadd(productDTO);
+		String url = "";
+		if (result > 0) {
+			url = "./list";
+		} else {
+		}
+		return url;
 	}
 
 }

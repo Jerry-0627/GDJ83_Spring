@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProductService {
 	@Autowired
+	// DAO가 필요ㅐ서
 	private ProductDAO productDAO;
 
 	public List<ProductDTO> getlist() throws Exception {
@@ -20,5 +21,10 @@ public class ProductService {
 		ProductDTO dto = productDAO.getdetail(productDTO);
 
 		return dto;
+	}
+
+	public int doadd(ProductDTO productDTO) throws Exception {
+		int i = productDAO.doadd(productDTO);
+		return i;
 	}
 }

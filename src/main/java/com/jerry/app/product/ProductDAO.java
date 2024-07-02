@@ -62,6 +62,24 @@ public class ProductDAO {
 		con.close();
 
 		return dto;
+	}
+
+	public int doadd(ProductDTO productDTO) throws Exception {
+		Connection con = dbConnection.getConnection();
+		String sql = "INSERT INTO PRODUCT_INFO VALUES (PRODUCT_SEQ.nexval, ?, ? ,?)";
+		// 시작(1) ~
+		PreparedStatement st = con.prepareStatement(sql);
+		st.setString(1, productDTO.getProduct_Name());
+		st.setDouble(2, productDTO.getProduct_Rate());
+		st.setString(3, productDTO.getProduct_Ex());
+		// ~ 끝(1) 에서
+
+		int result = st.executeUpdate();
+
+		st.close();
+		con.close();
+
+		return result;
 
 	}
 }
