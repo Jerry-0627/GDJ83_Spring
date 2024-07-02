@@ -24,7 +24,7 @@ public class ProductService {
 	}
 
 	public int doadd(ProductDTO productDTO) throws Exception {
-		int i = productDAO.doadd(productDTO);
-		return i;
+		int result = productDAO.doadd(productDTO);
+		return result;
 	}
 }

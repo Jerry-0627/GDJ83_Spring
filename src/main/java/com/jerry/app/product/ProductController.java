@@ -42,10 +42,18 @@ public class ProductController {
 		int result = productService.doadd(productDTO);
 		String url = "";
 		if (result > 0) {
-			url = "./list";
+			url = "redirect:./list";
 		} else {
+			url = "commons/message";
+			model.addAttribute("result", "금융상품 추가 실패");
+			model.addAttribute("url", "./list");
 		}
 		return url;
+	}
+	
+	@RequestMapping(value = "delete")
+	public void dedelete() {
+		
 	}
 
 }

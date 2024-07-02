@@ -34,6 +34,8 @@
 	</table>
 	<div>
 			<a href="./add" class = "btn btn-outline-primary">금융상품 등록</a>
+			<a href="./delete" class = "btn btn-outline-danger">금융상품 취소</a>
+			
 	</div>
 	<c:import url="/WEB-INF/views/sample/bootFooter.jsp"></c:import>
 </body>

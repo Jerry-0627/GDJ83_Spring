@@ -18,16 +18,20 @@
 		<div class = "row">
 			<form action="./add" method="post">
 				<div class="mb-3">
-					<label for="manager_id" class="form-label">상품 이름</label>
-				  	<input type="text" class="form-control" id="manager_id" name = "manager_id">
+					<label for="Product_Num" class="form-label">상품 번호</label>
+				  	<input type="text" class="form-control" id="Product_Num" name = "Product_Num"  placeholder = "자동으로 입력됨" disabled>
 				</div>
 				<div class="mb-3">
-				 	<label for="location_id" class="form-label">상품 이자율</label>
-				  	<input type="text" class="form-control" id="location_id" name = "location_id">
+					<label for="Product_Name" class="form-label">상품 이름</label>
+				  	<input type="text" class="form-control" id="Product_Name" name = "Product_Name">
 				</div>
 				<div class="mb-3">
-				 	<label for="location_id" class="form-label">상품 설명</label>
-				  	<input type="text" class="form-control" id="location_id" name = "location_id">
+				 	<label for="Product_Rate" class="form-label">상품 이자율</label>
+				  	<input type="text" class="form-control" id="Product_Rate" name = "Product_Rate">
+				</div>
+				<div class="mb-3">
+				 	<label for="Product_Ex" class="form-label">상품 설명</label>
+				  	<input type="text" class="form-control" id="Product_Ex" name = "Product_Ex">
 				</div>
 				<div>
 					<button type = "submit" class =  "btn btn-outline-primary">등록</button>

@@ -66,7 +66,7 @@ public class ProductDAO {
 
 	public int doadd(ProductDTO productDTO) throws Exception {
 		Connection con = dbConnection.getConnection();
-		String sql = "INSERT INTO PRODUCT_INFO VALUES (PRODUCT_SEQ.nexval, ?, ? ,?)";
+		String sql = "INSERT INTO PRODUCT_INFO VALUES (PRODUCT_SEQ.NEXTVAL, ?, ? ,?)";
 		// 시작(1) ~
 		PreparedStatement st = con.prepareStatement(sql);
 		st.setString(1, productDTO.getProduct_Name());
@@ -74,8 +74,9 @@ public class ProductDAO {
 		st.setString(3, productDTO.getProduct_Ex());
 		// ~ 끝(1) 에서
 
+		
 		int result = st.executeUpdate();
-
+		System.out.println(result);
 		st.close();
 		con.close();
 
