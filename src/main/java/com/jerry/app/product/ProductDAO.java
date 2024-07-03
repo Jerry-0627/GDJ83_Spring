@@ -74,7 +74,6 @@ public class ProductDAO {
 		st.setString(3, productDTO.getProduct_Ex());
 		// ~ 끝(1) 에서
 
-		
 		int result = st.executeUpdate();
 		System.out.println(result);
 		st.close();

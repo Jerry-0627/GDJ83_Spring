@@ -13,7 +13,7 @@
 <c:import url="/WEB-INF/views/sample/header.jsp"></c:import>
 	<table class = "table table-striped table-primary">
 		<thead>
-			<h1>${detail.product_Name} 상세 정보</h1>
+			<h1>${detail.product_Name}의 상세 정보</h1>
 		
 			<tr>
 				<th>상품 번호</th>
