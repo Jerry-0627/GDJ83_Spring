@@ -66,7 +66,7 @@ public class MemberController {
 			cookie.setMaxAge(0);
 			response.addCookie(cookie);
 		}
-		System.out.println("테스트");
+		System.out.println("테스트2");
 
 		memberDTO = memberService.loginMemberService(memberDTO);
 		String url = "redirect:/";
