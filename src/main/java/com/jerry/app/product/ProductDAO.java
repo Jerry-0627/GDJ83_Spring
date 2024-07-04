@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -16,6 +17,8 @@ public class ProductDAO {
 
 	@Autowired
 	private DBConnection dbConnection;
+	
+
 
 	public List<ProductDTO> getlist() throws Exception {
 		Connection con = dbConnection.getConnection();
