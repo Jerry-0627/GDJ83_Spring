@@ -24,10 +24,10 @@
 		<tbody>
 			<c:forEach items = "${list}" var = "dto"> 
 				<tr>
-					<td>${dto.product_Num}</td>
-					<td><a href="./detail?product_Num=${dto.product_Num}">${dto.product_Name}</a></td>
-					<td>${dto.product_Rate}</td>
-					<td>${dto.product_Ex}</td>
+					<td>${dto.product_num}</td>
+					<td><a href="./detail?product_num=${dto.product_num}">${dto.product_name}</a></td>
+					<td>${dto.product_rate}</td>
+					<td>${dto.product_ex}</td>
 				</tr>
 			</c:forEach>
 		</tbody>

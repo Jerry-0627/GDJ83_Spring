@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.stream.events.Namespace;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -16,73 +18,20 @@ import com.jerry.app.util.DBConnection;
 public class ProductDAO {
 
 	@Autowired
-	private DBConnection dbConnection;
+	private SqlSession sqlsession;
 	
+	private final String NAMESPACE = "com.jerry.app.product.ProductDAO" ;
 
 
 	public List<ProductDTO> getlist() throws Exception {
-		Connection con = dbConnection.getConnection();
-		String sql = "SELECT * FROM PRODUCT_INFO ORDER BY PRODUCT_NUM";
-		PreparedStatement st = con.prepareStatement(sql);
-		ResultSet rs = st.executeQuery();
-		ArrayList<ProductDTO> ar = new ArrayList<ProductDTO>();
 
-		while (rs.next()) {
-			ProductDTO productDTO = new ProductDTO();
-			productDTO.setProduct_Num(rs.getInt("PRODUCT_NUM"));
-			productDTO.setProduct_Name(rs.getString("PRODUCT_NAME"));
-			productDTO.setProduct_Rate(rs.getDouble("PRODUCT_RATE"));
-			productDTO.setProduct_Ex(rs.getString("PRODUCT_EX"));
-			ar.add(productDTO);
-		}
-
-		rs.close();
-		st.close();
-		con.close();
-
-		return ar;
 	}
 
 	public ProductDTO getdetail(ProductDTO productDTO) throws Exception {
-		Connection con = dbConnection.getConnection();
-		String sql = "SELECT * FROM PRODUCT_INFO WHERE PRODUCT_NUM = ?";
-		PreparedStatement st = con.prepareStatement(sql);
 
-		st.setInt(1, productDTO.getProduct_Num());
-
-		ResultSet rs = st.executeQuery();
-
-		ProductDTO dto = null;
-		if (rs.next()) {
-			dto = new ProductDTO();
-			dto.setProduct_Num(rs.getInt("PRODUCT_NUM"));
-			dto.setProduct_Name(rs.getString("PRODUCT_NAME"));
-			dto.setProduct_Rate(rs.getDouble("PRODUCT_RATE"));
-			dto.setProduct_Ex(rs.getString("PRODUCT_EX"));
-		}
-		rs.close();
-		st.close();
-		con.close();
-
-		return dto;
 	}
 
 	public int doadd(ProductDTO productDTO) throws Exception {
-		Connection con = dbConnection.getConnection();
-		String sql = "INSERT INTO PRODUCT_INFO VALUES (PRODUCT_SEQ.NEXTVAL, ?, ? ,?)";
-		// 시작(1) ~
-		PreparedStatement st = con.prepareStatement(sql);
-		st.setString(1, productDTO.getProduct_Name());
-		st.setDouble(2, productDTO.getProduct_Rate());
-		st.setString(3, productDTO.getProduct_Ex());
-		// ~ 끝(1) 에서
-
-		int result = st.executeUpdate();
-		System.out.println(result);
-		st.close();
-		con.close();
-
-		return result;
 
 	}
 }

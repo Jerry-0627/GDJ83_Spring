@@ -13,7 +13,7 @@
 <c:import url="/WEB-INF/views/sample/header.jsp"></c:import>
 	<table class = "table table-striped table-primary">
 		<thead>
-			<h1>${detail.product_Name}의 상세 정보</h1>
+			<h1>${detail.product_name}의 상세 정보</h1>
 		
 			<tr>
 				<th>상품 번호</th>
@@ -23,10 +23,10 @@
 			</tr>
 		</thead>
 		<tbody>
-			<td>${detail.product_Num }</td>
-			<td>${detail.product_Name }</td>
-			<td>${detail.product_Rate }</td>
-			<td>${detail.product_Ex }</td>
+			<td>${detail.product_num }</td>
+			<td>${detail.product_name }</td>
+			<td>${detail.product_rate }</td>
+			<td>${detail.product_ex }</td>
 		</tbody>
 	</table>
 <c:import url="/WEB-INF/views/sample/bootFooter.jsp"></c:import>	

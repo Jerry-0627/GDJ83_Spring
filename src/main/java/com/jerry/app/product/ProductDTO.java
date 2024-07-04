@@ -2,41 +2,35 @@ package com.jerry.app.product;
 
 public class ProductDTO {
 
-	private int product_Num;
-	private String product_Name;
-	private double product_Rate;
-	private String product_Ex;
-
-	public int getProduct_Num() {
-		return product_Num;
+	private int product_num;
+	private String product_name;
+	private double product_rate;
+	private String product_ex;
+	public int getProduct_num() {
+		return product_num;
+	}
+	public void setProduct_num(int product_num) {
+		this.product_num = product_num;
+	}
+	public String getProduct_name() {
+		return product_name;
+	}
+	public void setProduct_name(String product_name) {
+		this.product_name = product_name;
+	}
+	public double getProduct_rate() {
+		return product_rate;
+	}
+	public void setProduct_rate(double product_rate) {
+		this.product_rate = product_rate;
+	}
+	public String getProduct_ex() {
+		return product_ex;
+	}
+	public void setProduct_ex(String product_ex) {
+		this.product_ex = product_ex;
 	}
 
-	public void setProduct_Num(int product_Num) {
-		this.product_Num = product_Num;
-	}
 
-	public String getProduct_Name() {
-		return product_Name;
-	}
-
-	public void setProduct_Name(String product_Name) {
-		this.product_Name = product_Name;
-	}
-
-	public double getProduct_Rate() {
-		return product_Rate;
-	}
-
-	public void setProduct_Rate(double product_Rate) {
-		this.product_Rate = product_Rate;
-	}
-
-	public String getProduct_Ex() {
-		return product_Ex;
-	}
-
-	public void setProduct_Ex(String product_Ex) {
-		this.product_Ex = product_Ex;
-	}
 
 }

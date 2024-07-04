@@ -19,19 +19,19 @@
 			<form action="./add" method="post">
 				<div class="mb-3">
 					<label for="Product_Num" class="form-label">상품 번호</label>
-				  	<input type="text" class="form-control" id="Product_Num" name = "Product_Num"  placeholder = "자동으로 입력됨" disabled>
+				  	<input type="text" class="form-control" id="Product_Num" name = "Product_num"  placeholder = "자동으로 입력됨" disabled>
 				</div>
 				<div class="mb-3">
 					<label for="Product_Name" class="form-label">상품 이름</label>
-				  	<input type="text" class="form-control" id="Product_Name" name = "Product_Name">
+				  	<input type="text" class="form-control" id="Product_Name" name = "Product_name">
 				</div>
 				<div class="mb-3">
 				 	<label for="Product_Rate" class="form-label">상품 이자율</label>
-				  	<input type="text" class="form-control" id="Product_Rate" name = "Product_Rate">
+				  	<input type="text" class="form-control" id="Product_Rate" name = "Product_rate">
 				</div>
 				<div class="mb-3">
 				 	<label for="Product_Ex" class="form-label">상품 설명</label>
-				  	<input type="text" class="form-control" id="Product_Ex" name = "Product_Ex">
+				  	<input type="text" class="form-control" id="Product_Ex" name = "Product_ex">
 				</div>
 				<div>
 					<button type = "submit" class =  "btn btn-outline-primary">등록</button>
