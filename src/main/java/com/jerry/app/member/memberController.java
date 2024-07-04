@@ -35,6 +35,7 @@ public class MemberController {
 			model.addAttribute("url", "./");
 		}
 		return url;
+		// 테스트 글
 	}
 
 	@RequestMapping(value = "loginMember", method = RequestMethod.GET)
@@ -65,6 +66,7 @@ public class MemberController {
 			cookie.setMaxAge(0);
 			response.addCookie(cookie);
 		}
+		System.out.println("테스트");
 
 		memberDTO = memberService.loginMemberService(memberDTO);
 		String url = "redirect:/";
