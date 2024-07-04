@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.jerry.app.product.ProductDAO">
+	  
+	  <select id="getlist" resultType="ProductDTO">
+	  		SELECT * FROM PRODUCT_INFO ORDER BY PRODUCT_NUM
+	  </select>
+	  
+	  <select id="getdetail" resultType="ProductDTO" parameterType="ProductDTO">
+	  		SELECT * FROM PRODUCT_INFO WHERE PRODUCT_NUM = #{product_num}
+	  </select>
+	  
+	  <insert id="doadd" parameterType="ProductDTO">
+	  		INSERT INTO PRODUCT_INFO VALUES (PRODUCT_SEQ.NEXTVAL, #{product_name}, #{product_rate}, #{product_ex})
+	  </insert>
+	  
+	  <delete id="dodelete" parameterType="ProductDTO">
+	  		DELETE FROM PRODUCT_INFO WHERE PRODUCT_NUM = #{product_num} 
+	  </delete>
+	  
+	  <update id="doupdate" parameterType="ProductDTO">
+			UPDATE PRODUCT_INFO SET PRODUCT_NAME = #{product_name}, PRODUCT_RATE=#{product_rate}, PRODUCT_EX=#{product_ex} WHERE PRODUCT_NUM = #{product_num} 
+	  </update>
+  </mapper>

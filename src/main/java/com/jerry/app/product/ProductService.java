@@ -27,4 +27,14 @@ public class ProductService {
 		int result = productDAO.doadd(productDTO);
 		return result;
 	}
+
+	public int dodelete(ProductDTO productDTO) throws Exception {
+		int result = productDAO.dodelete(productDTO);
+		return result;
+	}
+
+	public int doupdate(ProductDTO productDTO) throws Exception {
+		int result = productDAO.doupdate(productDTO);
+		return result;
+	}
 }

@@ -29,6 +29,10 @@
 			<td>${detail.product_ex }</td>
 		</tbody>
 	</table>
+	<div>
+		<a href="./update?product_num=${detail.product_num}" class = "btn btn-outline-primary">상품 수정</a>
+		<a href="./delete?product_num=${detail.product_num}" class = "btn btn-outline-danger">상품 삭제</a>
+	</div>
 <c:import url="/WEB-INF/views/sample/bootFooter.jsp"></c:import>	
 </body>
 </html>

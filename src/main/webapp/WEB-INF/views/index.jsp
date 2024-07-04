@@ -13,6 +13,11 @@
 	
 	<div class = "container-fluid mt-5">
 		<div class="row justify-content-center">
+			<c:if test="${not empty member}">
+				<div>
+					<h3>${member.user_name}님 환영합니다</h3>
+				</div>
+			</c:if>
 			<div id="carouselExampleAutoplaying" class="carousel slide col-md-4 " data-bs-ride="carousel">
 			  <div class="carousel-inner">
 			    <div class="carousel-item active">
@@ -35,7 +40,6 @@
 			  </button>
 			</div>
 		</div>
-		<div class="row">두줄</div>
 
 	</div>	
 <c:import url="/WEB-INF/views/sample/bootFooter.jsp"></c:import>
