@@ -13,7 +13,7 @@
 
 	<table class = "table table-striped table-primary">
 		<thead>
-			<h1>금융 상품</h1>
+			<h1>금융 상품 목록</h1>
 			<tr>
 				<th>상품 번호</th>
 				<th>상품 이름</th>
@@ -33,7 +33,9 @@
 		</tbody>
 	</table>
 	<div>
-			<a href="./add" class = "btn btn-outline-primary">금융상품 가입</a>			
+			<a href="./add" class = "btn btn-outline-primary">상품 등록</a>	
+			<a href="/" class = "btn btn-outline-danger">뒤로가기</a>
+					
 	</div>
 	<c:import url="/WEB-INF/views/sample/bootFooter.jsp"></c:import>
 </body>

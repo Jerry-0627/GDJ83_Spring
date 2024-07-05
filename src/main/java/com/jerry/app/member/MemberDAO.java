@@ -21,4 +21,11 @@ public class MemberDAO {
 		return sqlSession.selectOne(NAMESPACE + "loginMember", memberDTO);
 	}
 
+	public int update(MemberDTO memberDTO) {
+		return sqlSession.update(NAMESPACE + "update", memberDTO);
+	}
+
+	public int delete(MemberDTO memberDTO) {
+		return sqlSession.delete(NAMESPACE + "delete", memberDTO);
+	}
 }

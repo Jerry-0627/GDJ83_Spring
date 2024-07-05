@@ -30,7 +30,8 @@
 		</tbody>
 	</table>
 	<div>
-		<a href="./update?product_num=${detail.product_num}" class = "btn btn-outline-primary">상품 수정</a>
+		<a href="../account/add" class = "btn btn-outline-primary">상품 가입</a>
+		<a href="./update?product_num=${detail.product_num}" class = "btn btn-outline-warning">상품 수정</a>
 		<a href="./delete?product_num=${detail.product_num}" class = "btn btn-outline-danger">상품 삭제</a>
 	</div>
 <c:import url="/WEB-INF/views/sample/bootFooter.jsp"></c:import>	

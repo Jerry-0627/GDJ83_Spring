@@ -83,7 +83,56 @@ public class memberController {
 	@RequestMapping(value = "logoutMember", method = RequestMethod.GET)
 	public String logoutMember(HttpSession session) throws Exception {
 		session.invalidate(); // 세션의 유지 시간을 0으로 하겠다는 뜻이다.
+		// session.setAttribute("member", null); {7.5_C.1} : 이렇게 session에 있는 애를 null로
+		// 맞춰서 세션을 종료 시킬 수 있다.
+		// session.removeAttribute("member"); {7.5_C.1} : 로그인하고 있는 동안 데이터를 유지하기 위해선 세션을
+		// 이용해야 한다.
+		// session.isNew() {7.5_C.1} : 새로운 객체인지 물어보는거. 그냥 invalidate 쓰면 된다.
+
 		return "redirect:/";
+	}
+
+	@RequestMapping(value = "myPage", method = RequestMethod.GET)
+	public void myPage(HttpSession session, Model model) throws Exception {
+		MemberDTO memberDTO = (MemberDTO) session.getAttribute("member");
+		memberDTO = memberService.loginMemberService(memberDTO);
+		model.addAttribute("member", memberDTO);
+	}
+
+	@RequestMapping(value = "update", method = RequestMethod.GET)
+	public void update(HttpSession session, Model model) throws Exception {
+		MemberDTO memberDTO = (MemberDTO) session.getAttribute("member");
+		memberDTO = memberService.loginMemberService(memberDTO);
+		model.addAttribute("member", memberDTO);
+
+	}
+
+	@RequestMapping(value = "update", method = RequestMethod.POST)
+	public String myPageUpdate(MemberDTO memberDTO, HttpSession session, Model model) throws Exception {
+		MemberDTO dto = (MemberDTO) session.getAttribute("member");
+		memberDTO.setUser_id(dto.getUser_id());
+		// memberDTO.setUser_name(dto.getUser_name()) 으로 잘못 설정했다.
+		int result = memberService.update(memberDTO);
+		return "redirect:/member/myPage";
+	}
+
+	@RequestMapping(value = "delete", method = RequestMethod.GET)
+	public String delete(MemberDTO memberDTO, HttpSession session, Model model) throws Exception {
+		MemberDTO dto = (MemberDTO) session.getAttribute("member");
+		memberDTO.setUser_id(dto.getUser_id());
+		int result = memberService.delete(memberDTO);
+		String url = "";
+		if (result > 0) {
+			session.invalidate();
+			url = "commons/message";
+			model.addAttribute("result", "회원 탈퇴 성공");
+			model.addAttribute("url", "/");
+		} else {
+			url = "commons/message";
+			model.addAttribute("result", "회원 탈퇴 실패");
+			model.addAttribute("url", "./myPage");
+		}
+		return url;
 	}
 
 }

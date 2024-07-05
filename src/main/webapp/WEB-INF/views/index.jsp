@@ -15,7 +15,7 @@
 		<div class="row justify-content-center">
 			<c:if test="${not empty member}">
 				<div>
-					<h3>${member.user_name}님 환영합니다</h3>
+					<h3>${sessionScope.member.user_name}님 환영합니다</h3>
 				</div>
 			</c:if>
 			<div id="carouselExampleAutoplaying" class="carousel slide col-md-4 " data-bs-ride="carousel">
