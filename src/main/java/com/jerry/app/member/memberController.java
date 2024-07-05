@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 @RequestMapping("/member/*")
-public class MemberController {
+public class memberController {
 
 	@Autowired
 	private MemberService memberService;
