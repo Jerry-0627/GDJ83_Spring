@@ -6,6 +6,12 @@
   
  <mapper namespace="com.jerry.app.account.AccountDAO">
 	<insert id="add" parameterType="AccountDTO">
-	  	SELECT * FROM ACCOUNT_INFO
+		INSERT INTO ACCOUNT_INFO (ACCOUNT_NUM, PRODUCT_NUM, USER_ID, BALANCE)
+		VALUES (
+			LPAD(TO_CHAR(#{product_num}), 7, '0') || LPAD(TO_CHAR(ACCOUNT_SEQ.NEXTVAL), 13, '0'),
+			#{user_id},
+			#{product_num},
+			#{balance}
+		)
 	</insert>
  </mapper>

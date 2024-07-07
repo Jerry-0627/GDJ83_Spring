@@ -11,7 +11,7 @@ public class AccountDAO {
 
 	private final String Namespace = "com.jerry.app.account.AccountDAO";
 
-	public void add() {
-
+	public int add(AccountDTO accountDTO) throws Exception{
+		return sqlSession.insert(Namespace + "add", accountDTO);
 	}
 }

@@ -55,7 +55,6 @@ public class memberController {
 	@RequestMapping(value = "loginMember", method = RequestMethod.POST)
 	public String loginMember(MemberDTO memberDTO, Model model, HttpServletResponse response, String remember,
 			HttpSession session) throws Exception {
-		System.out.println(remember);
 
 		if (remember != null) {
 			Cookie cookie = new Cookie("remember", memberDTO.getUser_id());
@@ -66,8 +65,7 @@ public class memberController {
 			cookie.setMaxAge(0);
 			response.addCookie(cookie);
 		}
-		System.out.println("테스트2");
-
+		
 		memberDTO = memberService.loginMemberService(memberDTO);
 		String url = "redirect:/";
 		if (memberDTO != null) {
