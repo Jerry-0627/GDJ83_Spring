@@ -8,9 +8,37 @@
 	<insert id="joinMember" parameterType="MemberDTO">
 	  	INSERT INTO MEMBER_INFO VALUES (#{user_id}, #{user_pw}, #{user_name}, #{user_phone_num}, #{user_email}, #{user_address})
 	</insert>
- 	<select id="loginMember" parameterType="MemberDTO" resultType="MemberDTO">
- 		SELECT * FROM MEMBER_INFO WHERE USER_ID = #{user_id}
- 	</select>		
+ 	<select id="loginMember" parameterType="MemberDTO" resultMap="loginResult">
+ 		SELECT M.*, A.* 
+ 		FROM MEMBER_INFO M
+ 			LEFT JOIN
+ 			ACCOUNT_INFO A
+ 			ON M.USER_ID = A.USER_ID
+ 		WHERE M.USER_ID = #{user_id}
+ 		<!-- 이 쿼리의 결과물을 MemberDTO에 담으려 하는데, 이 DTO의 세터 이름과 같이야함 그런데 join이 되버려서 MemberDTO에 setter에 없는 것들이 생김 -->
+ 		<!-- 리절트 타입음 java.util.map로 만들면 map에 담겨짐, map은 키와 벨류로 이뤄져 있는데, 컬럼명이 키가됨 -->
+ 	</select>
+ 	
+ 	<resultMap type="MemberDTO" id="loginResult">
+ 		<!-- primary Key 용도 -->
+ 		<!-- column에는 "컬럼명", property는 setter의 이름 -->
+ 		<id column="USER_ID" property="user_id"/>
+ 		<!-- primary키 외의 나머지는 result로함 -->
+ 		<result column="USER_PW" property="user_pw"/>
+ 		<result column="USER_NAME" property="user_name"/>
+ 		<result column="USER_PHONE_NUM" property="user_phone_num"/>
+ 		<result column="USER_EMAIL" property="user_email"/>
+ 		<result column="USER_ADDRESS" property="user_address"/>
+		<!-- 1대 N의 관계일 때 -->
+		<!-- member는 하나만 나오니까 List로 안해도 되는데, account는 여러개 나오니까 List로 해줘야함-->
+		<collection property="dtos" javaType="java.util.List" ofType="AccountDTO">
+			<id column="ACCOUNT_NUM" property="account_num"/>
+			<result column = "PRODUCT_NUM" property="product_num"/>
+			<result column = "BALANCE" property="balance"/>
+			<result column = "ACCOUNT_DATE" property="account_date"/>
+		</collection>
+ 	</resultMap>
+ 	
  	<select id="myPage" parameterType="MemberDTO" resultType="MemberDTO">
 		SELECT * FROM MEMBER_INFO WHERE USER_ID = #{user_id}
  	</select>

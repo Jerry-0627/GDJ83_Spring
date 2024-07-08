@@ -1,6 +1,7 @@
 package com.jerry.app.account;
 
 import java.sql.Date;
+import java.util.List;
 
 public class AccountDTO {
 	private Long account_num;
@@ -8,6 +9,7 @@ public class AccountDTO {
 	private Long product_num;
 	private Long balance;
 	private Date account_date;
+	private List<AccountDTO> accountDTO;
 
 	public Long getAccount_num() {
 		return account_num;

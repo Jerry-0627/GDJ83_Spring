@@ -1,5 +1,9 @@
 package com.jerry.app.member;
 
+import java.util.List;
+
+import com.jerry.app.account.AccountDTO;
+
 public class MemberDTO {
 	private String user_id;
 	private String user_name;
@@ -7,6 +11,7 @@ public class MemberDTO {
 	private String user_pw;
 	private String user_email;
 	private String user_address;
+	private List<AccountDTO> dtos;
 
 	public String getUser_id() {
 		return user_id;
@@ -54,6 +59,14 @@ public class MemberDTO {
 
 	public void setUser_address(String user_address) {
 		this.user_address = user_address;
+	}
+
+	public List<AccountDTO> getDtos() {
+		return dtos;
+	}
+
+	public void setDtos(List<AccountDTO> dtos) {
+		this.dtos = dtos;
 	}
 
 }

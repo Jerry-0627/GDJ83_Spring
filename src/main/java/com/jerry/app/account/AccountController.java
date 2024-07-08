@@ -25,7 +25,6 @@ public class AccountController {
 		int result = accountService.add(accountDTO);
 
 		return "redirect:/";
-
 	}
 
 }
