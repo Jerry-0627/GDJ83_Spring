@@ -1,5 +1,7 @@
 package com.jerry.app.member;
 
+import java.util.Map;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -65,11 +67,11 @@ public class memberController {
 			cookie.setMaxAge(0);
 			response.addCookie(cookie);
 		}
-		
-		memberDTO = memberService.loginMemberService(memberDTO);
+
+		Map<String, Object> map = memberService.loginMemberService(memberDTO);
 		String url = "redirect:/";
-		if (memberDTO != null) {
-			session.setAttribute("member", memberDTO);
+		if (map != null) {
+			session.setAttribute("member", map);
 		} else {
 			url = "commons/message";
 			model.addAttribute("result", "로그인에 실패했습니다.");
@@ -92,9 +94,9 @@ public class memberController {
 
 	@RequestMapping(value = "myPage", method = RequestMethod.GET)
 	public void myPage(HttpSession session, Model model) throws Exception {
-		MemberDTO memberDTO = (MemberDTO) session.getAttribute("member");
-		memberDTO = memberService.loginMemberService(memberDTO);
-		model.addAttribute("member", memberDTO);
+//		MemberDTO memberDTO = (MemberDTO) session.getAttribute("member");
+//		memberDTO = memberService.loginMemberService(memberDTO);
+//		model.addAttribute("member", memberDTO);
 	}
 
 	@RequestMapping(value = "update", method = RequestMethod.GET)

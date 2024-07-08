@@ -6,12 +6,14 @@
   
  <mapper namespace="com.jerry.app.account.AccountDAO">
 	<insert id="add" parameterType="AccountDTO">
-		INSERT INTO ACCOUNT_INFO (ACCOUNT_NUM, PRODUCT_NUM, USER_ID, BALANCE)
-		VALUES (
-			LPAD(TO_CHAR(#{product_num}), 7, '0') || LPAD(TO_CHAR(ACCOUNT_SEQ.NEXTVAL), 13, '0'),
-			#{user_id},
-			#{product_num},
-			#{balance}
-		)
+		INSERT INTO ACCOUNT_INFO (ACCOUNT_NUM, PRODUCT_NUM, USER_ID, ACCOUNT_DATE, BALANCE)
+		VALUES ( #{account_num}, #{product_num}, #{user_id}, SYSDATE, 0)
 	</insert>
+	<!-- member에서 사용할 것이기 때문에 user id를 가져오는 parameterType은 memberDTO에서 가져오는 것이 좋다 -->
+	<!-- resultType은 내보내는 것. Acount로 내보내기 떄문에 AccountDTO -->
+	<select id="list" parameterType="MemberDTO" resultType="AccountDTO">
+		SELECT ACCOUNT_NUM, BALANCE
+		FROM ACCOUNT_INFO
+		WHERE USER_ID = #{user_id}
+	</select>
  </mapper>

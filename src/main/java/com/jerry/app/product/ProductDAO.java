@@ -15,6 +15,7 @@ public class ProductDAO {
 	private final String NAMESPACE = "com.jerry.app.product.ProductDAO.";
 
 	public List<ProductDTO> getlist() throws Exception {
+		// productDTO가 여러개여서 List로 받는거임
 		return sqlSession.selectList(NAMESPACE + "getlist");
 	}
 

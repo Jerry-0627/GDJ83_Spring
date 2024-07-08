@@ -3,17 +3,17 @@ package com.jerry.app.account;
 import java.sql.Date;
 
 public class AccountDTO {
-	private String account_num;
+	private Long account_num;
 	private String user_id;
-	private int product_num;
-	private int balance;
+	private Long product_num;
+	private Long balance;
 	private Date account_date;
 
-	public String getAccount_num() {
+	public Long getAccount_num() {
 		return account_num;
 	}
 
-	public void setAccount_num(String account_num) {
+	public void setAccount_num(Long account_num) {
 		this.account_num = account_num;
 	}
 
@@ -25,19 +25,19 @@ public class AccountDTO {
 		this.user_id = user_id;
 	}
 
-	public int getProduct_num() {
+	public Long getProduct_num() {
 		return product_num;
 	}
 
-	public void setProduct_num(int product_num) {
+	public void setProduct_num(Long product_num) {
 		this.product_num = product_num;
 	}
 
-	public int getBalance() {
+	public Long getBalance() {
 		return balance;
 	}
 
-	public void setBalance(int balance) {
+	public void setBalance(Long balance) {
 		this.balance = balance;
 	}
 
