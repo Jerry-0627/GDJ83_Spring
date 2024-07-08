@@ -93,14 +93,14 @@ public class memberController {
 	@RequestMapping(value = "myPage", method = RequestMethod.GET)
 	public void myPage(HttpSession session, Model model) throws Exception {
 		MemberDTO memberDTO = (MemberDTO) session.getAttribute("member");
-		memberDTO = memberService.loginMemberService(memberDTO);
+		memberDTO = memberService.detail(memberDTO);
 		model.addAttribute("member", memberDTO);
 	}
 
 	@RequestMapping(value = "update", method = RequestMethod.GET)
 	public void update(HttpSession session, Model model) throws Exception {
 		MemberDTO memberDTO = (MemberDTO) session.getAttribute("member");
-		memberDTO = memberService.loginMemberService(memberDTO);
+		memberDTO = memberService.detail(memberDTO);
 		model.addAttribute("member", memberDTO);
 
 	}

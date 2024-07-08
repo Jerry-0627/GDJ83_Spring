@@ -18,4 +18,8 @@ public class AccountService {
 
 		return accountDAO.add(accountDTO);
 	}
+
+	public AccountDTO detail(AccountDTO accountDTO) throws Exception {
+		return accountDAO.detail(accountDTO);
+	}
 }

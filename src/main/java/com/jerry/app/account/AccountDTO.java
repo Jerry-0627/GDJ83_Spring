@@ -1,15 +1,35 @@
 package com.jerry.app.account;
 
 import java.sql.Date;
-import java.util.List;
+
+import com.jerry.app.member.MemberDTO;
+import com.jerry.app.product.ProductDTO;
 
 public class AccountDTO {
+
 	private Long account_num;
 	private String user_id;
 	private Long product_num;
 	private Long balance;
 	private Date account_date;
-	private List<AccountDTO> accountDTO;
+	private MemberDTO memberDTO;
+	private ProductDTO productDTO;
+
+	public MemberDTO getMemberDTO() {
+		return memberDTO;
+	}
+
+	public void setMemberDTO(MemberDTO memberDTO) {
+		this.memberDTO = memberDTO;
+	}
+
+	public ProductDTO getProductDTO() {
+		return productDTO;
+	}
+
+	public void setProductDTO(ProductDTO productDTO) {
+		this.productDTO = productDTO;
+	}
 
 	public Long getAccount_num() {
 		return account_num;

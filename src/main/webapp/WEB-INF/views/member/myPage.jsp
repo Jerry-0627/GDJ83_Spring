@@ -15,24 +15,24 @@
 		<h1>회원 정보 확인 페이지</h1>
 		<div class="mb-3">
 			<label for="user_name" class="form-label">회원 이름</label>
-			<input type="text" class="form-control" id="user_name" name = "user_name" value="${sessionScope.member.user_name}" disabled>
+			<input type="text" class="form-control" id="user_name" name = "user_name" value="${member.user_name}" disabled>
 		</div>
 		<div class="mb-3">
 			<label for="user_phone_num" class="user_phone_num">회원 전화번호</label>
-			<input type="text" class="form-control" id="user_phone_num" name = "user_phone_num" value="${sessionScope.member.user_phone_num}" disabled>
+			<input type="text" class="form-control" id="user_phone_num" name = "user_phone_num" value="${member.user_phone_num}" disabled>
 		</div>
 		<div class="mb-3">
 			<label for="user_email" class="form-label">회원 이메일</label>
-			<input type="email" class="form-control" id="user_email" name = "user_email" value="${sessionScope.member.user_email}" disabled>
+			<input type="email" class="form-control" id="user_email" name = "user_email" value="${member.user_email}" disabled>
 		</div>
 			<div class="mb-3">
 			<label for="user_address" class="form-label">회원 주소</label>
-			<input type="text" class="form-control" id="user_address" name = "user_address"  value="${sessionScope.member.user_address}" disabled>
+			<input type="text" class="form-control" id="user_address" name = "user_address"  value="${member.user_address}" disabled>
 		</div>
 		<div>
 			<h3>계좌정보</h3>
 			<c:forEach items="${member.dtos}" var = "ac">
-				<h3>${ac.account_num} : ${ac.balance}</h3>
+				<h3><a href="../account/detail?account_num=${ac.account_num}">${ac.account_num}</a> : ${ac.balance}</h3>
 			</c:forEach>
 		</div>
 		<div>

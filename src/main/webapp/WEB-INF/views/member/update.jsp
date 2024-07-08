@@ -20,19 +20,19 @@
 
 					<div class="mb-3">
 					 	<label for="user_name" class="form-label">회원 이름</label>
-					  	<input type="text" class="form-control" id="user_name" name = "user_name" value="${sessionScope.member.user_name}">
+					  	<input type="text" class="form-control" id="user_name" name = "user_name" value="${member.user_name}">
 					</div>
 					<div class="mb-3">
 					 	<label for="user_phone_num" class="user_phone_num">회원 전화번호</label>
-					  	<input type="text" class="form-control" id="user_phone_num" name = "user_phone_num" value="${sessionScope.member.user_phone_num}">
+					  	<input type="text" class="form-control" id="user_phone_num" name = "user_phone_num" value="${member.user_phone_num}">
 					</div>
 					<div class="mb-3">
 					 	<label for="user_email" class="form-label">회원 이메일</label>
-					  	<input type="email" class="form-control" id="user_email" name = "user_email" value="${sessionScope.member.user_email}">
+					  	<input type="email" class="form-control" id="user_email" name = "user_email" value="${member.user_email}">
 					</div>
 					<div class="mb-3">
 					 	<label for="user_address" class="form-label">회원 주소</label>
-					  	<input type="text" class="form-control" id="user_address" name = "user_address"  value="${sessionScope.member.user_address}">
+					  	<input type="text" class="form-control" id="user_address" name = "user_address"  value="${member.user_address}">
 					</div>
 					<button class = "btn btn-primary">등록</button>
 					<a href="./myPage" class = "btn btn-outline-danger">취소</a>

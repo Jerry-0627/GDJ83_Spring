@@ -11,9 +11,31 @@
 	</insert>
 	<!-- member에서 사용할 것이기 때문에 user id를 가져오는 parameterType은 memberDTO에서 가져오는 것이 좋다 -->
 	<!-- resultType은 내보내는 것. Acount로 내보내기 떄문에 AccountDTO -->
-	<select id="list" parameterType="MemberDTO" resultType="AccountDTO">
+<!-- 	<select id="list" parameterType="MemberDTO" resultType="AccountDTO">
 		SELECT ACCOUNT_NUM, BALANCE
 		FROM ACCOUNT_INFO
 		WHERE USER_ID = #{user_id}
+	</select> -->
+	
+	<select id="detail" parameterType="AccountDTO" resultMap="detailResult">
+		SELECT A.*, P.PRODUCT_NAME, P.PRODUCT_RATE FROM ACCOUNT_INFO A
+			INNER JOIN PRODUCT_INFO P
+			ON A.PRODUCT_NUM = P.PRODUCT_NUM
+		WHERE A.ACCOUNT_NUM = #{account_num}
+		
 	</select>
+	
+	<resultMap type="AccountDTO" id="detailResult">
+		<id column = "ACCOUNT_NUM" property="account_num"/>
+		<result column = "PRODUCT_NUM" property="product_num"/>
+		<result column = "USER_ID" property="user_id"/>
+		<result column = "ACCOUNT_DATE" property = "account_date"/>
+		<result column = "BALANCE" property = "balance"/>
+		
+		<!-- 1:1의 관계 -->
+		<association property="productDTO" javaType="ProductDTO">
+			<result column = "PRODUCT_NAME" property = "product_name"/>
+			<result column = "PRODUCT_RATE" property = "product_rate"/>
+		</association>	
+	</resultMap>
  </mapper>

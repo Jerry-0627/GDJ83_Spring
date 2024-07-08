@@ -9,16 +9,22 @@
 	  	INSERT INTO MEMBER_INFO VALUES (#{user_id}, #{user_pw}, #{user_name}, #{user_phone_num}, #{user_email}, #{user_address})
 	</insert>
  	<select id="loginMember" parameterType="MemberDTO" resultMap="loginResult">
- 		SELECT M.*, A.* 
+ 		SELECT USER_ID, USER_PW, USER_NAME 
  		FROM MEMBER_INFO M
- 			LEFT JOIN
- 			ACCOUNT_INFO A
- 			ON M.USER_ID = A.USER_ID
  		WHERE M.USER_ID = #{user_id}
  		<!-- 이 쿼리의 결과물을 MemberDTO에 담으려 하는데, 이 DTO의 세터 이름과 같이야함 그런데 join이 되버려서 MemberDTO에 setter에 없는 것들이 생김 -->
  		<!-- 리절트 타입음 java.util.map로 만들면 map에 담겨짐, map은 키와 벨류로 이뤄져 있는데, 컬럼명이 키가됨 -->
  	</select>
  	
+ 	<select id="detail" parameterType="MemberDTO" resultMap="loginResult">
+ 		SELECT M.*, A.*
+ 		FROM MEMBER_INFO M
+ 			LEFT JOIN
+ 			ACCOUNT_INFO A
+ 			ON M.USER_ID = A.USER_ID
+ 		WHERE M.USER_ID = #{user_id}
+ 	</select>
+
  	<resultMap type="MemberDTO" id="loginResult">
  		<!-- primary Key 용도 -->
  		<!-- column에는 "컬럼명", property는 setter의 이름 -->
@@ -38,7 +44,8 @@
 			<result column = "ACCOUNT_DATE" property="account_date"/>
 		</collection>
  	</resultMap>
- 	
+
+ 
  	<select id="myPage" parameterType="MemberDTO" resultType="MemberDTO">
 		SELECT * FROM MEMBER_INFO WHERE USER_ID = #{user_id}
  	</select>
