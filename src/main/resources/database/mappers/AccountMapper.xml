@@ -24,7 +24,6 @@
 		WHERE A.ACCOUNT_NUM = #{account_num}
 		
 	</select>
-	
 	<resultMap type="AccountDTO" id="detailResult">
 		<id column = "ACCOUNT_NUM" property="account_num"/>
 		<result column = "PRODUCT_NUM" property="product_num"/>
@@ -38,4 +37,29 @@
 			<result column = "PRODUCT_RATE" property = "product_rate"/>
 		</association>	
 	</resultMap>
+	
+
+	
+	<insert id="insertMe" parameterType="TradeDTO">
+		INSERT INTO TRADE_HISTORY(TRADE_NUM, ACCOUNT_NUM, TRADE_TYPE, TRADE_AMOUNT, BALANCE, TRADE_DATE)
+		VALUES (TRADE_SEQ.NEXTVAL, #{account_num_me}, '출금', #{trade_amount}, #{balance} - #{trade_amount}, SYSDATE)
+	</insert>
+	
+	<insert id="insertYou" parameterType="TradeDTO">
+		INSERT INTO TRADE_HISTORY(TRADE_NUM, ACCOUNT_NUM, TRADE_TYPE, TRADE_AMOUNT, BALANCE, TRADE_DATE)
+		VALUES (TRADE_SEQ.NEXTVAL, #{account_num_you}, '입금', #{trade_amount},
+			(SELECT BALANCE FROM ACCOUNT_INFO WHERE ACCOUNT_NUM = #{account_num_you}) + #{trade_amount}, SYSDATE)
+	</insert>
+	
+	<update id="updateMe" parameterType="TradeDTO">
+		UPDATE ACCOUNT_INFO SET BALANCE = BALANCE - #{trade_amount}
+		WHERE ACCOUNT_NUM = #{account_num_me}
+	</update>
+	
+	<update id="updateYou" parameterType="TradeDTO">
+		UPDATE ACCOUNT_INFO SET BALANCE = BALANCE + #{trade_amount}
+		WHERE ACCOUNT_NUM = #{account_num_you}
+	</update>
+	
+
  </mapper>

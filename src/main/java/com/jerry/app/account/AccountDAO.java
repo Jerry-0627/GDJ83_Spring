@@ -23,4 +23,21 @@ public class AccountDAO {
 //	public List<AccountDTO> list(MemberDTO memberDTO) throws Exception {
 //		return sqlSession.selectList(Namespace + "list", memberDTO);
 //	}
+
+	public int insertMe(TradeDTO tradeDTO) throws Exception {
+		return sqlSession.insert(Namespace + "insertMe", tradeDTO);
+	}
+
+	public int insertYou(TradeDTO tradeDTO) throws Exception {
+		return sqlSession.insert(Namespace + "insertYou", tradeDTO);
+	}
+
+	public int updateMe(TradeDTO tradeDTO) throws Exception {
+		return sqlSession.update(Namespace + "updateMe", tradeDTO);
+	}
+
+	public int updateYou(TradeDTO tradeDTO) throws Exception {
+		return sqlSession.update(Namespace + "updateYou", tradeDTO);
+	}
+
 }

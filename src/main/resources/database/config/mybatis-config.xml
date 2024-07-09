@@ -8,5 +8,6 @@
   		<typeAlias type="com.jerry.app.product.ProductDTO" alias="ProductDTO"/>
   		<typeAlias type="com.jerry.app.member.MemberDTO" alias = "MemberDTO"/>
   		<typeAlias type="com.jerry.app.account.AccountDTO" alias = "AccountDTO"/>
+  		<typeAlias type="com.jerry.app.account.TradeDTO" alias = "TradeDTO"/>
   	</typeAliases>
  </configuration>
