@@ -29,19 +29,24 @@
 			<label for="user_address" class="form-label">회원 주소</label>
 			<input type="text" class="form-control" id="user_address" name = "user_address"  value="${member.user_address}" disabled>
 		</div>
-		<div>
-			<h3>계좌정보</h3>
+	</div>
+	<div class="container">
+		<h1>계좌정보</h1>
 			<c:forEach items="${member.dtos}" var = "ac">
-				<h3><a href="../account/detail?account_num=${ac.account_num}">${ac.account_num}</a> : ${ac.balance}</h3>
+				<label class="form-label">
+					<a href="../account/detail?account_num=${ac.account_num}"
+						 class="btn btn-light" role="button">${ac.account_num} 계좌 정보 보기
+					</a>
+				</label>
+				<input class="form-control" value = " 잔액 : ${ac.balance}" disabled>
 			</c:forEach>
-		</div>
-		<div>
-			<a type = "button" href = "./update" class="btn btn-primary">회원 정보 수정</a>
-			<a type = "button" href = "/" class="btn btn-danger">홈으로 돌아가기</a>
-			<form action="./delete">
-				<button class="btn btn-warning">회원 탈퇴</button>
-			</form>
-		</div>
+	</div>
+	<div class="container">
+		<a type = "button" href = "./update" class="btn btn-primary">회원 정보 수정</a>
+		<a type = "button" href = "/" class="btn btn-danger">홈으로 돌아가기</a>
+		<form action="./delete">
+			<button class="btn btn-warning">회원 탈퇴</button>
+		</form>
 	</div>
 <c:import url="/WEB-INF/views/sample/bootFooter.jsp"></c:import>
 </body>
