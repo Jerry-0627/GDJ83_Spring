@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.jerry.app.member.MemberDTO;
+import com.jerry.app.trades.TradeDTO;
+import com.jerry.app.trades.TradeService;
 
 @Controller
 @RequestMapping("/account/*")
@@ -16,6 +18,9 @@ public class AccountController {
 
 	@Autowired
 	private AccountService accountService;
+
+	@Autowired
+	private TradeService tradeService;
 
 	@RequestMapping(value = "add", method = RequestMethod.GET)
 	public String account(AccountDTO accountDTO, HttpSession session) throws Exception {
@@ -35,28 +40,20 @@ public class AccountController {
 	}
 
 	@RequestMapping(value = "transfer", method = RequestMethod.GET)
-	public void transfer(AccountDTO accountDTO, Model model) throws Exception {
-		accountDTO = accountService.detail(accountDTO);
-		model.addAttribute("detail", accountDTO);
+	public void transfer() throws Exception {
+
 	}
 
 	@RequestMapping(value = "transfer", method = RequestMethod.POST)
-	public String transfer(AccountDTO accountDTO, TradeDTO tradeDTO, Model model) throws Exception {
-		int a = accountService.transfer(accountDTO, tradeDTO);
+	public String transfer(TradeDTO tradeDTO) throws Exception {
+		// tradeDTO : 계좌번호 1개
+		// 보내는 계좌 :accountNumber
+		// 받는 계좌 : receiveNumber
+		// tradeDTO에 receiveNumber 아래 3번째 방법으로 받을 것이다.
+		// 파라미터를 받는 방법 1. httprequest로 받는 방법 2.bean 선언 3. 파라미터 이름과 동일한 데이터 타입으로 받아서
+		int result = tradeService.trade(tradeDTO);
 
-		System.out.println(a);
-		String url = "";
-		Long b = tradeDTO.getAccount_num_me();
-		if (a == 4) {
-			url = "commons/message";
-			model.addAttribute("result", "송금을 완료 하였습니다.");
-			model.addAttribute("url", "./detail?account_num=" + b);
-		} else {
-			url = "commons/message";
-			model.addAttribute("result", "잔액이 부족합니다.");
-			model.addAttribute("url", "./detail?account_num=" + b);
-		}
-		return url;
+		return "redirect:/member/myPage";
 	}
 
 }

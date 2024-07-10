@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+  <mapper namespace="com.jerry.app.trades.TradeDAO">
+  		<insert id="add" parameterType="TradeDTO">
+  			INSERT INTO TRADE_HISTORY
+  				(TRADE_NUM, TRADE_DATE, TRADE_AMOUNT, BALANCE, TRADE_TYPE, ACCOUNT_NUM)
+  			VALUES
+  				(
+  					TRADE_SEQ.NEXTVAL, SYSDATE, #{trade_amount}, 
+  					(SELECT BALANCE FROM ACCOUNT_INFO WHERE ACCOUNT_NUM=#{account_num})+#{trade_amount},
+  					#{trade_type},
+  					#{account_num}	
+  				)
+  		</insert>
+  		
+  		<insert id="update" parameterType="TradeDTO">
+  			UPDATE ACCOUNT_INFO SET	BALANCE = BALANCE + #{trade_amount}
+  			WHERE ACCOUNT_NUM = #{account_num}
+  		</insert>
+  
+  	
+  </mapper>

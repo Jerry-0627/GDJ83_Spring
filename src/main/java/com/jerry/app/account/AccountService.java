@@ -23,19 +23,4 @@ public class AccountService {
 		return accountDAO.detail(accountDTO);
 	}
 
-	public int transfer(AccountDTO accountDTO, TradeDTO tradeDTO) throws Exception {
-		int a = 0;
-
-		if (tradeDTO.getTrade_amount() > accountDTO.getBalance()) {
-			a = -1;
-		} else {
-
-			a += accountDAO.insertMe(tradeDTO);
-			a += accountDAO.insertYou(tradeDTO);
-			a += accountDAO.updateMe(tradeDTO);
-			a += accountDAO.updateYou(tradeDTO);
-		}
-		System.out.println(a);
-		return a;
-	}
 }
