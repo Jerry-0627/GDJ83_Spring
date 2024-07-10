@@ -20,7 +20,7 @@
 		<h3>잔액 : ${detail.balance}</h3>
 		<h3>개설일 : ${detail.account_date}</h3>
 		<h3>이자율 : ${detail.productDTO.product_rate}</h3>
-	<a href="./transfer?account_num=${detail.account_num}" type = "button"	class="btn btn-primary">이체</a>
+	<a href="./transfer?account_num=${detail.account_num}" type = "button"	class="btn btn-primary">송금</a>
 	</div>
 	
 	

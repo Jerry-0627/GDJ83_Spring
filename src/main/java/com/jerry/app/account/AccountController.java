@@ -45,14 +45,12 @@ public class AccountController {
 		int a = accountService.transfer(accountDTO, tradeDTO);
 
 		System.out.println(a);
-		String url = "";
+		String url = "commons/message";
 		Long b = tradeDTO.getAccount_num_me();
 		if (a == 4) {
-			url = "commons/message";
 			model.addAttribute("result", "송금을 완료 하였습니다.");
 			model.addAttribute("url", "./detail?account_num=" + b);
 		} else {
-			url = "commons/message";
 			model.addAttribute("result", "잔액이 부족합니다.");
 			model.addAttribute("url", "./detail?account_num=" + b);
 		}
