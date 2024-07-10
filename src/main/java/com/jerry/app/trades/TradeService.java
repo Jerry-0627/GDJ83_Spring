@@ -20,7 +20,6 @@ public class TradeService {
 		AccountDTO accountDTO = new AccountDTO();
 		accountDTO.setAccount_num(tradeDTO.getAccount_num());
 		accountDTO = accountDAO.detail(accountDTO);
-
 		if (accountDTO.getBalance() < tradeDTO.getTrade_amount()) {
 			return 0;
 		}
