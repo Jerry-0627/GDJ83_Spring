@@ -9,17 +9,34 @@
   				(TRADE_NUM, TRADE_DATE, TRADE_AMOUNT, BALANCE, TRADE_TYPE, ACCOUNT_NUM)
   			VALUES
   				(
-  					TRADE_SEQ.NEXTVAL, SYSDATE, #{trade_amount}, 
-  					(SELECT BALANCE FROM ACCOUNT_INFO WHERE ACCOUNT_NUM=#{account_num})+#{trade_amount},
-  					#{trade_type},
-  					#{account_num}	
+  					TRADE_SEQ.NEXTVAL, SYSDATE, #{trade_amount},
+  					<choose>
+  						<when test='trade_type.equals("입금")'>
+	  						(SELECT BALANCE FROM ACCOUNT_INFO WHERE ACCOUNT_NUM=#{account_num})+#{trade_amount},
+	  						#{trade_type},
+	  						#{receive_num}	
+  						</when>
+  						<otherwise>
+  							(SELECT BALANCE FROM ACCOUNT_INFO WHERE ACCOUNT_NUM=#{account_num})-#{trade_amount},
+	  						#{trade_type},
+	  						#{account_num}	
+  						</otherwise>
+  					</choose> 
+
   				)
   		</insert>
   		
-  		<insert id="update" parameterType="TradeDTO">
-  			UPDATE ACCOUNT_INFO SET	BALANCE = BALANCE + #{trade_amount}
-  			WHERE ACCOUNT_NUM = #{account_num}
-  		</insert>
+  		<update id="update" parameterType="TradeDTO">
+  			UPDATE ACCOUNT_INFO SET	
+  			<if test='trade_type.equals("입금")'>
+	  			BALANCE = BALANCE + #{trade_amount}
+	  			WHERE ACCOUNT_NUM = #{receive_num}
+  			</if>
+  			<if test='trade_type.equals("출금")'>
+  				BALANCE = BALANCE - #{trade_amount}
+	  			WHERE ACCOUNT_NUM = #{account_num}
+  			</if>
+  		</update>
   
   	
   </mapper>
