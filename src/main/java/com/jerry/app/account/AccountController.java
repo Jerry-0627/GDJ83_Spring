@@ -1,5 +1,7 @@
 package com.jerry.app.account;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +48,7 @@ public class AccountController {
 
 		System.out.println(a);
 		String url = "commons/message";
-		Long b = tradeDTO.getAccount_num_me();
+		Long b = tradeDTO.getAccount_num();
 		if (a == 4) {
 			model.addAttribute("result", "송금을 완료 하였습니다.");
 			model.addAttribute("url", "./detail?account_num=" + b);
@@ -55,6 +57,12 @@ public class AccountController {
 			model.addAttribute("url", "./detail?account_num=" + b);
 		}
 		return url;
+	}
+
+	@RequestMapping(value = "list", method = RequestMethod.GET)
+	public void tradeDetail(ListOption listOption, Model model) throws Exception {
+		List<TradeDTO> ar = accountService.list(listOption);
+		model.addAttribute("list", ar);
 	}
 
 }

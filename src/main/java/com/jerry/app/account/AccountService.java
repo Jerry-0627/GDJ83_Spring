@@ -1,6 +1,7 @@
 package com.jerry.app.account;
 
 import java.util.Calendar;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,5 +38,10 @@ public class AccountService {
 		}
 		System.out.println(a);
 		return a;
+	}
+
+	public List<TradeDTO> list(ListOption listOption) throws Exception {
+		return accountDAO.list(listOption);
+
 	}
 }

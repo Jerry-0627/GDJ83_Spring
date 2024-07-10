@@ -23,7 +23,7 @@
 				<input type="text" class="form-control" id="trade_amount" name = "trade_amount">
 			</div>
 			<div class="mb-3">
-				<input type="hidden" class="form-control" id="account_num" name = "account_num_me" value="${detail.account_num}">
+				<input type="hidden" class="form-control" id="account_num" name = "account_num" value="${detail.account_num}">
 			</div>
 			<div class="mb-3">
 				<input type="hidden" class="form-control" id="account_num" name = "balance" value="${detail.balance}">

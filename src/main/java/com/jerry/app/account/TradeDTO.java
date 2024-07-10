@@ -5,7 +5,7 @@ import java.sql.Date;
 public class TradeDTO {
 
 	private Long trade_num;
-	private Long account_num_me;
+	private Long account_num;
 	private Long account_num_you;
 	private String trade_type;
 	private Long trade_amount;
@@ -13,12 +13,12 @@ public class TradeDTO {
 	private Date trade_date;
 	private AccountDTO accountDTO;
 
-	public Long getAccount_num_me() {
-		return account_num_me;
+	public Long getAccount_num() {
+		return account_num;
 	}
 
-	public void setAccount_num_me(Long account_num_me) {
-		this.account_num_me = account_num_me;
+	public void setAccount_num(Long account_num) {
+		this.account_num = account_num;
 	}
 
 	public Long getAccount_num_you() {

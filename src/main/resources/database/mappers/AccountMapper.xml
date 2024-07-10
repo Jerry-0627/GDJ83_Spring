@@ -42,7 +42,7 @@
 	
 	<insert id="insertMe" parameterType="TradeDTO">
 		INSERT INTO TRADE_HISTORY(TRADE_NUM, ACCOUNT_NUM, TRADE_TYPE, TRADE_AMOUNT, BALANCE, TRADE_DATE)
-		VALUES (TRADE_SEQ.NEXTVAL, #{account_num_me}, '출금', #{trade_amount}, #{balance} - #{trade_amount}, SYSDATE)
+		VALUES (TRADE_SEQ.NEXTVAL, #{account_num}, '출금', #{trade_amount}, #{balance} - #{trade_amount}, SYSDATE)
 	</insert>
 	
 	<insert id="insertYou" parameterType="TradeDTO">
@@ -53,13 +53,38 @@
 	
 	<update id="updateMe" parameterType="TradeDTO">
 		UPDATE ACCOUNT_INFO SET BALANCE = BALANCE - #{trade_amount}
-		WHERE ACCOUNT_NUM = #{account_num_me}
+		WHERE ACCOUNT_NUM = #{account_num}
 	</update>
 	
 	<update id="updateYou" parameterType="TradeDTO">
 		UPDATE ACCOUNT_INFO SET BALANCE = BALANCE + #{trade_amount}
 		WHERE ACCOUNT_NUM = #{account_num_you}
 	</update>
+	
+	<select id="list" parameterType="ListOption" resultType="TradeDTO">
+		SELECT TRADE_DATE , TRADE_AMOUNT , BALANCE , TRADE_TYPE
+		FROM TRADE_HISTORY
+		WHERE ACCOUNT_NUM = #{account_num}
+		<choose>
+			<when test='trade_type == "출금"'>
+				AND TRADE_TYPE = #{trade_type}
+			</when> 
+			<when test='trade_type == "입금"'>
+				AND TRADE_TYPE = #{trade_type}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+		ORDER BY TRADE_DATE 
+		<choose>
+			<when test="order == 0">DESC</when>
+			<otherwise>ASC</otherwise>
+		</choose>
+	</select>
+	
+
+	
+
 	
 
  </mapper>

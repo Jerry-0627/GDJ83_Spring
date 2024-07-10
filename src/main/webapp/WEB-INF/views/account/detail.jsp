@@ -21,6 +21,7 @@
 		<h3>개설일 : ${detail.account_date}</h3>
 		<h3>이자율 : ${detail.productDTO.product_rate}</h3>
 	<a href="./transfer?account_num=${detail.account_num}" type = "button"	class="btn btn-primary">송금</a>
+	<a href="./list?account_num=${detail.account_num}&order=0" type = "button"	class="btn btn-primary">거래 내역 조회</a>
 	</div>
 	
 	
