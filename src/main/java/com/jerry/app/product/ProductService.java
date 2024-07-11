@@ -1,6 +1,7 @@
 package com.jerry.app.product;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +13,7 @@ public class ProductService {
 	private ProductDAO productDAO;
 	private PageDTO pageDTO;
 
-	public List<ProductDTO> getlist(Long page) throws Exception {
+	public Map<String, Object> getlist(Long page) throws Exception {
 		// page값이 1이면 첫번째 숫자는 1 두번째 숫자는 10
 		// page값이 2라면 첫번째 숫자는 11 두번째 숫자는 20
 		// .
@@ -20,6 +21,9 @@ public class ProductService {
 		// . 이것을 계산하는 식을 만들어야함
 
 		if (page == null) {
+			page = 1L;
+		}
+		if (page < 1) {
 			page = 1L;
 		}
 
@@ -34,19 +38,61 @@ public class ProductService {
 		pageDTO.setStartRow(startRow);
 		pageDTO.setLastRow(lastRow);
 
-		// 잔여 Row 보여주게 하기 위함.
+		// 1. 총 개수로 총 페이지 수 구하기
 		if (totalCount % perPage != 0) {
 			totalPage++;
 		}
-
 		System.out.println("RowCount : " + totalCount);
 		System.out.println("PageCount : " + totalPage);
 
-		// long과 Long의 차이는 어떠한 것들이 있을까?
+		// 총 블럭의 수
+		long perBlock = 5L; // 한 페이지에 보여줄 Page 번호의 개수
+		long totalBlock = 0; // 총 블럭의 수
 
-		List<ProductDTO> ar = productDAO.getlist(pageDTO);
+		// 2.
+		totalBlock = (totalPage / 5);
+		if (totalPage % perBlock != 0) {
+			totalBlock++;
+		}
 
-		return ar;
+		// 3. 현재 페이지 번호로 현재블럭 번호를 구하기
+
+		long curBlock = 0;
+
+		curBlock = page / perBlock;
+		if ((page % perBlock) != 0) {
+			curBlock++;
+		}
+
+		// 4. 현재 블럭 번호로 시작번호와 끝 번호 구하기
+		long startNum = 0;
+		long lastNum = 0;
+
+		startNum = (curBlock - 1) * perBlock + 1;
+		lastNum = curBlock * perBlock;
+
+		// 5. 이전 블럭, 다음 블럭 유무 판단
+		boolean pre = true; // true면 이전 블럭이 있다.
+		if (curBlock == 1) {
+			pre = false;
+		}
+
+		boolean next = true;
+		if (totalBlock == curBlock) {
+			next = false;
+			lastNum = totalPage;
+		}
+
+		// 찾기 쉽기 위해 키로 넣음. Map 사용 List와 페이지 개수를 Controller로 보냄
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("list", productDAO.getlist(pageDTO));
+		map.put("getnum", totalPage);
+		map.put("startNum", startNum);
+		map.put("lastNum", lastNum);
+		map.put("pre", pre);
+		map.put("next", next);
+
+		return map;
 	}
 
 	public ProductDTO getdetail(ProductDTO productDTO) throws Exception {
