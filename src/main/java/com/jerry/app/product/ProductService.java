@@ -13,13 +13,17 @@ public class ProductService {
 	private ProductDAO productDAO;
 	private PageDTO pageDTO;
 
-	public Map<String, Object> getlist(Long page) throws Exception {
+	public Map<String, Object> getlist(PageDTO pageDTO) throws Exception {
 		// page값이 1이면 첫번째 숫자는 1 두번째 숫자는 10
 		// page값이 2라면 첫번째 숫자는 11 두번째 숫자는 20
 		// .
 		// .
 		// . 이것을 계산하는 식을 만들어야함
-
+		Long page = pageDTO.getPage();
+		long order = pageDTO.getOrder();
+				
+		
+		
 		if (page == null) {
 			page = 1L;
 		}
@@ -39,7 +43,6 @@ public class ProductService {
 		long totalPageCount = totalRowCount / curPageRowCount; // Page의 개수
 
 		// 하나의 Page에서 Row의 시작 값과 마지막 값 세팅
-		PageDTO pageDTO = new PageDTO();
 		pageDTO.setStartRow(pageFirstRowNum);
 		pageDTO.setLastRow(pageLastRowNum);
 
@@ -91,13 +94,17 @@ public class ProductService {
 			nextPage = false;
 			blockLastPage = totalPageCount;
 		}
-
+		Long curPage = page;
+		Long curOrder = pageDTO.getOrder();
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("list", productDAO.getlist(pageDTO));
 		map.put("blockFirstPage", blockFirstPage);
 		map.put("blockLastPage", blockLastPage);
 		map.put("prePage", prePage);
 		map.put("nextPage", nextPage);
+		map.put("curPage", curPage);
+		map.put("curOrder", curOrder);
 		return map;
 	}
 

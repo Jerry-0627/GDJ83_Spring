@@ -14,8 +14,8 @@
 	<table class = "table table-striped table-primary">
 		<thead>
 			<h1>금융 상품 목록</h1>
-			<a href="/product/list">상품번호 오름차순</a>
-			<a>상품 번호 내림차순</a>
+			<a href="/product/list?page=${map.curPage}&order=0">상품번호 오름차순</a>
+			<a href="/product/list?page=${map.curPage}&order=1">상품번호 내림차순</a>
 			<tr>
 				<th>상품 번호</th>
 				<th>상품 이름</th>
@@ -42,17 +42,17 @@
 	<nav aria-label="Page navigation example">
   <ul class="pagination">
     <li class="page-item ${map.prePage?'':'disabled' }">
-      <a class="page-link" href="./list?page=${map.blockFirstPage-1}" aria-label="Previous">
+      <a class="page-link" href="./list?page=${map.blockFirstPage-1}&order=${map.curOrder}" aria-label="Previous">
         <span aria-hidden="true">&laquo;</span>
       </a>
     </li>
     
     <c:forEach begin="${map.blockFirstPage}" end="${map.blockLastPage}" step="1" var="i">
-    	<li class="page-item"><a class="page-link" href="./list?page=${i}">${i}</a></li>
+    	<li class="page-item"><a class="page-link" href="./list?page=${i}&order=${map.curOrder}">${i}</a></li>
 	</c:forEach>
 	
     <li class="page-item ${map.nextPage?'':'disabled'}" >
-      <a class="page-link" href="./list?page=${map.blockLastPage+1}" aria-label="Next">
+      <a class="page-link" href="./list?page=${map.blockLastPage+1}&order=${map.curOrder}" aria-label="Next">
         <span aria-hidden="true">&raquo;</span>
       </a>
     </li>
