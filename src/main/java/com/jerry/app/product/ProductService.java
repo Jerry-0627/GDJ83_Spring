@@ -1,6 +1,7 @@
 package com.jerry.app.product;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +13,7 @@ public class ProductService {
 	private ProductDAO productDAO;
 	private PageDTO pageDTO;
 
-	public List<ProductDTO> getlist(Long page) throws Exception {
+	public Map<String, Object> getlist(Long page) throws Exception {
 		// page값이 1이면 첫번째 숫자는 1 두번째 숫자는 10
 		// page값이 2라면 첫번째 숫자는 11 두번째 숫자는 20
 		// .
@@ -22,31 +23,77 @@ public class ProductService {
 		if (page == null) {
 			page = 1L;
 		}
+		if (page < 1) {
+			page = 1L;
+		}
+		// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+		// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+		// 1. 총 Row 개수로 총페이지 수 구하기.
 
-		long perPage = 10L; // 하나의 Page에 보여줄 Row의 개수
-		long startRow = (page - 1) * perPage + 1; // 첫번째 Page의 번호
-		long lastRow = page * perPage; // 마지막 Page 번호
-		long totalCount = productDAO.getnum(); // Row의 개수
-		long totalPage = totalCount / perPage; // Page의 개수
+		long perPageRowNum = 10L; // 하나의 Page에 보여줄 Row의 개수
+
+		long pageFirstRowNum = (page - 1) * perPageRowNum + 1; // Page에 나타낼 첫번째 Row 번호
+		long pageLastRowNum = page * perPageRowNum; // Page에 나타낼 마지막 Row 번호
+
+		long totalRowCount = productDAO.getnum(); // Row의 개수
+		long totalPageCount = totalRowCount / perPageRowNum; // Page의 개수
 
 		// 하나의 Page에서 Row의 시작 값과 마지막 값 세팅
 		PageDTO pageDTO = new PageDTO();
-		pageDTO.setStartRow(startRow);
-		pageDTO.setLastRow(lastRow);
+		pageDTO.setStartRow(pageFirstRowNum);
+		pageDTO.setLastRow(pageLastRowNum);
 
-		// 잔여 Row 보여주게 하기 위함.
-		if (totalCount % perPage != 0) {
-			totalPage++;
+		// 잔여 Row가 있으면 잔여 Row를 담기 위한 페이지를 하나 더 만든다.
+		if (totalRowCount % perPageRowNum != 0) {
+			totalPageCount++;
 		}
 
-		System.out.println("RowCount : " + totalCount);
-		System.out.println("PageCount : " + totalPage);
+		System.out.println("RowCount : " + totalRowCount);
+		System.out.println("PageCount : " + totalPageCount);
 
-		// long과 Long의 차이는 어떠한 것들이 있을까?
+		// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+		// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+		// 2. 총 페이지수로 총 블럭 수 구하기
+		long pageBlockCount = 5L;
+		long totalBlockCount = totalPageCount / pageBlockCount;
+		if (totalPageCount % pageBlockCount != 0) {
+			totalBlockCount++;
+		}
 
-		List<ProductDTO> ar = productDAO.getlist(pageDTO);
+		// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+		// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+		// 3. 현재 페이지 번호로 현재 블럭 번호 구하기.
+		long perBlockNum = page / pageBlockCount;
+		if (page % pageBlockCount != 0) {
+			perBlockNum++;
+		}
 
-		return ar;
+		// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+		// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+		// 4. 현재 블럭 번호로 해당 블럭의 페이지 시작번호와 끝번호 구하기.
+		long blockFirstPage = perBlockNum * pageBlockCount - (pageBlockCount - 1);
+		long blockLastPage = perBlockNum * pageBlockCount;
+
+		// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+		// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+		// 5. 이전 다음 페이지가 있는지 판단하기.
+		boolean prePage = true;
+		boolean nextPage = true;
+		long extraNum = totalBlockCount * (pageBlockCount - 1);
+		if (page <= pageBlockCount) {
+			prePage = false;
+		}
+		if (page >= extraNum) {
+			nextPage = false;
+		}
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("list", productDAO.getlist(pageDTO));
+		map.put("blockFirstPage", blockFirstPage);
+		map.put("blockLastPage", blockLastPage);
+		map.put("prePage", prePage);
+		map.put("nextPage", nextPage);
+		return map;
 	}
 
 	public ProductDTO getdetail(ProductDTO productDTO) throws Exception {

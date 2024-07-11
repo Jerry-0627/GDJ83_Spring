@@ -1,6 +1,7 @@
 package com.jerry.app.product;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,9 +19,10 @@ public class ProductController {
 	@RequestMapping(value = "list", method = RequestMethod.GET)
 	public void getlist(Long page, Model model) throws Exception {
 		System.out.println("실행됨");
-		List<ProductDTO> ar = productService.getlist(page);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map = productService.getlist(page);
 
-		model.addAttribute("list", ar);
+		model.addAttribute("map", map);
 	}
 
 	@RequestMapping(value = "detail")

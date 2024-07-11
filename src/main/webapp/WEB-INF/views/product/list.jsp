@@ -22,7 +22,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items = "${list}" var = "dto"> 
+			<c:forEach items = "${map.list}" var = "dto"> 
 				<tr>
 					<td>${dto.product_num}</td>
 					<td><a href="./detail?product_num=${dto.product_num}">${dto.product_name}</a></td>
@@ -39,16 +39,18 @@
 	</div>
 	<nav aria-label="Page navigation example">
   <ul class="pagination">
-    <li class="page-item">
-      <a class="page-link" href="#" aria-label="Previous">
+    <li class="page-item ${map.prePage?'':'disabled' }">
+      <a class="page-link" href="./list?page=${map.blockFirstPage-1}" aria-label="Previous">
         <span aria-hidden="true">&laquo;</span>
       </a>
     </li>
-    <li class="page-item"><a class="page-link" href="./list?page=1">1</a></li>
-    <li class="page-item"><a class="page-link" href="./list?page=2">2</a></li>
-    <li class="page-item"><a class="page-link" href="./list?page=3">3</a></li>
-    <li class="page-item">
-      <a class="page-link" href="#" aria-label="Next">
+    
+    <c:forEach begin="${map.blockFirstPage}" end="${map.blockLastPage}" step="1" var="i">
+    	<li class="page-item"><a class="page-link" href="./list?page=${i}">${i}</a></li>
+	</c:forEach>
+	
+    <li class="page-item ${map.nextPage?'':'disabled'}" >
+      <a class="page-link" href="./list?page=${map.blockLastPage+1}" aria-label="Next">
         <span aria-hidden="true">&raquo;</span>
       </a>
     </li>
