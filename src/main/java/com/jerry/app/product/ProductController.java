@@ -16,12 +16,11 @@ public class ProductController {
 	private ProductService productService;
 
 	@RequestMapping(value = "list", method = RequestMethod.GET)
-	public void getlist(Model model) throws Exception {
+	public void getlist(Long page, Model model) throws Exception {
 		System.out.println("실행됨");
-		List<ProductDTO> ar = productService.getlist();
+		List<ProductDTO> ar = productService.getlist(page);
 
 		model.addAttribute("list", ar);
-
 	}
 
 	@RequestMapping(value = "detail")
@@ -54,7 +53,7 @@ public class ProductController {
 
 	@RequestMapping(value = "delete", method = RequestMethod.GET)
 	public String dodelete(ProductDTO productDTO, Model model) throws Exception {
-		 int result = productService.dodelete(productDTO);
+		int result = productService.dodelete(productDTO);
 		String url = "";
 		if (result > 0) {
 			url = "redirect:./list";

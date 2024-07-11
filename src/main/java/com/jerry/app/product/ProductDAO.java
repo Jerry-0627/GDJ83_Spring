@@ -14,9 +14,13 @@ public class ProductDAO {
 
 	private final String NAMESPACE = "com.jerry.app.product.ProductDAO.";
 
-	public List<ProductDTO> getlist() throws Exception {
+	public List<ProductDTO> getlist(PageDTO pageDTO) throws Exception {
 		// productDTO가 여러개여서 List로 받는거임
-		return sqlSession.selectList(NAMESPACE + "getlist");
+		return sqlSession.selectList(NAMESPACE + "getlist", pageDTO);
+	}
+
+	public Long getnum() throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "getnum");
 	}
 
 	public ProductDTO getdetail(ProductDTO productDTO) throws Exception {

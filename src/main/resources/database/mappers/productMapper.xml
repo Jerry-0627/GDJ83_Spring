@@ -6,8 +6,20 @@
   
   <mapper namespace="com.jerry.app.product.ProductDAO">
 	  
-	  <select id="getlist" resultType="ProductDTO">
-	  		SELECT * FROM PRODUCT_INFO ORDER BY PRODUCT_NUM
+	  <select id="getlist" parameterType="PageDTO" resultType="ProductDTO">
+	  
+			SELECT * FROM
+			(
+				SELECT ROWNUM R, P.* FROM
+				(
+					SELECT * FROM PRODUCT_INFO
+					ORDER BY PRODUCT_NUM DESC) P)
+			WHERE R BETWEEN #{startRow} AND #{lastRow}
+	  </select>
+	  
+	  <select id="getnum" resultType = "java.lang.Long">
+	 		SELECT COUNT(PRODUCT_NUM) 
+			FROM PRODUCT_INFO
 	  </select>
 	  
 	  <select id="getdetail" resultType="ProductDTO" parameterType="ProductDTO">
