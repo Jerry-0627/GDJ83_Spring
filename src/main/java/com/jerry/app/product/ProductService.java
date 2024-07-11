@@ -30,13 +30,13 @@ public class ProductService {
 		// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 		// 1. 총 Row 개수로 총페이지 수 구하기.
 
-		long perPageRowNum = 10L; // 하나의 Page에 보여줄 Row의 개수
+		long curPageRowCount = 10L; // 하나의 Page에 보여줄 Row의 개수
 
-		long pageFirstRowNum = (page - 1) * perPageRowNum + 1; // Page에 나타낼 첫번째 Row 번호
-		long pageLastRowNum = page * perPageRowNum; // Page에 나타낼 마지막 Row 번호
+		long pageFirstRowNum = (page - 1) * curPageRowCount + 1; // Page에 나타낼 첫번째 Row 번호
+		long pageLastRowNum = page * curPageRowCount; // Page에 나타낼 마지막 Row 번호
 
 		long totalRowCount = productDAO.getnum(); // Row의 개수
-		long totalPageCount = totalRowCount / perPageRowNum; // Page의 개수
+		long totalPageCount = totalRowCount / curPageRowCount; // Page의 개수
 
 		// 하나의 Page에서 Row의 시작 값과 마지막 값 세팅
 		PageDTO pageDTO = new PageDTO();
@@ -44,7 +44,7 @@ public class ProductService {
 		pageDTO.setLastRow(pageLastRowNum);
 
 		// 잔여 Row가 있으면 잔여 Row를 담기 위한 페이지를 하나 더 만든다.
-		if (totalRowCount % perPageRowNum != 0) {
+		if (totalRowCount % curPageRowCount != 0) {
 			totalPageCount++;
 		}
 
@@ -54,37 +54,42 @@ public class ProductService {
 		// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 		// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 		// 2. 총 페이지수로 총 블럭 수 구하기
-		long pageBlockCount = 5L;
-		long totalBlockCount = totalPageCount / pageBlockCount;
-		if (totalPageCount % pageBlockCount != 0) {
+		long blockPageCount = 5L;
+		long totalBlockCount = totalPageCount / blockPageCount;
+		if (totalPageCount % blockPageCount != 0) {
 			totalBlockCount++;
 		}
 
 		// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 		// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 		// 3. 현재 페이지 번호로 현재 블럭 번호 구하기.
-		long perBlockNum = page / pageBlockCount;
-		if (page % pageBlockCount != 0) {
-			perBlockNum++;
+		long curBlockNum = page / blockPageCount;
+		if (page % blockPageCount != 0) {
+			curBlockNum++;
 		}
 
 		// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 		// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 		// 4. 현재 블럭 번호로 해당 블럭의 페이지 시작번호와 끝번호 구하기.
-		long blockFirstPage = perBlockNum * pageBlockCount - (pageBlockCount - 1);
-		long blockLastPage = perBlockNum * pageBlockCount;
+		long blockFirstPage = curBlockNum * blockPageCount - (blockPageCount - 1);
+		long blockLastPage = curBlockNum * blockPageCount;
 
 		// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 		// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 		// 5. 이전 다음 페이지가 있는지 판단하기.
 		boolean prePage = true;
 		boolean nextPage = true;
-		long extraNum1 = totalBlockCount * (pageBlockCount - 1);
-		if (page <= pageBlockCount) {
+		// 현재 페이지에 해당하는 블록의 첫번째 페이지 보다 
+		
+		if (page <= blockPageCount) {
 			prePage = false;
 		}
-		if (page >= extraNum1) {
+		
+		long lastBlockFirstPage = totalBlockCount*blockPageCount - (blockPageCount - 1);
+		
+		if (page >= lastBlockFirstPage) {
 			nextPage = false;
+			blockLastPage = totalPageCount;
 		}
 
 		Map<String, Object> map = new HashMap<String, Object>();

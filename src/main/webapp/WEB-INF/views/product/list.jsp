@@ -14,6 +14,8 @@
 	<table class = "table table-striped table-primary">
 		<thead>
 			<h1>금융 상품 목록</h1>
+			<a href="/product/list">상품번호 오름차순</a>
+			<a>상품 번호 내림차순</a>
 			<tr>
 				<th>상품 번호</th>
 				<th>상품 이름</th>
