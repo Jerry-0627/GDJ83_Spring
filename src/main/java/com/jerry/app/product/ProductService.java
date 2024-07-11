@@ -79,11 +79,11 @@ public class ProductService {
 		// 5. 이전 다음 페이지가 있는지 판단하기.
 		boolean prePage = true;
 		boolean nextPage = true;
-		long extraNum = totalBlockCount * (pageBlockCount - 1);
+		long extraNum1 = totalBlockCount * (pageBlockCount - 1);
 		if (page <= pageBlockCount) {
 			prePage = false;
 		}
-		if (page >= extraNum) {
+		if (page >= extraNum1) {
 			nextPage = false;
 		}
 
