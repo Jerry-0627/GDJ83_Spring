@@ -22,4 +22,12 @@ public class NoticeService {
 
 		return map;
 	}
+
+	public NoticeDTO getDetail(NoticeDTO noticeDTO) throws Exception {
+		return noticeDAO.getDetail(noticeDTO);
+	}
+
+	public int doADD(NoticeDTO noticeDTO) throws Exception {
+		return noticeDAO.doAdd(noticeDTO);
+	}
 }

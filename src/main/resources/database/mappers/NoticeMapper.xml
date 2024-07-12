@@ -22,5 +22,14 @@
 			</otherwise>
 		</choose>
  	</select>
+ 	
+ 	<select id="getDetail" parameterType="NoticeDTO" resultType="NoticeDTO">
+ 		SELECT * FROM NOTICE_INFO
+ 		WHERE BOARD_NUM = #{board_num}
+ 	</select>
+ 	
+ 	<insert id="doAdd" parameterType="NoticeDTO">
+ 		
+ 	</insert>
  
  </mapper>
