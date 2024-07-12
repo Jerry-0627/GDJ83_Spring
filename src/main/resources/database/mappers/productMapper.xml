@@ -13,13 +13,36 @@
 				SELECT ROWNUM R, P.* FROM
 				(
 					SELECT * FROM PRODUCT_INFO
+					<where>
+						PRODUCT_NUM > 0
+						<choose>
+							<when test="kind == 'k2'">
+								AND PRODUCT_EX LIKE '%' || #{search} || '%' 
+							</when>
+							<otherwise>
+								AND PRODUCT_NAME LIKE '%' || #{search} || '%' 
+							</otherwise>
+						</choose>
+					</where>
+
 					ORDER BY PRODUCT_NUM DESC) P)
 			WHERE R BETWEEN #{startRow} AND #{lastRow}
 	  </select>
 	  
-	  <select id="getnum" resultType = "java.lang.Long">
+	  <select id="getnum" parameterType="PageDTO" resultType = "java.lang.Long">
 	 		SELECT COUNT(PRODUCT_NUM) 
 			FROM PRODUCT_INFO
+			<where>
+				PRODUCT_NUM > 0
+					<choose>
+						<when test="kind == 'k2'">
+							AND PRODUCT_EX LIKE '%' || #{search} || '%' 
+						</when>
+						<otherwise>
+							AND PRODUCT_NAME LIKE '%' || #{search} || '%' 
+						</otherwise>
+					</choose>
+			</where>
 	  </select>
 	  
 	  <select id="getdetail" resultType="ProductDTO" parameterType="ProductDTO">

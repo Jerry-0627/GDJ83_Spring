@@ -13,7 +13,7 @@ public class ProductService {
 	private ProductDAO productDAO;
 	private PageDTO pageDTO;
 
-	public Map<String, Object> getlist(Long page) throws Exception {
+	public Map<String, Object> getlist(String kind, String search, Long page) throws Exception {
 		// page값이 1이면 첫번째 숫자는 1 두번째 숫자는 10
 		// page값이 2라면 첫번째 숫자는 11 두번째 숫자는 20
 		// .
@@ -26,17 +26,23 @@ public class ProductService {
 		if (page < 1) {
 			page = 1L;
 		}
+		if (search == null) {
+			search = "";
+		}
 
 		long perPage = 10L; // 하나의 Page에 보여줄 Row의 개수
 		long startRow = (page - 1) * perPage + 1; // 첫번째 Page의 번호
 		long lastRow = page * perPage; // 마지막 Page 번호
-		long totalCount = productDAO.getnum(); // Row의 개수
-		long totalPage = totalCount / perPage; // Page의 개수
 
 		// 하나의 Page에서 Row의 시작 값과 마지막 값 세팅
 		PageDTO pageDTO = new PageDTO();
 		pageDTO.setStartRow(startRow);
 		pageDTO.setLastRow(lastRow);
+		pageDTO.setKind(kind);
+		pageDTO.setSearch(search);
+
+		long totalCount = productDAO.getnum(pageDTO); // Row의 개수
+		long totalPage = totalCount / perPage; // Page의 개수
 
 		// 1. 총 개수로 총 페이지 수 구하기
 		if (totalCount % perPage != 0) {
@@ -86,6 +92,8 @@ public class ProductService {
 		// 찾기 쉽기 위해 키로 넣음. Map 사용 List와 페이지 개수를 Controller로 보냄
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("list", productDAO.getlist(pageDTO));
+		map.put("kind", kind);
+		map.put("search", search);
 		map.put("getnum", totalPage);
 		map.put("startNum", startNum);
 		map.put("lastNum", lastNum);

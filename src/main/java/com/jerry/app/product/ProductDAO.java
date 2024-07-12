@@ -19,8 +19,8 @@ public class ProductDAO {
 		return sqlSession.selectList(NAMESPACE + "getlist", pageDTO);
 	}
 
-	public Long getnum() throws Exception {
-		return sqlSession.selectOne(NAMESPACE + "getnum");
+	public Long getnum(PageDTO pageDTO) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "getnum", pageDTO);
 	}
 
 	public ProductDTO getdetail(ProductDTO productDTO) throws Exception {
