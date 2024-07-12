@@ -11,6 +11,8 @@
   		<typeAlias type="com.jerry.app.account.AccountDTO" alias = "AccountDTO"/>
   		<typeAlias type="com.jerry.app.account.TradeDTO" alias = "TradeDTO"/>
   		<typeAlias type="com.jerry.app.account.ListOption" alias = "ListOption"/>
+  		<typeAlias type="com.jerry.app.notice.NoticeDTO" alias = "NoticeDTO"/>
+  		<typeAlias type="com.jerry.app.notice.ExtraDTO" alias = "ExtraDTO"/>
   		
   	</typeAliases>
  </configuration>

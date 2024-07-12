@@ -11,7 +11,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">기타1</a>
+          <a class="nav-link active" aria-current="page" href="/notice/list">공지사항</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">기타2</a>
