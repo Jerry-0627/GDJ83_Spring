@@ -17,19 +17,19 @@ public class NoticeDAOTest extends DefaultTest {
 	@Test
 	public void NoticeTest() throws Exception {
 		NoticeDTO noticeDTO = new NoticeDTO();
-		for (long i = 0; i < 100; i++) {
+		for (long i = 0; i < 50; i++) {
 			Date date = new Date(i);
 			noticeDTO.setBoard_num(i);
-			noticeDTO.setBoard_writer("작성자" + i);
-			noticeDTO.setBoard_title("제목" + (i * 2));
+			noticeDTO.setBoard_writer("123");
+			noticeDTO.setBoard_title("제목" + i);
 			noticeDTO.setCreate_date(date);
-			i = i + 1;
-			noticeDTO.setUpdate_date(date);
+			noticeDTO.setUpdate_date(null);
 			int r = ((int) (Math.random() * 1000)) / 100;
 			noticeDTO.setBoard_hit(r);
 			noticeDTO.setBoard_contents("랜덤" + (r * r));
-			noticeDTO.setBoard_category("1");
-
+			noticeDTO.setBoard_category(1);
+			noticeDAO.doAdd(noticeDTO);
+			Thread.sleep(50);
 		}
 
 //			ProductDTO productDTO = new ProductDTO();

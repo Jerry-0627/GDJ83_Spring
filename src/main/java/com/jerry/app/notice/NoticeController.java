@@ -16,9 +16,14 @@ public class NoticeController {
 	private NoticeService noticeService;
 
 	@RequestMapping(value = "list", method = RequestMethod.GET)
-	public void getList(String kind, String search, Model model) throws Exception {
-		Map<String, Object> map = noticeService.getList(kind, search);
+	public void getList(ExtraDTO extraDTO, Model model) throws Exception {
+		Map<String, Object> map = noticeService.getList(extraDTO);
 		model.addAttribute("map", map);
+	}
+	
+	@RequestMapping(value = "list", method = RequestMethod.POST)
+	public void getList(ExtraDTO extraDTO) throws Exception{
+		noticeService.getList(extraDTO);
 	}
 
 	@RequestMapping(value = "detail", method = RequestMethod.GET)

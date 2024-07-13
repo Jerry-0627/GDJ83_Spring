@@ -28,7 +28,7 @@
 	   	 	</div>
 	  	</div>
 		<div class="col-12">
-			<button type="submit" class="btn btn-primary">Submit</button>
+			<button type="submit" class="btn btn-primary">검색</button>
 		</div>	
 		<div>
 			<a href="/notice/add" class="btn btn-success">글쓰기</a>
@@ -63,6 +63,22 @@
 		</c:forEach>
 	  </tbody>
 	</table>
+	
+	<ul class="pagination">
+   		<li class="page-item ${map.prePage?'':'disabled' }">
+		    <a class="page-link" href="./list?page=${map.blockFirstPageNum-1}&kind=${map.kind}&search=${map.search}" aria-label="Previous">
+        		<span aria-hidden="true">&laquo;</span>
+      		</a>
+    	</li>
+    	<c:forEach begin="${map.blockFirstPageNum}" end ="${map.blockLastPageNum}" step="1" var="i"> 
+	    	<li class="page-item"><a class="page-link" href="./list?page=${i}&kind=${map.kind}&search=${map.search}">${i}</a></li>
+		</c:forEach>
+	    <li class="page-item ${map.nextPage?'':'disabled'}">
+    		<a class="page-link" href="./list?page=${map.blockLastPageNum+1}&kind=${map.kind}&search=${map.search}" aria-label="Next">
+        	<span aria-hidden="true">&raquo;</span>
+     		</a>
+    	</li>
+  	</ul>
 
 	<c:import url="/WEB-INF/views/sample/bootFooter.jsp"></c:import>
 </body>

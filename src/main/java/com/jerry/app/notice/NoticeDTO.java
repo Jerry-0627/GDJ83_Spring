@@ -11,7 +11,7 @@ public class NoticeDTO {
 	private Date update_date;
 	private long board_hit;
 	private String board_contents;
-	private String board_category;
+	private int board_category;
 
 	public String getBoard_writer() {
 		return board_writer;
@@ -69,12 +69,14 @@ public class NoticeDTO {
 		this.board_contents = board_contents;
 	}
 
-	public String getBoard_category() {
+	public int getBoard_category() {
 		return board_category;
 	}
 
-	public void setBoard_category(String board_category) {
+	public void setBoard_category(int board_category) {
 		this.board_category = board_category;
 	}
+
+
 
 }

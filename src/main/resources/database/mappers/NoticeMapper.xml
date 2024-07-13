@@ -7,21 +7,35 @@
   
  <mapper namespace="com.jerry.app.notice.NoticeDAO">
  	<select id="getList" parameterType="ExtraDTO" resultType="NoticeDTO">
- 		SELECT * FROM NOTICE_INFO
-		<choose>
-			<when test="kind == 'k1'">
-				WHERE BOARD_TITLE LIKE '%' || #{search} || '%' 
-			</when>
-			<when test="kind == 'k2'">
-				WHERE BOARD_CONTENTS LIKE '%' || #{search} || '%' 
-			</when>
-			<when test="kind == 'k2'">
-				WHERE BOARD_WRITER LIKE '%' || #{search} || '%' 
-			</when>
-			<otherwise>
-			</otherwise>
-		</choose>
- 	</select>
+ 		SELECT * FROM
+		(
+			SELECT ROWNUM R, N.* FROM
+			(
+				SELECT * FROM NOTICE_INFO
+				WHERE BOARD_NUM > 0
+				<choose>
+					<when test="kind == 'k1'">
+						 AND WHERE BOARD_TITLE LIKE '%' || #{search} || '%' 
+					</when>
+					<when test="kind == 'k2'">
+						 AND WHERE BOARD_CONTENTS LIKE '%' || #{search} || '%' 
+					</when>
+					<when test="kind == 'k3'">
+						 AND WHERE BOARD_WRITER LIKE '%' || #{search} || '%' 
+					</when>
+					<otherwise>
+					</otherwise>
+				</choose>
+				ORDER BY BOARD_NUM DESC) N
+		)
+		WHERE R BETWEEN #{pageFirstRow} AND #{pageLastRow} 	
+		
+	</select>
+	
+	<select id="getTotalRowCount" resultType="java.lang.Long">
+		SELECT COUNT(BOARD_NUM)
+		FROM NOTICE_INFO
+	</select>
  	
  	<select id="getDetail" parameterType="NoticeDTO" resultType="NoticeDTO">
  		SELECT * FROM NOTICE_INFO
@@ -29,7 +43,9 @@
  	</select>
  	
  	<insert id="doAdd" parameterType="NoticeDTO">
- 		
+ 		INSERT INTO NOTICE_INFO
+		VALUES (BOARD_SEQ.NEXTVAL, #{board_writer}, #{board_title}, #{create_date}, #{update_date},
+			#{board_hit}, #{board_contents}, #{board_category})
  	</insert>
  
  </mapper>
