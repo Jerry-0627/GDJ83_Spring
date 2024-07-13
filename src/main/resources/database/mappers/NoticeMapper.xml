@@ -15,13 +15,13 @@
 				WHERE BOARD_NUM > 0
 				<choose>
 					<when test="kind == 'k1'">
-						 AND WHERE BOARD_TITLE LIKE '%' || #{search} || '%' 
+						 AND BOARD_TITLE LIKE '%' || #{search} || '%' 
 					</when>
 					<when test="kind == 'k2'">
-						 AND WHERE BOARD_CONTENTS LIKE '%' || #{search} || '%' 
+						 AND BOARD_CONTENTS LIKE '%' || #{search} || '%' 
 					</when>
 					<when test="kind == 'k3'">
-						 AND WHERE BOARD_WRITER LIKE '%' || #{search} || '%' 
+						 AND BOARD_WRITER LIKE '%' || #{search} || '%' 
 					</when>
 					<otherwise>
 					</otherwise>
@@ -32,9 +32,23 @@
 		
 	</select>
 	
-	<select id="getTotalRowCount" resultType="java.lang.Long">
+	<select id="getTotalRowCount" parameterType="ExtraDTO" resultType="java.lang.Long">
 		SELECT COUNT(BOARD_NUM)
 		FROM NOTICE_INFO
+		WHERE BOARD_NUM > 0
+				<choose>
+					<when test="kind == 'k1'">
+						 AND BOARD_TITLE LIKE '%' || #{search} || '%' 
+					</when>
+					<when test="kind == 'k2'">
+						 AND BOARD_CONTENTS LIKE '%' || #{search} || '%' 
+					</when>
+					<when test="kind == 'k3'">
+						 AND BOARD_WRITER LIKE '%' || #{search} || '%' 
+					</when>
+					<otherwise>
+					</otherwise>
+				</choose>
 	</select>
  	
  	<select id="getDetail" parameterType="NoticeDTO" resultType="NoticeDTO">
@@ -43,9 +57,10 @@
  	</select>
  	
  	<insert id="doAdd" parameterType="NoticeDTO">
- 		INSERT INTO NOTICE_INFO
-		VALUES (BOARD_SEQ.NEXTVAL, #{board_writer}, #{board_title}, #{create_date}, #{update_date},
-			#{board_hit}, #{board_contents}, #{board_category})
+		INSERT INTO NOTICE_INFO
+		(BOARD_NUM, BOARD_WRITER, BOARD_TITLE, CREATE_DATE, BOARD_CONTENTS, BOARD_CATEGORY)
+		VALUES
+		(BOARD_SEQ.NEXTVAL, ?, #{board_title}, SYSDATE, #{baord_contents}, #{board_category})
  	</insert>
  
  </mapper>

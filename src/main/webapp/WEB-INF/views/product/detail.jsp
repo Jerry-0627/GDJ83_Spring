@@ -11,7 +11,8 @@
 </head>
 <body>
 <c:import url="/WEB-INF/views/sample/header.jsp"></c:import>
-	<table class = "table table-striped table-primary">
+<div class="container">
+	<table class = "table">
 		<thead>
 			<h1>${detail.product_name}의 상세 정보</h1>
 		
@@ -34,6 +35,7 @@
 		<a href="./update?product_num=${detail.product_num}" class = "btn btn-outline-warning">상품 수정</a>
 		<a href="./delete?product_num=${detail.product_num}" class = "btn btn-outline-danger">상품 삭제</a>
 	</div>
+</div>
 <c:import url="/WEB-INF/views/sample/bootFooter.jsp"></c:import>	
 </body>
 </html>

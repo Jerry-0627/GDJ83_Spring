@@ -12,14 +12,15 @@
 </head>
 <body>
 	<c:import url="/WEB-INF/views/sample/header.jsp"></c:import>
-	<table class = "table table-striped table-primary">
+<div class="container">
+	<table class = "table">
 			<h1>거래 내역 조회</h1>
 			<div>
-				<a href="list?account_num=${param.account_num}&order=1">과거순으로</a>
-				<a href="list?account_num=${param.account_num}&order=0">최신순으로</a>
-				<a href="list?account_num=${param.account_num}&order=0&trade_type=입금">입금만 조회</a>
-				<a href="list?account_num=${param.account_num}&order=0&trade_type=출금">출금만 조회</a>
-				<a href="list?account_num=${param.account_num}&order=0">입출금 조회</a>
+				<a type="button" class="btn btn-light" href="list?account_num=${param.account_num}&order=1">과거순으로</a>
+				<a type="button" class="btn btn-light" href="list?account_num=${param.account_num}&order=0">최신순으로</a>
+				<a type="button" class="btn btn-light" href="list?account_num=${param.account_num}&order=0&trade_type=입금">입금만 조회</a>
+				<a type="button" class="btn btn-light" href="list?account_num=${param.account_num}&order=0&trade_type=출금">출금만 조회</a>
+				<a type="button" class="btn btn-light" href="list?account_num=${param.account_num}&order=0">입출금 조회</a>
 			</div>
 		<thead>
 			<tr>
@@ -44,6 +45,7 @@
 			</c:forEach>
 		</tbody>
 	</table>
+</div>
 <c:import url="/WEB-INF/views/sample/bootFooter.jsp"></c:import> 
 	
 </body>

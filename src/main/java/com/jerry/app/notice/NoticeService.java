@@ -1,6 +1,7 @@
 package com.jerry.app.notice;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +12,14 @@ public class NoticeService {
 
 	@Autowired
 	private NoticeDAO noticeDAO;
+	
 
-	public Map<String, Object> getList(ExtraDTO extraDTO) throws Exception {
+	public Map<String, Object> getList(String kind, String search, Long page) throws Exception {
+		ExtraDTO extraDTO = new ExtraDTO();
+		extraDTO.setKind(kind);
+		extraDTO.setSearch(search);
 		
-		Long curPageNum = extraDTO.getPage();
+		Long curPageNum = page;
 		Long pageRowCount = 10L;
 		Long blockPageCount = 5L;
 		if(curPageNum == null) {
@@ -30,7 +35,7 @@ public class NoticeService {
 		extraDTO.setPageLastRow(pageLastRow);
 		
 		
-		long totalRowCount = noticeDAO.getTotalRowCount();
+		long totalRowCount = noticeDAO.getTotalRowCount(extraDTO);
 				System.out.println("totalRowCount : " + totalRowCount);
 		long totalPageCount = totalRowCount/pageRowCount;
 			if(totalRowCount%pageRowCount != 0) {
@@ -69,7 +74,7 @@ public class NoticeService {
 			}	
 
 		
-		
+				System.out.println("-------------------------------------------------------------------------");
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("getList", noticeDAO.getList(extraDTO));
 		map.put("kind", extraDTO.getKind());

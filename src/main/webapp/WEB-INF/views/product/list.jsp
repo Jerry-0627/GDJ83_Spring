@@ -11,6 +11,7 @@
 <body>
 <c:import url="/WEB-INF/views/sample/header.jsp"></c:import>
 	<!-- 검색어 입력 폼 -->
+<div class="container">
 	<form action = "./list" method="get" class="row row-cols-lg-auto g-3 align-items-center">
 		
 		<div class="col-12">
@@ -35,7 +36,7 @@
 	    <button type="submit" class="btn btn-primary">Submit</button>
 	  </div>
 	</form>
-	<table class = "table table-striped table-primary">
+	<table class = "table">
 		<thead>
 			<h1>금융 상품 목록</h1>
 			<tr>
@@ -81,6 +82,7 @@
     </li>
   </ul>
 </nav>
+</div>
 	<c:import url="/WEB-INF/views/sample/bootFooter.jsp"></c:import>
 </body>
 </html>

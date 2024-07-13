@@ -18,8 +18,8 @@ public class NoticeDAO {
 		return sqlSession.selectList(NAMESPACE + "getList", extraDTO);
 	}
 	
-	public long getTotalRowCount() throws EnumConstantNotPresentException{
-		return sqlSession.selectOne(NAMESPACE + "getTotalRowCount");
+	public long getTotalRowCount(ExtraDTO extraDTO) throws Exception{
+		return sqlSession.selectOne(NAMESPACE + "getTotalRowCount", extraDTO);
 	}
 
 	public NoticeDTO getDetail(NoticeDTO noticeDTO) throws Exception {

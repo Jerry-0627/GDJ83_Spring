@@ -12,20 +12,23 @@
 <body>
 	<c:import url="/WEB-INF/views/sample/header.jsp"></c:import>
 
+	<div class="container">
 	<h1>추가</h1>
-	
 		<form action="./add" method="post">
 			<div class="mb-3">
-			 	<label for="board_num" class="form-label">상품 이름</label>
-			  	<input type="text" class="form-control" id="product_name" name = "product_name">
+				
 			</div>
 			<div class="mb-3">
-				<label for="product_rate" class="form-label">상품 이자율</label>
-				<input type="text" class="form-control" id="product_rate" name = "product_rate">
+			 	<label for="board_category" class="form-label">공지 카테고리</label>
+			  	<input type="text" class="form-control" id="board_category" name = "board_category">
 			</div>
 			<div class="mb-3">
-			 	<label for="product_ex" class="form-label">상품 설명</label>
-			  	<input type="text" class="form-control" id="product_ex" name = "product_ex">
+			 	<label for="board_title" class="form-label">공지 제목</label>
+			  	<input type="text" class="form-control" id="board_title" name = "board_title">
+			</div>
+			<div class="mb-3">
+				<label for="board_contents" class="form-label">공지 내용</label>
+				<input type="text" class="form-control" id="board_contents" name = "board_contents">
 			</div>
 				
 				
@@ -33,6 +36,7 @@
 			<a href="./list" class = "btn btn-outline-danger">취소</a>
 				
 		</form>	
+	</div>
 	<c:import url="/WEB-INF/views/sample/bootFooter.jsp"></c:import>
 </body>
 </html>
