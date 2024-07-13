@@ -21,15 +21,15 @@
 			</div>
 			<div class="mb-3">
 			 	<label for="board_category" class="form-label">공지 카테고리</label>
-			  	<input type="text" class="form-control" id="board_category" name = "board_category">
+			  	<input type="text" class="form-control" id="board_category" name = "board_category" value="">
 			</div>
 			<div class="mb-3">
 			 	<label for="board_title" class="form-label">공지 제목</label>
-			  	<input type="text" class="form-control" id="board_title" name = "board_title">
+			  	<input type="text" class="form-control" id="board_title" name = "board_title" value="">
 			</div>
 			<div class="mb-3">
 				<label for="board_contents" class="form-label">공지 내용</label>
-				<input type="text" class="form-control" id="board_contents" name = "board_contents">
+				<input type="text" class="form-control" id="board_contents" name = "board_contents" value="">
 			</div>
 				
 				

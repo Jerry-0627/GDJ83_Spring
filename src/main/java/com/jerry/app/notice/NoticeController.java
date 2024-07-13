@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jerry.app.member.MemberDTO;
 
@@ -47,25 +48,28 @@ public class NoticeController {
 	}
 
 	@RequestMapping(value = "add", method = RequestMethod.POST)
-	public String doAdd(HttpSession session, NoticeDTO noticeDTO, Model model) throws Exception {
-		MemberDTO memberDTO = new MemberDTO();
-		memberDTO = (MemberDTO)session.getAttribute("member");
+	public String doAdd(@RequestParam(name = "board_category", required = false) String board_category, 
+			@RequestParam(value = "board_title", required = false) String board_title,
+			@RequestParam(value = "board_contents", required = false) String board_contents,
+			HttpSession session, NoticeDTO noticeDTO, Model model) throws Exception {
+		
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
 		noticeDTO.setBoard_writer(memberDTO.getUser_name());
 		model.addAttribute("doAdd", noticeService.doADD(noticeDTO));
-		
 		String url = "commons/message";
-		if(noticeDTO.getBoard_title() == null ||
-				noticeDTO.getBoard_contents() == null ||
-				noticeDTO.getBoard_contents() == null) {
+		
+		if(board_category == null ||
+				board_title == null ||
+				board_title == null) {
 			model.addAttribute("result", "글쓰기를 실패 하였습니다.");
-			model.addAttribute("url", "/notice/add");	
+			model.addAttribute("url", "/notice/add");
 			return url;
-			
 		}
-
+		
 		model.addAttribute("result", "글쓰기를 성공 하였습니다.");
 		model.addAttribute("url", "/notice/list");	
 		return url;
 	}
+
 
 }
