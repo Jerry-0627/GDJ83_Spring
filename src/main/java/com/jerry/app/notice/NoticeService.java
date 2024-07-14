@@ -28,25 +28,20 @@ public class NoticeService {
 		
 		
 		long pageFirstRow = (curPageNum-1)*pageRowCount + 1;
-				System.out.println("pageFirstLow : " + pageFirstRow);
 		long pageLastRow = curPageNum * pageRowCount;
-				System.out.println("pageLastRow : " + pageLastRow);
 		extraDTO.setPageFirstRow(pageFirstRow);
 		extraDTO.setPageLastRow(pageLastRow);
 		
 		
 		long totalRowCount = noticeDAO.getTotalRowCount(extraDTO);
-				System.out.println("totalRowCount : " + totalRowCount);
 		long totalPageCount = totalRowCount/pageRowCount;
 			if(totalRowCount%pageRowCount != 0) {
 				totalPageCount ++;
 			}
-				System.out.println("totalPageCount : " + totalPageCount);
 		long totalBlockCount = totalPageCount/blockPageCount;
 			if(totalPageCount%blockPageCount != 0) {
 				totalBlockCount ++;
 			}
-				System.out.println("totalBlockCount : " + totalBlockCount);
 
 		
 				
@@ -54,13 +49,10 @@ public class NoticeService {
 			if(curPageNum%blockPageCount != 0) {
 				curBlockNum ++;
 			}
-				System.out.println("cirBlockNum : " + curBlockNum);
 		
 				
 		long blockFirstPageNum = (curBlockNum - 1) * blockPageCount + 1;
 		long blockLastPageNum = curBlockNum * blockPageCount;
-				System.out.println("blockFirsPageNum : " + blockFirstPageNum);
-				System.out.println("blockLastPageNum : " + blockLastPageNum);
 		
 				
 		boolean prePage = true;
@@ -74,7 +66,6 @@ public class NoticeService {
 			}	
 
 		
-				System.out.println("-------------------------------------------------------------------------");
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("getList", noticeDAO.getList(extraDTO));
 		map.put("kind", extraDTO.getKind());

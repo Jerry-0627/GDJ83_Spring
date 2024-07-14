@@ -39,7 +39,7 @@ public class NoticeController {
 	public String doUpdate(HttpSession session , NoticeDTO noticeDTO, Model model) throws Exception {
 		MemberDTO sessionMemberDTO = (MemberDTO)session.getAttribute("member");
 		NoticeDTO detailNoticeDTO = noticeService.getDetail(noticeDTO);
-			System.out.println("업데이트 갯 : " + detailNoticeDTO.getBoard_contents());
+			System.out.println("Update Get : " + detailNoticeDTO.getBoard_contents());
 		String url = "commons/message";
 		if(sessionMemberDTO == null) {
 			model.addAttribute("result", "로그인한 회원만 수정이 가능합니다.");
@@ -49,21 +49,26 @@ public class NoticeController {
 			model.addAttribute("url", "/notice/list");		
 		}else{
 			url = "/notice/update";
-			model.addAttribute("getDetail", noticeService.getDetail(noticeDTO));
+			model.addAttribute("getDetail", detailNoticeDTO);
+			System.out.println("제목 : " + detailNoticeDTO.getBoard_title());
+			System.out.println("내용 : " + detailNoticeDTO.getBoard_contents());
+			System.out.println("작성자 : " + detailNoticeDTO.getBoard_writer());
+			System.out.println("카테고리 : " + detailNoticeDTO.getBoard_category());
+			System.out.println("조회수 : " + detailNoticeDTO.getBoard_hit());
+			System.out.println("생성일 : " + detailNoticeDTO.getCreate_date());
+			System.out.println("수정일 : " + detailNoticeDTO.getUpdate_date());
 		}
 		return url;
 	}
 	
 	@RequestMapping(value = "update", method = RequestMethod.POST)
 	public String doUpdate(NoticeDTO noticeDTO, Model model) throws Exception{
-		int result = noticeService.doUpdate(noticeDTO);
-		System.out.println("업데이트 포스트 : " + result);
-		if(result>0) {
+		if(noticeService.doUpdate(noticeDTO) > 0) {
 			model.addAttribute("result", "수정을 성공하였습니다.");
-			model.addAttribute("url", "/notice/list");
+			model.addAttribute("url", "./list");
 		}else {
 			model.addAttribute("result", "수정을 실패하였습니다.");
-			model.addAttribute("url", "/notice/list");
+			model.addAttribute("url", "./list");
 		}
 		return "commons/message";
 	}
