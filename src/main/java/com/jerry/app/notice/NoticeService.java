@@ -102,8 +102,6 @@ public class NoticeService {
 	public int doDelete(NoticeDTO noticeDTO) throws Exception{
 		return noticeDAO.doDelete(noticeDTO);
 	}
-	
-
 
 	public int doADD(NoticeDTO noticeDTO) throws Exception {
 		return noticeDAO.doAdd(noticeDTO);

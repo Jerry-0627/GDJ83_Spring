@@ -30,11 +30,8 @@ public class NoticeController {
 	@RequestMapping(value = "detail", method = RequestMethod.GET)
 	public void getDetail(NoticeDTO noticeDTO, Model model) throws Exception {
 		NoticeDTO detailNoticeDTO =  noticeService.getDetail(noticeDTO);
-		long viewHit = detailNoticeDTO.getBoard_hit();
-		viewHit++;
-		detailNoticeDTO.setBoard_hit(viewHit);
-		int a = noticeService.hitUpdate(detailNoticeDTO);
-		System.out.println("성공 여부 : " + a);
+		detailNoticeDTO.setBoard_hit(detailNoticeDTO.getBoard_hit() + 1);
+		int hitUpdate = noticeService.hitUpdate(detailNoticeDTO);
 		model.addAttribute("getDetail", detailNoticeDTO);
 	}
 	
