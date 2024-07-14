@@ -17,7 +17,7 @@
 		</div>
 		<div class="row">
 			<form action="./update" method="post">
-				<input type="hidden", name="product_num" value="${update.productnum}">
+				<input type="hidden", name="product_num" value="${update.product_num}">
 				
 				<div class="mb-3">
 					<label for="product_name" class="form-label">상품 이름</label> 

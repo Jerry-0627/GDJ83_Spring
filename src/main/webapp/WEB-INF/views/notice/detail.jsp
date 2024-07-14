@@ -11,17 +11,52 @@
 </head>
 <body>
 	<c:import url="/WEB-INF/views/sample/header.jsp"></c:import>
-
-	<h1>detail</h1>
-	<h1>공지 번호 : ${doAdd.board_num}</h1>
-	<h1>공지 작성자 : ${doAdd.board_writer}</h1>
-	<h1>공지 제목 : ${doAdd.board_title}</h1>
-	<h1>공지 작성일 :${doAdd.create_date}</h1>
-	<h1>공지 수정일 : ${doAdd.update_date}</h1>
-	<h1>공지 내용 : ${doAdd.board_contents}</h1>
-	<h1>공지 카테고리 : ${doAdd.board_category}</h1>
-	
-	
-	<c:import url="/WEB-INF/views/sample/bootFooter.jsp"></c:import>
+	<div class="container">
+		<div class="row">
+			<h1>공지 세부사항</h1>
+		</div>
+		<div class="row">				
+			<div class="mb-3">
+				<label for="" class="form-label">공지 번호</label> 
+				<input type="text" class="form-control" id="" name="" value="${getDetail.board_num}" disabled>
+			</div>
+				
+			<div class="mb-3">
+				<label for="" class="form-label">공지 작성자</label> 
+				<input type="text" class="form-control" id="" name="" value="${getDetail.board_writer}" disabled>
+			</div>
+				
+			<div class="mb-3">
+				<label for="" class="form-label">공지 작성일</label> 
+				<input type="text" class="form-control" id="" name="" value="${getDetail.create_date}" disabled>
+			</div>
+				
+			<div class="mb-3">
+				<label for="" class="form-label">공지 수정일</label> 
+				<input type="text" class="form-control" id="" name="" value="${getDetail.update_date}" disabled>
+			</div>
+				
+			<div class="mb-3">
+				<label for="" class="form-label">공지 카테고리</label> 
+				<input type="text" class="form-control" id="" name="" value="${getDetail.board_category}" disabled>
+			</div>
+				
+			<div class="mb-3">
+				<label for="" class="form-label">공지 제목</label> 
+				<input type="text" class="form-control" id="" name="" value="${getDetail.board_title}" disabled>
+			</div>
+				
+			<div class="mb-3">
+				<label for="" class="form-label">공지 내용</label> 
+				<input type="text" class="form-control" id="" name="" value="${getDetail.board_contents}" disabled>
+			</div>
+				
+			<div>
+				<a type = "btn" class = "btn btn-primary" href="./update?board_num=${getDetail.board_num}">수정하기</a>
+				<a type = "btn" class = "btn btn-danger" href="/notice/delete?board_num=${getDetail.board_num}">삭제하기</a>	
+			</div>	
+				
+		</div>
+<c:import url="/WEB-INF/views/sample/bootFooter.jsp"></c:import>	
 </body>
 </html>

@@ -29,7 +29,38 @@ public class NoticeController {
 
 	@RequestMapping(value = "detail", method = RequestMethod.GET)
 	public void getDetail(NoticeDTO noticeDTO, Model model) throws Exception {
-		model.addAttribute("doAdd", noticeService.getDetail(noticeDTO));
+		model.addAttribute("getDetail", noticeService.getDetail(noticeDTO));
+	}
+	
+	@RequestMapping(value = "update", method = RequestMethod.GET)
+	public String doUpdate(HttpSession session , NoticeDTO noticeDTO, Model model) throws Exception {
+		MemberDTO sessionMemberDTO = (MemberDTO)session.getAttribute("member");
+		NoticeDTO detailNoticeDTO = noticeService.getDetail(noticeDTO);
+		String url = "commons/message";
+		if(sessionMemberDTO == null) {
+			model.addAttribute("result", "로그인한 회원만 수정이 가능합니다.");
+			model.addAttribute("url", "/notice/list");		
+		}else if(!detailNoticeDTO.getBoard_writer().equals(sessionMemberDTO.getUser_id())) {
+			model.addAttribute("result", "본인의 글만 수정이 가능합니다.");
+			model.addAttribute("url", "/notice/list");		
+		}else{
+			url = "/notice/update";
+			model.addAttribute("getDetail", noticeService.getDetail(noticeDTO));
+		}
+		return url;
+	}
+	
+	@RequestMapping(value = "update", method = RequestMethod.POST)
+	public String doUpdate(NoticeDTO noticeDTO, Model model) throws Exception{
+		int result = noticeService.doUpdate(noticeDTO);
+		if(result>0) {
+			model.addAttribute("result", "수정을 성공하였습니다.");
+			model.addAttribute("url", "/notice/list");
+		}else {
+			model.addAttribute("result", "수정을 실패하였습니다.");
+			model.addAttribute("url", "/notice/list");
+		}
+		return "commons/message";
 	}
 
 	@RequestMapping(value = "add", method = RequestMethod.GET)
@@ -71,5 +102,6 @@ public class NoticeController {
 		return url;
 	}
 
+	
 
 }

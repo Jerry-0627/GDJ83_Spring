@@ -25,6 +25,10 @@ public class NoticeDAO {
 	public NoticeDTO getDetail(NoticeDTO noticeDTO) throws Exception {
 		return sqlSession.selectOne(NAMESPACE + "getDetail", noticeDTO);
 	}
+	
+	public int doUpdate(NoticeDTO noticeDTO) throws Exception{
+		return sqlSession.update(NAMESPACE + "doUpdate", noticeDTO);
+	}
 
 	public int doAdd(NoticeDTO noticeDTO) throws Exception {
 		return sqlSession.insert(NAMESPACE + "doAdd", noticeDTO);

@@ -2,11 +2,15 @@ package com.jerry.app.product;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.jerry.app.member.MemberDTO;
 
 @Controller
 @RequestMapping("/product/*")
@@ -65,35 +69,31 @@ public class ProductController {
 		return url;
 	}
 
-	@RequestMapping(value = "update")
-	public String doupdate(ProductDTO productDTO, Model model) throws Exception {
-		int result = productService.doupdate(productDTO);
+	@RequestMapping(value = "update", method = RequestMethod.GET)
+	public String doupdate(HttpSession session, ProductDTO productDTO, Model model) throws Exception {
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
 		String url = "";
-		if (result > 0) {
-			url = "redirect:./list";
-		} else {
+		if(memberDTO == null) {
 			url = "commons/message";
-			model.addAttribute("result", "삭제 실패");
-			model.addAttribute("url", "./list");
+			model.addAttribute("result", "로그인한 회원만 수정이 가능합니다.");
+			model.addAttribute("url", "/product/list");		
+		}else {
+			url = "/product/update";
+			model.addAttribute("update", productService.getdetail(productDTO));
 		}
 		return url;
-
 	}
 
 	@RequestMapping(value = "update", method = RequestMethod.POST)
 	public String update(ProductDTO productDTO, Model model) throws Exception {
-		int result = productService.doupdate(productDTO);
-
-		String url = "";
-		if (result > 0) {
-			url = "/product/update";
-			model.addAttribute("update", productDTO);
+		if (productService.doupdate(productDTO) > 0) {
+			model.addAttribute("result", "수정을 성공했습니다.");
+			model.addAttribute("url", "./list");
 		} else {
-			url = "commons/message";
-			model.addAttribute("result", "부서 등록에 실패했습니다.");
+			model.addAttribute("result", "수정을 실패했습니다.");
 			model.addAttribute("url", "./list");
 		}
 
-		return url;
+		return "commons/message";
 	}
 }
