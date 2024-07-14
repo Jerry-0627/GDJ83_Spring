@@ -15,9 +15,11 @@
 		<div class="row">
 			<h1>공지 세부사항</h1>
 		</div>
-		<form action="./update" method="post">
+		<form action="/notice/update" method="post">
 			
 			<div class="row">				
+				<input type="hidden" name="board_hit" value="${getDetail.board_hit}">
+			
 				<div class="mb-3">
 					<label for="board_num" class="form-label">공지 번호</label> 
 					<input type="text" class="form-control" id="board_num" name="board_num" value="${getDetail.board_num}" disabled>
@@ -61,7 +63,7 @@
 					
 				<div>
 					<button type = "submit" class = "btn btn-primary">수정 완료</button>
-					<a type = "btn" class = "btn btn-danger" href="/notice/update?board_num=${getDetail.board_num}">취소하기</a>	
+					<a type = "btn" class = "btn btn-outline-danger" href="/notice/detail?board_num=${getDetail.board_num}">취소하기</a>	
 				</div>	
 			</div>
 		</form>

@@ -25,7 +25,7 @@ public class NoticeDAOTest extends DefaultTest {
 			noticeDTO.setCreate_date(date);
 			noticeDTO.setUpdate_date(null);
 			int r = ((int) (Math.random() * 1000)) / 100;
-			noticeDTO.setBoard_hit(r);
+			noticeDTO.setBoard_hit(0);
 			noticeDTO.setBoard_contents("랜덤" + (r * r));
 			noticeDTO.setBoard_category(1);
 			noticeDAO.doAdd(noticeDTO);

@@ -91,8 +91,16 @@ public class NoticeService {
 		return noticeDAO.getDetail(noticeDTO);
 	}
 	
+	public int hitUpdate(NoticeDTO noticeDTO) throws Exception{
+		return noticeDAO.hitUpdate(noticeDTO);
+	}
+	
 	public int doUpdate(NoticeDTO noticeDTO) throws Exception{
 		return noticeDAO.doUpdate(noticeDTO);
+	}
+	
+	public int doDelete(NoticeDTO noticeDTO) throws Exception{
+		return noticeDAO.doDelete(noticeDTO);
 	}
 	
 

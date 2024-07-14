@@ -56,12 +56,23 @@
  		WHERE BOARD_NUM = #{board_num}
  	</select>
  	
+ 	<update id="hitUpdate" parameterType="NoticeDTO">
+ 		UPDATE NOTICE_INFO
+ 		SET	BOARD_HIT = #{board_hit}
+		WHERE BOARD_NUM = #{board_num}
+ 	</update>
+ 	
  	<update id="doUpdate" parameterType="NoticeDTO">
  		UPDATE NOTICE_INFO 
 		SET UPDATE_DATE = SYSDATE , BOARD_CATEGORY = #{board_category}, 
 			BOARD_TITLE = #{board_title}, BOARD_CONTENTS = #{board_contents}
 		WHERE BOARD_NUM = #{board_num}
  	</update>
+ 	
+ 	<delete id="doDelete" parameterType="NoticeDTO">
+		DELETE FROM NOTICE_INFO
+		WHERE BOARD_NUM = #{board_num}
+ 	</delete>
  	
  	<insert id="doAdd" parameterType="NoticeDTO">
 		INSERT INTO NOTICE_INFO

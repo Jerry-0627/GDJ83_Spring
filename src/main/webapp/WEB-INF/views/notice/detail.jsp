@@ -53,7 +53,8 @@
 				
 			<div>
 				<a type = "btn" class = "btn btn-primary" href="./update?board_num=${getDetail.board_num}">수정하기</a>
-				<a type = "btn" class = "btn btn-danger" href="/notice/delete?board_num=${getDetail.board_num}">삭제하기</a>	
+				<a type = "btn" class = "btn btn-danger" href="/notice/delete?board_num=${getDetail.board_num}">삭제하기</a>
+				<a type = "btn" class = "btn btn-outline-danger" href="/notice/list">뒤로가기</a>
 			</div>	
 				
 		</div>

@@ -29,17 +29,24 @@ public class NoticeController {
 
 	@RequestMapping(value = "detail", method = RequestMethod.GET)
 	public void getDetail(NoticeDTO noticeDTO, Model model) throws Exception {
-		model.addAttribute("getDetail", noticeService.getDetail(noticeDTO));
+		NoticeDTO detailNoticeDTO =  noticeService.getDetail(noticeDTO);
+		long viewHit = detailNoticeDTO.getBoard_hit();
+		viewHit++;
+		detailNoticeDTO.setBoard_hit(viewHit);
+		int a = noticeService.hitUpdate(detailNoticeDTO);
+		System.out.println("성공 여부 : " + a);
+		model.addAttribute("getDetail", detailNoticeDTO);
 	}
 	
 	@RequestMapping(value = "update", method = RequestMethod.GET)
 	public String doUpdate(HttpSession session , NoticeDTO noticeDTO, Model model) throws Exception {
 		MemberDTO sessionMemberDTO = (MemberDTO)session.getAttribute("member");
 		NoticeDTO detailNoticeDTO = noticeService.getDetail(noticeDTO);
+			System.out.println("업데이트 갯 : " + detailNoticeDTO.getBoard_contents());
 		String url = "commons/message";
 		if(sessionMemberDTO == null) {
 			model.addAttribute("result", "로그인한 회원만 수정이 가능합니다.");
-			model.addAttribute("url", "/notice/list");		
+			model.addAttribute("url", "/member/loginMember");		
 		}else if(!detailNoticeDTO.getBoard_writer().equals(sessionMemberDTO.getUser_id())) {
 			model.addAttribute("result", "본인의 글만 수정이 가능합니다.");
 			model.addAttribute("url", "/notice/list");		
@@ -53,6 +60,7 @@ public class NoticeController {
 	@RequestMapping(value = "update", method = RequestMethod.POST)
 	public String doUpdate(NoticeDTO noticeDTO, Model model) throws Exception{
 		int result = noticeService.doUpdate(noticeDTO);
+		System.out.println("업데이트 포스트 : " + result);
 		if(result>0) {
 			model.addAttribute("result", "수정을 성공하였습니다.");
 			model.addAttribute("url", "/notice/list");
@@ -63,6 +71,26 @@ public class NoticeController {
 		return "commons/message";
 	}
 
+	@RequestMapping(value = "delete", method = RequestMethod.GET)
+	public String doDelete(HttpSession session ,NoticeDTO noticeDTO, Model model) throws Exception{
+		MemberDTO sessionMemberDTO = (MemberDTO)session.getAttribute("member");
+		NoticeDTO detailNoticeDTO = noticeService.getDetail(noticeDTO);
+		String url = "commons/message";
+		if(sessionMemberDTO == null) {
+			model.addAttribute("result", "로그인한 회원만 삭제가 가능합니다.");
+			model.addAttribute("url", "/member/loginMember");		
+		}else if(!detailNoticeDTO.getBoard_writer().equals(sessionMemberDTO.getUser_id())) {
+			model.addAttribute("result", "본인의 글만 삭제가 가능합니다.");
+			model.addAttribute("url", "/notice/list");		
+		}else{
+			noticeService.doDelete(detailNoticeDTO);
+			model.addAttribute("result", "삭제를 성공하였습니다.");
+			model.addAttribute("url", "/notice/list");
+		}
+		return url;
+	}
+	
+	
 	@RequestMapping(value = "add", method = RequestMethod.GET)
 	public String doAdd(HttpSession session, Model model) {
 		MemberDTO memberDTO = new MemberDTO();
