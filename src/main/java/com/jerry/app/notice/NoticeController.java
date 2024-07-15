@@ -108,7 +108,7 @@ public class NoticeController {
 	public String doAdd(HttpSession session, NoticeDTO noticeDTO, Model model) throws Exception {
 
 		MemberDTO memberDTO = (MemberDTO) session.getAttribute("member");
-		noticeDTO.setBoard_writer(memberDTO.getUser_name());
+		noticeDTO.setBoard_writer(memberDTO.getUser_id());
 		model.addAttribute("doAdd", noticeService.doADD(noticeDTO));
 		String url = "commons/message";
 
