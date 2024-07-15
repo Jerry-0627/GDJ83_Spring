@@ -31,7 +31,7 @@
 				<button type="submit" class="btn btn-primary">검색</button>
 			</div>	
 			<div>
-				<a href="/notice/add" class="btn btn-success">글쓰기</a>
+				<a href="./add" class="btn btn-success">글쓰기</a>
 			</div>
 		</form>
 		

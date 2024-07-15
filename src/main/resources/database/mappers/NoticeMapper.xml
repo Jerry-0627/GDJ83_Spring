@@ -51,30 +51,30 @@
 				</choose>
 	</select>
  	
- 	<select id="getDetail" parameterType="NoticeDTO" resultType="NoticeDTO">
+ 	<select id="getDetail" parameterType="boardDTO" resultType="NoticeDTO">
  		SELECT * FROM NOTICE_INFO
  		WHERE BOARD_NUM = #{board_num}
  	</select>
  	
- 	<update id="hitUpdate" parameterType="NoticeDTO">
+ 	<update id="hitUpdate" parameterType="boardDTO">
  		UPDATE NOTICE_INFO
  		SET	BOARD_HIT = #{board_hit}
 		WHERE BOARD_NUM = #{board_num}
  	</update>
  	
- 	<update id="doUpdate" parameterType="NoticeDTO">
+ 	<update id="doUpdate" parameterType="boardDTO">
  		UPDATE NOTICE_INFO 
 		SET UPDATE_DATE = SYSDATE , BOARD_CATEGORY = #{board_category}, 
 			BOARD_TITLE = #{board_title}, BOARD_CONTENTS = #{board_contents}
 		WHERE BOARD_NUM = #{board_num}
  	</update>
  	
- 	<delete id="doDelete" parameterType="NoticeDTO">
+ 	<delete id="doDelete" parameterType="boardDTO">
 		DELETE FROM NOTICE_INFO
 		WHERE BOARD_NUM = #{board_num}
  	</delete>
  	
- 	<insert id="doAdd" parameterType="NoticeDTO">
+ 	<insert id="doAdd" parameterType="boardDTO">
 		INSERT INTO NOTICE_INFO
 		(BOARD_NUM, BOARD_WRITER, BOARD_TITLE, CREATE_DATE, BOARD_CONTENTS, BOARD_CATEGORY)
 		VALUES

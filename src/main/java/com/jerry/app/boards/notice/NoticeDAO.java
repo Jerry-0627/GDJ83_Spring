@@ -11,7 +11,9 @@ import com.jerry.app.boards.BoardDTO;
 import com.jerry.app.util.PageDTO;
 
 @Repository
+//이름 지정 @repository("[이름]")
 public class NoticeDAO implements BoardDAO {
+	// noticeDAO가 boardDAO를 구현했다.
 
 	@Autowired
 	private SqlSession sqlSession;

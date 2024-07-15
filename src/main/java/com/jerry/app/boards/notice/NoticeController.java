@@ -22,27 +22,29 @@ public class NoticeController {
 	private NoticeService noticeService;
 
 	@RequestMapping(value = "list", method = RequestMethod.GET)
-	public void getList(PageDTO pageDTO, Model model) throws Exception {
+	public String getList(PageDTO pageDTO, Model model) throws Exception {
 		List<BoardDTO> list = noticeService.getList(pageDTO);
 		model.addAttribute("pageDTO", pageDTO);
 		model.addAttribute("list", list);
+		return "board/list";
 	}
 
 	@RequestMapping(value = "detail", method = RequestMethod.GET)
-	public void getDetail(NoticeDTO noticeDTO, Model model) throws Exception {
-		NoticeDTO detailNoticeDTO = noticeService.getDetail(noticeDTO);
+	public String getDetail(NoticeDTO noticeDTO, Model model) throws Exception {
+		BoardDTO detailNoticeDTO = noticeService.getDetail(noticeDTO);
 		if (detailNoticeDTO.getBoard_hit() == null) {
 			detailNoticeDTO.setBoard_hit(0L);
 		}
-		detailNoticeDTO.setBoard_hit(detailNoticeDTO.getBoard_hit());
+		detailNoticeDTO.setBoard_hit(detailNoticeDTO.getBoard_hit() + 1);
 		int hitUpdate = noticeService.hitUpdate(detailNoticeDTO);
 		model.addAttribute("getDetail", detailNoticeDTO);
+		return "board/detail";
 	}
 
 	@RequestMapping(value = "update", method = RequestMethod.GET)
 	public String doUpdate(HttpSession session, NoticeDTO noticeDTO, Model model) throws Exception {
 		MemberDTO sessionMemberDTO = (MemberDTO) session.getAttribute("member");
-		NoticeDTO detailNoticeDTO = noticeService.getDetail(noticeDTO);
+		BoardDTO detailNoticeDTO = noticeService.getDetail(noticeDTO);
 		System.out.println("Update Get : " + detailNoticeDTO.getBoard_contents());
 		String url = "commons/message";
 		if (sessionMemberDTO == null) {
@@ -52,7 +54,7 @@ public class NoticeController {
 			model.addAttribute("result", "본인의 글만 수정이 가능합니다.");
 			model.addAttribute("url", "/notice/list");
 		} else {
-			url = "/notice/update";
+			url = "board/update";
 			model.addAttribute("getDetail", detailNoticeDTO);
 			System.out.println("제목 : " + detailNoticeDTO.getBoard_title());
 			System.out.println("내용 : " + detailNoticeDTO.getBoard_contents());
@@ -80,7 +82,7 @@ public class NoticeController {
 	@RequestMapping(value = "delete", method = RequestMethod.GET)
 	public String doDelete(HttpSession session, NoticeDTO noticeDTO, Model model) throws Exception {
 		MemberDTO sessionMemberDTO = (MemberDTO) session.getAttribute("member");
-		NoticeDTO detailNoticeDTO = noticeService.getDetail(noticeDTO);
+		BoardDTO detailNoticeDTO = noticeService.getDetail(noticeDTO);
 		String url = "commons/message";
 		if (sessionMemberDTO == null) {
 			model.addAttribute("result", "로그인한 회원만 삭제가 가능합니다.");
@@ -105,7 +107,7 @@ public class NoticeController {
 			model.addAttribute("result", "로그인한 회원만 글쓰기가 가능합니다.");
 			model.addAttribute("url", "/notice/list");
 		} else {
-			url = "/notice/add";
+			url = "board/add";
 		}
 		return url;
 	}
