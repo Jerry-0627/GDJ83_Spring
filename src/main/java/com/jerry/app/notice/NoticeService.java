@@ -1,96 +1,65 @@
 package com.jerry.app.notice;
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.jerry.app.util.PageDTO;
 
 @Service
 public class NoticeService {
 
 	@Autowired
 	private NoticeDAO noticeDAO;
-	
+	private PageDTO pageDTO;
 
 	public Map<String, Object> getList(String kind, String search, Long page) throws Exception {
-		ExtraDTO extraDTO = new ExtraDTO();
-		extraDTO.setKind(kind);
-		extraDTO.setSearch(search);
-		
-		Long curPageNum = page;
-		Long pageRowCount = 10L;
-		Long blockPageCount = 5L;
-		if(curPageNum == null) {
-			curPageNum = 1L;
+		if (page == null) {
+			page = 1L;
 		}
-		
-		
-		long pageFirstRow = (curPageNum-1)*pageRowCount + 1;
-		long pageLastRow = curPageNum * pageRowCount;
-		extraDTO.setPageFirstRow(pageFirstRow);
-		extraDTO.setPageLastRow(pageLastRow);
-		
-		
-		long totalRowCount = noticeDAO.getTotalRowCount(extraDTO);
-		long totalPageCount = totalRowCount/pageRowCount;
-			if(totalRowCount%pageRowCount != 0) {
-				totalPageCount ++;
-			}
-		long totalBlockCount = totalPageCount/blockPageCount;
-			if(totalPageCount%blockPageCount != 0) {
-				totalBlockCount ++;
-			}
+		if (page < 1) {
+			page = 1L;
+		}
+		if (search == null) {
+			search = "";
+		}
 
-		
-				
-		long curBlockNum = curPageNum/blockPageCount;
-			if(curPageNum%blockPageCount != 0) {
-				curBlockNum ++;
-			}
-		
-				
-		long blockFirstPageNum = (curBlockNum - 1) * blockPageCount + 1;
-		long blockLastPageNum = curBlockNum * blockPageCount;
-		
-				
-		boolean prePage = true;
-		boolean nextPage = true;
-			if(curBlockNum <= 1) {
-				prePage = false;
-			}
-			if(curBlockNum == totalBlockCount) {
-				nextPage = false;
-				blockLastPageNum = totalPageCount;
-			}	
+		long perPage = 10L; // 하나의 Page에 보여줄 Row의 개수
+		long startRow = (page - 1) * perPage + 1; // 첫번째 Page의 번호
+		long lastRow = page * perPage; // 마지막 Page 번호
 
-		
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("getList", noticeDAO.getList(extraDTO));
-		map.put("kind", extraDTO.getKind());
-		map.put("search", extraDTO.getSearch());
-		map.put("curPageNum", curPageNum);
-		map.put("blockFirstPageNum", blockFirstPageNum);
-		map.put("blockLastPageNum", blockLastPageNum);
-		map.put("prePage", prePage);
-		map.put("nextPage", nextPage);
+		// 하나의 Page에서 Row의 시작 값과 마지막 값 세팅
+		PageDTO pageDTO = new PageDTO();
+		pageDTO.setStartRow(startRow);
+		pageDTO.setLastRow(lastRow);
+		pageDTO.setKind(kind);
+		pageDTO.setSearch(search);
+
+		long totalCount = noticeDAO.getTotalRowCount(pageDTO); // Row의 개수
+
+		// 찾기 쉽기 위해 키로 넣음. Map 사용 List와 페이지 개수를 Controller로 보냄
+		Map<String, Object> map = pageDTO.makeNum(totalCount, perPage, page);
+		map.put("list", noticeDAO.getList(pageDTO));
+		map.put("kind", kind);
+		map.put("search", search);
+
 		return map;
 	}
 
 	public NoticeDTO getDetail(NoticeDTO noticeDTO) throws Exception {
 		return noticeDAO.getDetail(noticeDTO);
 	}
-	
-	public int hitUpdate(NoticeDTO noticeDTO) throws Exception{
+
+	public int hitUpdate(NoticeDTO noticeDTO) throws Exception {
 		return noticeDAO.hitUpdate(noticeDTO);
 	}
-	
-	public int doUpdate(NoticeDTO noticeDTO) throws Exception{
+
+	public int doUpdate(NoticeDTO noticeDTO) throws Exception {
 		return noticeDAO.doUpdate(noticeDTO);
 	}
-	
-	public int doDelete(NoticeDTO noticeDTO) throws Exception{
+
+	public int doDelete(NoticeDTO noticeDTO) throws Exception {
 		return noticeDAO.doDelete(noticeDTO);
 	}
 

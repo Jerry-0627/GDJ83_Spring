@@ -6,7 +6,7 @@
   
   
  <mapper namespace="com.jerry.app.notice.NoticeDAO">
- 	<select id="getList" parameterType="ExtraDTO" resultType="NoticeDTO">
+ 	<select id="getList" parameterType="pageDTO" resultType="NoticeDTO">
  		SELECT * FROM
 		(
 			SELECT ROWNUM R, N.* FROM
@@ -28,11 +28,11 @@
 				</choose>
 				ORDER BY BOARD_NUM DESC) N
 		)
-		WHERE R BETWEEN #{pageFirstRow} AND #{pageLastRow} 	
+		WHERE R BETWEEN #{startRow} AND #{lastRow}
 		
 	</select>
 	
-	<select id="getTotalRowCount" parameterType="ExtraDTO" resultType="java.lang.Long">
+	<select id="getTotalRowCount" parameterType="pageDTO" resultType="java.lang.Long">
 		SELECT COUNT(BOARD_NUM)
 		FROM NOTICE_INFO
 		WHERE BOARD_NUM > 0
