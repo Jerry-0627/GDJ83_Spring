@@ -1,6 +1,6 @@
 package com.jerry.app.product;
 
-import java.util.Map;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.jerry.app.member.MemberDTO;
+import com.jerry.app.util.PageDTO;
 
 @Controller
 @RequestMapping("/product/*")
@@ -20,11 +21,12 @@ public class ProductController {
 	private ProductService productService;
 
 	@RequestMapping(value = "list", method = RequestMethod.GET)
-	public void getlist(String kind, String search, Long page, Model model) throws Exception {
+	public void getlist(PageDTO pageDTO, Model model) throws Exception {
 		System.out.println("실행됨");
-		Map<String, Object> map = productService.getlist(kind, search, page);
+		List<ProductDTO> list = productService.getlist(pageDTO);
 
-		model.addAttribute("map", map);
+		model.addAttribute("pageDTO", pageDTO);
+		model.addAttribute("list", list);
 	}
 
 	@RequestMapping(value = "detail")
@@ -71,13 +73,13 @@ public class ProductController {
 
 	@RequestMapping(value = "update", method = RequestMethod.GET)
 	public String doupdate(HttpSession session, ProductDTO productDTO, Model model) throws Exception {
-		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
+		MemberDTO memberDTO = (MemberDTO) session.getAttribute("member");
 		String url = "";
-		if(memberDTO == null) {
+		if (memberDTO == null) {
 			url = "commons/message";
 			model.addAttribute("result", "로그인한 회원만 수정이 가능합니다.");
-			model.addAttribute("url", "/product/list");		
-		}else {
+			model.addAttribute("url", "/product/list");
+		} else {
 			url = "/product/update";
 			model.addAttribute("update", productService.getdetail(productDTO));
 		}

@@ -1,4 +1,4 @@
-package com.jerry.app.notice;
+package com.jerry.app.boards.notice;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ public class NoticeDAO {
 	@Autowired
 	private SqlSession sqlSession;
 
-	private final String NAMESPACE = "com.jerry.app.notice.NoticeDAO.";
+	private final String NAMESPACE = "com.jerry.app.boards.notice.NoticeDAO.";
 
 	public List<NoticeDTO> getList(PageDTO pageDTO) throws Exception {
 		return sqlSession.selectList(NAMESPACE + "getList", pageDTO);

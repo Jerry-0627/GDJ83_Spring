@@ -1,17 +1,25 @@
-package com.jerry.app.notice;
+package com.jerry.app.boards;
 
 import java.sql.Date;
 
-public class NoticeDTO {
+public class BoardDTO {
 
-	private long board_num;
+	private Long board_num;
 	private String board_writer;
 	private String board_title;
 	private Date create_date;
 	private Date update_date;
-	private long board_hit;
+	private Long board_hit;
 	private String board_contents;
-	private int board_category;
+	private Integer board_category;
+
+	public Long getBoard_num() {
+		return board_num;
+	}
+
+	public void setBoard_num(Long board_num) {
+		this.board_num = board_num;
+	}
 
 	public String getBoard_writer() {
 		return board_writer;
@@ -19,14 +27,6 @@ public class NoticeDTO {
 
 	public void setBoard_writer(String board_writer) {
 		this.board_writer = board_writer;
-	}
-
-	public long getBoard_num() {
-		return board_num;
-	}
-
-	public void setBoard_num(long board_num) {
-		this.board_num = board_num;
 	}
 
 	public String getBoard_title() {
@@ -53,11 +53,11 @@ public class NoticeDTO {
 		this.update_date = update_date;
 	}
 
-	public long getBoard_hit() {
+	public Long getBoard_hit() {
 		return board_hit;
 	}
 
-	public void setBoard_hit(long board_hit) {
+	public void setBoard_hit(Long board_hit) {
 		this.board_hit = board_hit;
 	}
 
@@ -69,14 +69,12 @@ public class NoticeDTO {
 		this.board_contents = board_contents;
 	}
 
-	public int getBoard_category() {
+	public Integer getBoard_category() {
 		return board_category;
 	}
 
-	public void setBoard_category(int board_category) {
+	public void setBoard_category(Integer board_category) {
 		this.board_category = board_category;
 	}
-
-
 
 }

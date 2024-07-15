@@ -24,7 +24,7 @@
 		  	<div class="col-12">
 		  		<div class="input-group">
 		  			 <label class="visually-hidden" for="inlineFormInputGroupUsername">Username</label>
-		     		 <input name="search" type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="${map.search }">
+		     		 <input name="search" type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="${pageDTO.search }">
 		   	 	</div>
 		  	</div>
 			<div class="col-12">
@@ -50,7 +50,7 @@
 		    </tr>
 		  </thead>
 		  <tbody>
-		  	<c:forEach items = "${map.list}" var = "dto"> 
+		  	<c:forEach items = "${list}" var = "dto"> 
 				<tr>
 					<td>${dto.board_num}</td>
 					<td><a href="./detail?board_num=${dto.board_num}">${dto.board_title}</a></td>
@@ -65,16 +65,16 @@
 		</table>
 		
 		<ul class="pagination">
-	   		<li class="page-item ${map.pre?'':'disabled' }">
-     			<a class="page-link" href="./list?page=${map.startNum-1}&kind=${map.kind}&search=${map.search}" aria-label="Previous">
+	   		<li class="page-item ${pageDTO.pre?'':'disabled' }">
+     			<a class="page-link" href="./list?page=${pageDTO.startNum-1}&kind=${pageDTO.kind}&search=${pageDTO.search}" aria-label="Previous">
 	        		<span aria-hidden="true">&laquo;</span>
 	      		</a>
 	    	</li>
-		    <c:forEach begin="${map.startNum}" end ="${map.lastNum}" step="1" var="i"> 
-			    <li class="page-item"><a class="page-link" href="./list?page=${i}&kind=${map.kind}&search=${map.search}">${i}</a></li>
+		    <c:forEach begin="${pageDTO.startNum}" end ="${pageDTO.lastNum}" step="1" var="i"> 
+			    <li class="page-item"><a class="page-link" href="./list?page=${i}&kind=${pageDTO.kind}&search=${pageDTO.search}">${i}</a></li>
 			</c:forEach>
-		    <li class="page-item ${map.next?'':'disabled' }">
-		      <a class="page-link" href="./list?page=${map.lastNum+1}&kind=${map.kind}&search=${map.search}" aria-label="Next">
+		    <li class="page-item ${pageDTO.next?'':'disabled' }">
+		      <a class="page-link" href="./list?page=${pageDTO.lastNum+1}&kind=${pageDTO.kind}&search=${pageDTO.search}" aria-label="Next">
 		        <span aria-hidden="true">&raquo;</span>
 		      </a>
 		    </li>

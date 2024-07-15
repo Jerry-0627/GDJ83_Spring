@@ -1,6 +1,6 @@
-package com.jerry.app.notice;
+package com.jerry.app.boards.notice;
 
-import java.util.Map;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.jerry.app.member.MemberDTO;
+import com.jerry.app.util.PageDTO;
 
 @Controller
 @RequestMapping(value = "/notice/*")
@@ -20,9 +21,10 @@ public class NoticeController {
 	private NoticeService noticeService;
 
 	@RequestMapping(value = "list", method = RequestMethod.GET)
-	public void getList(String kind, String search, Long page, Model model) throws Exception {
-		Map<String, Object> map = noticeService.getList(kind, search, page);
-		model.addAttribute("map", map);
+	public void getList(PageDTO pageDTO, Model model) throws Exception {
+		List<NoticeDTO> list = noticeService.getList(pageDTO);
+		model.addAttribute("pageDTO", pageDTO);
+		model.addAttribute("list", list);
 	}
 
 	@RequestMapping(value = "detail", method = RequestMethod.GET)

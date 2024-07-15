@@ -1,4 +1,4 @@
-package com.jerry.app.notice;
+package com.jerry.app.boards.notice;
 
 public class ExtraDTO {
 	private String kind;

@@ -6,8 +6,8 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.jerry.app.DefaultTest;
-import com.jerry.app.notice.NoticeDAO;
-import com.jerry.app.notice.NoticeDTO;
+import com.jerry.app.boards.notice.NoticeDAO;
+import com.jerry.app.boards.notice.NoticeDTO;
 
 public class NoticeDAOTest extends DefaultTest {
 

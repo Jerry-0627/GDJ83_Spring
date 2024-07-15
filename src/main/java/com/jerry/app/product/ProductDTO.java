@@ -2,16 +2,16 @@ package com.jerry.app.product;
 
 public class ProductDTO {
 
-	private int product_num;
+	private Integer product_num;
 	private String product_name;
 	private double product_rate;
 	private String product_ex;
 
-	public int getProduct_num() {
+	public Integer getProduct_num() {
 		return product_num;
 	}
 
-	public void setProduct_num(int product_num) {
+	public void setProduct_num(Integer product_num) {
 		this.product_num = product_num;
 	}
 
