@@ -6,41 +6,50 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.jerry.app.boards.BoardDAO;
+import com.jerry.app.boards.BoardDTO;
 import com.jerry.app.util.PageDTO;
 
 @Repository
-public class NoticeDAO {
+public class NoticeDAO implements BoardDAO {
 
 	@Autowired
 	private SqlSession sqlSession;
 
 	private final String NAMESPACE = "com.jerry.app.boards.notice.NoticeDAO.";
 
-	public List<NoticeDTO> getList(PageDTO pageDTO) throws Exception {
+	@Override
+	public List<BoardDTO> getList(PageDTO pageDTO) throws Exception {
 		return sqlSession.selectList(NAMESPACE + "getList", pageDTO);
 	}
 
-	public long getTotalRowCount(PageDTO pageDTO) throws Exception {
+	@Override
+	public Long getTotalRowCount(PageDTO pageDTO) throws Exception {
 		return sqlSession.selectOne(NAMESPACE + "getTotalRowCount", pageDTO);
 	}
 
-	public NoticeDTO getDetail(NoticeDTO noticeDTO) throws Exception {
-		return sqlSession.selectOne(NAMESPACE + "getDetail", noticeDTO);
+	@Override
+	public NoticeDTO getDetail(BoardDTO boardDTO) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "getDetail", boardDTO);
 	}
 
-	public int hitUpdate(NoticeDTO noticeDTO) throws Exception {
-		return sqlSession.update(NAMESPACE + "hitUpdate", noticeDTO);
+	@Override
+	public int hitUpdate(BoardDTO boardDTO) throws Exception {
+		return sqlSession.update(NAMESPACE + "hitUpdate", boardDTO);
 	}
 
-	public int doDelete(NoticeDTO noticeDTO) throws Exception {
-		return sqlSession.delete(NAMESPACE + "doDelete", noticeDTO);
+	@Override
+	public int doDelete(BoardDTO boardDTO) throws Exception {
+		return sqlSession.delete(NAMESPACE + "doDelete", boardDTO);
 	}
 
-	public int doUpdate(NoticeDTO noticeDTO) throws Exception {
-		return sqlSession.update(NAMESPACE + "doUpdate", noticeDTO);
+	@Override
+	public int doUpdate(BoardDTO boardDTO) throws Exception {
+		return sqlSession.update(NAMESPACE + "doUpdate", boardDTO);
 	}
 
-	public int doAdd(NoticeDTO noticeDTO) throws Exception {
-		return sqlSession.insert(NAMESPACE + "doAdd", noticeDTO);
+	@Override
+	public int doAdd(BoardDTO boardDTO) throws Exception {
+		return sqlSession.insert(NAMESPACE + "doAdd", boardDTO);
 	}
 }

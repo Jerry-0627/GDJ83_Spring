@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.jerry.app.boards.BoardDTO;
 import com.jerry.app.util.PageDTO;
 
 @Service
@@ -14,7 +15,7 @@ public class NoticeService {
 	private NoticeDAO noticeDAO;
 	private PageDTO pageDTO;
 
-	public List<NoticeDTO> getList(PageDTO pageDTO) throws Exception {
+	public List<BoardDTO> getList(PageDTO pageDTO) throws Exception {
 		pageDTO.makeRow();
 
 		long totalCount = noticeDAO.getTotalRowCount(pageDTO); // Row의 개수

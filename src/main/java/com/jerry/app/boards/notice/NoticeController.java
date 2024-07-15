@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.jerry.app.boards.BoardDTO;
 import com.jerry.app.member.MemberDTO;
 import com.jerry.app.util.PageDTO;
 
@@ -22,7 +23,7 @@ public class NoticeController {
 
 	@RequestMapping(value = "list", method = RequestMethod.GET)
 	public void getList(PageDTO pageDTO, Model model) throws Exception {
-		List<NoticeDTO> list = noticeService.getList(pageDTO);
+		List<BoardDTO> list = noticeService.getList(pageDTO);
 		model.addAttribute("pageDTO", pageDTO);
 		model.addAttribute("list", list);
 	}
@@ -30,7 +31,10 @@ public class NoticeController {
 	@RequestMapping(value = "detail", method = RequestMethod.GET)
 	public void getDetail(NoticeDTO noticeDTO, Model model) throws Exception {
 		NoticeDTO detailNoticeDTO = noticeService.getDetail(noticeDTO);
-		detailNoticeDTO.setBoard_hit(detailNoticeDTO.getBoard_hit() + 1);
+		if (detailNoticeDTO.getBoard_hit() == null) {
+			detailNoticeDTO.setBoard_hit(0L);
+		}
+		detailNoticeDTO.setBoard_hit(detailNoticeDTO.getBoard_hit());
 		int hitUpdate = noticeService.hitUpdate(detailNoticeDTO);
 		model.addAttribute("getDetail", detailNoticeDTO);
 	}
