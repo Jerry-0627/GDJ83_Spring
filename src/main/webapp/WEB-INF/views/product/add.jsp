@@ -17,8 +17,8 @@
 		<div class = "row">
 			<form action="./add" method="post">
 				<div class="mb-3">
-				 	<label for="board_title" class="form-label"></label>
-				  	<input type="text" class="form-control" id="board_title" name = "board_title">
+				 	<label for="product_name" class="form-label">상품 이름</label>
+				  	<input type="text" class="form-control" id="product_name" name = "product_name">
 				</div>
 				<div class="mb-3">
 				 	<label for="product_rate" class="form-label">상품 이자율</label>

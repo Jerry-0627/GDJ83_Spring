@@ -41,7 +41,6 @@
 				<div class="mb-3">
 					<label for="update_date" class="form-label">공지 수정일</label> 
 					<input type="text" class="form-control" id="update_date" value="${getDetail.update_date}" disabled>
-					<input type="hidden" name="update_date" value="${getDetail.update_date}">
 				</div>
 					
 				<div class="mb-3">
