@@ -45,7 +45,11 @@
 					
 				<div class="mb-3">
 					<label for="board_category" class="form-label">카테고리</label> 
-					<input type="text" class="form-control" id="board_category" name="board_category" value="${getDetail.board_category}" >
+						<select name="board_category" class="form-select" id="inlineFormSelectPref">
+					      	<option value="1" <c:if test="${getDetail.board_category == 1}">selected</c:if>>1</option>
+					      	<option value="2" <c:if test="${getDetail.board_category == 2}">selected</c:if>>2</option>
+					      	<option value="3" <c:if test="${getDetail.board_category == 3}">selected</c:if>>3</option>
+			 		   </select>
 				</div>
 					
 				<div class="mb-3">	

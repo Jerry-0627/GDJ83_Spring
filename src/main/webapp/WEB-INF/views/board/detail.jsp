@@ -27,7 +27,7 @@
 			</div>
 				
 			<div class="mb-3">
-				<label for="" class="form-label">공지 작성일</label> 
+				<label for="" class="form-label">작성일</label> 
 				<input type="text" class="form-control" id="" name="" value="${getDetail.create_date}" disabled>
 			</div>
 				

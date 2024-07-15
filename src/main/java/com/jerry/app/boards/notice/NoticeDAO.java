@@ -31,7 +31,7 @@ public class NoticeDAO implements BoardDAO {
 	}
 
 	@Override
-	public NoticeDTO getDetail(BoardDTO boardDTO) throws Exception {
+	public BoardDTO getDetail(BoardDTO boardDTO) throws Exception {
 		return sqlSession.selectOne(NAMESPACE + "getDetail", boardDTO);
 	}
 
