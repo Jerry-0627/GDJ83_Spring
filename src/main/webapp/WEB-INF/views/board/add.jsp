@@ -34,7 +34,6 @@
 				
 			<button type = "submit" class = "btn btn-primary">등록</button>
 			<a href="./list" class = "btn btn-outline-danger">취소</a>
-			<a href="./list" class = "btn btn-outline-danger">취소</a>
 				
 		</form>	
 	</div>
