@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.jerry.app.boards.qna.QnaDAO">
+  	<sql id="searchSql">
+  		<where>
+		BOARD_NUM > 0
+			<choose>
+		  		<when test="kind == 'title'">
+		  			AND BOARD_TITLE	LIKE '%' || #{search} || '%'
+		  		</when>
+		  		<when test="kind == 'contents'">
+		  			AND BOARD_CONTENTS LIKE '%' || #{search} || '%'
+		  		</when>
+		  		<otherwise>
+		  			AND BOARD_WRITER LIKE '%' || #{search} || '%'
+		  		</otherwise>
+		  	</choose>
+		</where>
+  	</sql>
+  
+  	<select id="getTotalCount" parameterType="PageDTO" resultType="Long">
+  		SELECT COUNT(BOARD_NUM) FROM QNA_INFO
+  		<include refid="searchSql"></include>
+  	</select>
+  
+  
+  
+  	<select id="list" parameterType="PageDTO" resultType="QnaDTO">
+  		SELECT * FROM
+	  		(SELECT ROWNUM R, Q.* FROM
+	  			(SELECT * FROM QNA_INFO
+					<include refid="searchSql"></include>
+				ORDER BY REF DESC, STEP ASC
+	  			) Q
+	  		)
+	  	WHERE R BETWEEN #{startRow} AND #{lastRow}
+	 </select>
+	 
+	 <insert id="doAdd" parameterType="QnaDTO">
+	 	INSERT INTO QNA_INFO 
+	 	(
+	 		BOARD_NUM, BOARD_WRITER, BOARD_TITLE, CREATE_DATE,
+	 		 UPDATE_DATE, BOARD_HIT, BOARD_CONTENTS, BOARD_CATEGORY, REF, STEP, DEPTH
+	 	)
+		VALUES 
+		(
+			BOARD_SEQ.NEXTVAL, #{board_writer}, #{board_title},
+			SYSDATE, SYSDATE, 0 , #{board_contents} ,'Q', BOARD_SEQ.CURRVAL , 0, 0
+		)
+	 
+	 </insert>
+	 
+	 <select id="getDetail" parameterType="QnaDTO" resultType="QnaDTO">
+	 	SELECT * FROM QNA_INFO WHERE BOARD_NUM = #{board_num} AND DEL = 0
+	 </select>
+	 
+	 <update id="hitUpdate" parameterType="QnaDTO">
+	 	UPDATE QNA_INFO
+ 		SET	BOARD_HIT = #{board_hit}
+		WHERE BOARD_NUM = #{board_num}
+	 </update>
+	 
+	 <update id="doUpdate" parameterType="QnaDTO">
+		UPDATE QNA_INFO 
+		SET UPDATE_DATE = SYSDATE, BOARD_TITLE = #{board_title}, BOARD_CONTENTS = #{board_contents}
+		WHERE BOARD_NUM = #{board_num}
+	 </update>
+	 
+	 <insert id="reply" parameterType="QnaDTO">
+	 	INSERT INTO QNA_INFO 
+	 	(
+	 		BOARD_NUM, BOARD_WRITER, BOARD_TITLE, CREATE_DATE,
+	 		 UPDATE_DATE, BOARD_HIT, BOARD_CONTENTS, BOARD_CATEGORY, REF, STEP, DEPTH
+	 	)
+		VALUES 
+		(
+			BOARD_SEQ.NEXTVAL, #{board_writer}, #{board_title},
+			SYSDATE, SYSDATE, 0 , #{board_contents} ,'Q', #{ref} , #{step}, #{depth}
+		)
+	 </insert>
+	 
+	 <update id="replyUpdate" parameterType="QnaDTO">
+	 	UPDATE QNA_INFO
+	 	SET STEP = STEP + 1
+	 	WHERE REF = #{ref} AND STEP > #{step}
+	 </update>
+	 
+	 <delete id="doDelete" parameterType="QnaDTO">
+		UPDATE QNA_INFO SET DEL = 1 WHERE BOARD_NUM = #{board_num}
+	 	
+	 </delete>
+ 
+  </mapper>

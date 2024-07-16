@@ -11,7 +11,19 @@ public class BoardDTO {
 	private Date update_date;
 	private Long board_hit;
 	private String board_contents;
-	private Integer board_category;
+	private String board_category;
+	private Integer del;
+
+	public Integer getDel() {
+		if (this.del == null) {
+			this.del = 0;
+		}
+		return del;
+	}
+
+	public void setDel(Integer del) {
+		this.del = del;
+	}
 
 	public Long getBoard_num() {
 		return board_num;
@@ -69,11 +81,11 @@ public class BoardDTO {
 		this.board_contents = board_contents;
 	}
 
-	public Integer getBoard_category() {
+	public String getBoard_category() {
 		return board_category;
 	}
 
-	public void setBoard_category(Integer board_category) {
+	public void setBoard_category(String board_category) {
 		this.board_category = board_category;
 	}
 

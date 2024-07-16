@@ -14,13 +14,13 @@
 				SELECT * FROM NOTICE_INFO
 				WHERE BOARD_NUM > 0
 				<choose>
-					<when test="kind == 'k1'">
+					<when test="kind == 'title'">
 						 AND BOARD_TITLE LIKE '%' || #{search} || '%' 
 					</when>
-					<when test="kind == 'k2'">
+					<when test="kind == 'contents'">
 						 AND BOARD_CONTENTS LIKE '%' || #{search} || '%' 
 					</when>
-					<when test="kind == 'k3'">
+					<when test="kind == 'writer'">
 						 AND BOARD_WRITER LIKE '%' || #{search} || '%' 
 					</when>
 					<otherwise>
@@ -64,8 +64,7 @@
  	
  	<update id="doUpdate" parameterType="boardDTO">
  		UPDATE NOTICE_INFO 
-		SET UPDATE_DATE = SYSDATE , BOARD_CATEGORY = #{board_category}, 
-			BOARD_TITLE = #{board_title}, BOARD_CONTENTS = #{board_contents}
+		SET UPDATE_DATE = SYSDATE , BOARD_TITLE = #{board_title}, BOARD_CONTENTS = #{board_contents}
 		WHERE BOARD_NUM = #{board_num}
  	</update>
  	

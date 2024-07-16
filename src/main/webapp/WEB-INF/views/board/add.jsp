@@ -14,26 +14,21 @@
 	<c:import url="/WEB-INF/views/sample/header.jsp"></c:import>
 
 	<div class="container">
-	<h1>추가</h1>
-		<form action="./add" method="post">
+	<h1>${board} 추가</h1>
+		<form  method="post">
+			<input type = "hidden" value = "${getDetail.board_num}" name="">
 			<div class="mb-3">
-				
+				<label for="board_writer" class="form-label">작성자</label>
+				<input type="text" class="form-control" id="board_writer" name = "board_writer" value="${member.user_id}" disabled>
 			</div>
-			<div class="mb-3">
-			 	<label for="board_category" class="form-label">카테고리</label>
-			  		<select name="board_category" class="form-select" id="inlineFormSelectPref">
-					      <option value="1" <c:if test="${getDetail.board_category == 1}">selected</c:if>>1</option>
-					      <option value="2" <c:if test="${getDetail.board_category == 2}">selected</c:if>>2</option>
-					      <option value="3" <c:if test="${getDetail.board_category == 3}">selected</c:if>>3</option>
-			 		</select>
-			</div>
+
 			<div class="mb-3">
 			 	<label for="board_title" class="form-label">제목</label>
-			  	<input type="text" class="form-control" id="board_title" name = "board_title" value="">
+			  	<input type="text" class="form-control" id="board_title" name = "board_title">
 			</div>
 			<div class="mb-3">
 				<label for="board_contents" class="form-label">내용</label>
-				<input type="text" class="form-control" id="board_contents" name = "board_contents" value="">
+				<textarea rows="" cols="" class="form-control" id="board_contents" name = "board_contents"></textarea>
 			</div>
 				
 				

@@ -13,7 +13,7 @@
 	<c:import url="/WEB-INF/views/sample/header.jsp"></c:import>
 	<div class="container">
 		<div class="row">
-			<h1>세부사항</h1>
+			<h1>${board} 세부사항</h1>
 		</div>
 		<div class="row">				
 			<div class="mb-3">
@@ -37,23 +37,24 @@
 			</div>
 				
 			<div class="mb-3">
-				<label for="" class="form-label">카테고리</label> 
-				<input type="text" class="form-control" id="" name="" value="${getDetail.board_category}" disabled>
-			</div>
-				
-			<div class="mb-3">
 				<label for="" class="form-label">제목</label> 
 				<input type="text" class="form-control" id="" name="" value="${getDetail.board_title}" disabled>
 			</div>
 				
 			<div class="mb-3">
 				<label for="" class="form-label">내용</label> 
-				<input type="text" class="form-control" id="" name="" value="${getDetail.board_contents}" disabled>
+				<textarea rows="" cols="" class="form-control" id="board_contents" name = "board_contents" disabled>${getDetail.board_contents}
+				</textarea>
 			</div>
 				
 			<div>
-				<a type = "btn" class = "btn btn-primary" href="./update?board_num=${getDetail.board_num}">수정하기</a>
-				<a type = "btn" class = "btn btn-danger" href="./delete?board_num=${getDetail.board_num}">삭제하기</a>
+				<c:if test="${board ne 'Notice'}">
+					<a type = "btn" class = "btn btn-info" href="./reply?board_num=${getDetail.board_num}">답글 달기</a>				
+				</c:if>
+				<c:if test="${getDetail.board_writer eq member.user_id}">
+					<a type = "btn" class = "btn btn-primary" href="./update?board_num=${getDetail.board_num}">수정하기</a>
+					<a type = "btn" class = "btn btn-danger" href="./delete?board_num=${getDetail.board_num}">삭제하기</a>
+				</c:if>
 				<a type = "btn" class = "btn btn-outline-danger" href="./list">뒤로가기</a>
 			</div>	
 				

@@ -13,7 +13,7 @@
 	<c:import url="/WEB-INF/views/sample/header.jsp"></c:import>
 	<div class="container">
 		<div class="row">
-			<h1>세부사항 수정</h1>
+			<h1>${board} 세부사항 수정</h1>
 		</div>
 		<form action="./update" method="post">
 			
@@ -43,14 +43,6 @@
 					<input type="text" class="form-control" id="update_date" value="${getDetail.update_date}" disabled>
 				</div>
 					
-				<div class="mb-3">
-					<label for="board_category" class="form-label">카테고리</label> 
-						<select name="board_category" class="form-select" id="inlineFormSelectPref">
-					      	<option value="1" <c:if test="${getDetail.board_category == 1}">selected</c:if>>1</option>
-					      	<option value="2" <c:if test="${getDetail.board_category == 2}">selected</c:if>>2</option>
-					      	<option value="3" <c:if test="${getDetail.board_category == 3}">selected</c:if>>3</option>
-			 		   </select>
-				</div>
 					
 				<div class="mb-3">	
 					<label for="board_title" class="form-label">제목</label> 
@@ -58,8 +50,9 @@
 				</div>
 					
 				<div class="mb-3">
-					<label for="board_contents" class="form-label">내용</label> 
-					<input type="text" class="form-control" id="board_contents" name="board_contents" value="${getDetail.board_contents}" >
+					<label for="board_contents" class="form-label">내용</label>
+					<textarea rows="" cols="" class="form-control" id="board_contents" name = "board_contents">${getDetail.board_contents}
+					</textarea> 
 				</div>
 					
 				<div>

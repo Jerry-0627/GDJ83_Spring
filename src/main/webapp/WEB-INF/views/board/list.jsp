@@ -11,14 +11,14 @@
 <body>
 	<c:import url="/WEB-INF/views/sample/header.jsp"></c:import>
 	<div class = "container">
-		<h1>공지사항</h1>
+		<h1>${board} 리스트</h1>
 		
 		<form class="row row-cols-lg-auto g-3 align-items-center">
 			<div class="col-12">
 		    <select name="kind" class="form-select" id="inlineFormSelectPref">
-		      	<option value="k1">제목</option>
-		      	<option value="k2">내용</option>
-		    	<option value="k3">작성자</option>
+		      	<option value="title">제목</option>
+		      	<option value="contents">내용</option>
+		    	<option value="writer">작성자</option>
 		    </select>
 		  	</div>
 		  	<div class="col-12">
@@ -46,19 +46,57 @@
 		      <th scope="col">작성일</th>
 		      <th scope="col">수정일</th>
 		      <th scope="col">조회수</th>
-		      <th scope="col">카테고리</th>
 		    </tr>
 		  </thead>
 		  <tbody>
 		  	<c:forEach items = "${list}" var = "dto"> 
 				<tr>
-					<td>${dto.board_num}</td>
-					<td><a href="./detail?board_num=${dto.board_num}">${dto.board_title}</a></td>
-					<td>${dto.board_writer}</td>
-					<td>${dto.create_date}</td>
-					<td>${dto.update_date}</td>
-					<td>${dto.board_hit}</td>
-					<td>${dto.board_category}</td>
+					<td> 
+						<c:if test="${dto.del eq 0}">
+							${dto.board_num}
+						</c:if>
+					</td>
+					
+					
+					<td>
+						<c:choose>
+							<c:when test="${dto.del eq 0}">
+								<a href="./detail?board_num=${dto.board_num}">
+									<c:catch>
+										<c:forEach begin="1" end="${dto.depth}">━━></c:forEach>
+									</c:catch>	
+									${dto.board_title}
+								</a>
+							</c:when>
+							<c:otherwise>
+									<c:catch>
+										<c:forEach begin="1" end="${dto.depth}">━━></c:forEach>
+									</c:catch>	
+									삭제된 글입니다.
+							</c:otherwise>
+						</c:choose>
+					 </td>
+					 
+					<td>
+						<c:if test="${dto.del eq 0}">
+							${dto.board_writer}
+						</c:if>
+					</td>
+					<td>
+						<c:if test="${dto.del eq 0}">
+							${dto.create_date}
+						</c:if>	
+					</td>
+					<td>
+						<c:if test="${dto.del eq 0}">	
+							${dto.update_date}
+						</c:if>	
+					</td>
+					<td>
+						<c:if test="${dto.del eq 0}">	
+							${dto.board_hit}
+						</c:if>	
+					</td>
 				</tr>
 			</c:forEach>
 		  </tbody>
