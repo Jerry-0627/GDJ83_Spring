@@ -20,6 +20,7 @@ import com.jerry.app.util.PageDTO;
 @Controller
 @RequestMapping(value = "/qna/*")
 public class QnaController {
+	private int master;
 
 	@Autowired
 	private QnaService qnaService;
