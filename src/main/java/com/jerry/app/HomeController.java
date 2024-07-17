@@ -22,6 +22,7 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(HttpServletRequest request) {
+		System.out.println("@@ Study_Conflict @@");
 //		Cookie[] cookies = request.getCookies();
 //		for (Cookie c : cookies) {
 //			System.out.println(c.getName());
