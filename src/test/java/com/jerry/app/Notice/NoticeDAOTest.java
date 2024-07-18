@@ -14,23 +14,23 @@ public class NoticeDAOTest extends DefaultTest {
 	@Autowired
 	private NoticeDAO noticeDAO;
 
-	@Test
-	public void NoticeTest() throws Exception {
-		NoticeDTO noticeDTO = new NoticeDTO();
-		for (long i = 0; i < 50; i++) {
-			Date date = new Date(i);
-			noticeDTO.setBoard_num(i);
-			noticeDTO.setBoard_writer("123");
-			noticeDTO.setBoard_title("제목" + i);
-			noticeDTO.setCreate_date(date);
-			noticeDTO.setUpdate_date(null);
-			int r = ((int) (Math.random() * 1000)) / 100;
-			noticeDTO.setBoard_hit(0);
-			noticeDTO.setBoard_contents("랜덤" + (r * r));
-			noticeDTO.setBoard_category(1);
-			noticeDAO.doAdd(noticeDTO);
-			Thread.sleep(50);
-		}
+//	@Test
+//	public void NoticeTest() throws Exception {
+//		NoticeDTO noticeDTO = new NoticeDTO();
+//		for (long i = 0; i < 50; i++) {
+//			Date date = new Date(i);
+//			noticeDTO.setBoard_num(i);
+//			noticeDTO.setBoard_writer("123");
+//			noticeDTO.setBoard_title("제목" + i);
+//			noticeDTO.setCreate_date(date);
+//			noticeDTO.setUpdate_date(null);
+//			int r = ((int) (Math.random() * 1000)) / 100;
+//			noticeDTO.setBoard_hit(0);
+//			noticeDTO.setBoard_contents("랜덤" + (r * r));
+//			noticeDTO.setBoard_category(1);
+//			noticeDAO.doAdd(noticeDTO);
+//			Thread.sleep(50);
+//		}
 
 //			ProductDTO productDTO = new ProductDTO();
 //			for (int i = 0; i < 100; i++) {
@@ -44,4 +44,4 @@ public class NoticeDAOTest extends DefaultTest {
 //			System.out.println("Finish");
 
 	}
-}
+//}

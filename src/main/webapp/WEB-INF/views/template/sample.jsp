@@ -10,16 +10,17 @@
 <c:import url="/WEB-INF/views/template/headerScript.jsp"></c:import>
 </head>
 <body class="sb-nav-fixed">
-
 	<c:import url="/WEB-INF/views/template/navbar.jsp"></c:import>
-	
 	<div id="layoutSidenav">
-		<c:import url="/WEB-INF/views/template/sidenav.jsp"></c:import>
-		
+		<c:import url="/WEB-INF/views/template/sidenav.jsp"></c:import>	
 		<div id="layoutSidenav_content">
+		<!-- 코드 작성 라인-->
+
+		
+		
+		<!-- 코드 작성 라인 -->
 		<c:import url="/WEB-INF/views/template/footer.jsp"></c:import>
 		</div>
-		
 	</div>
 	<c:import url="/WEB-INF/views/template/footerScript.jsp"></c:import>
 </body>

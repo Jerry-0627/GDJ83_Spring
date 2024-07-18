@@ -6,15 +6,33 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<c:import url="/WEB-INF/views/sample/bootHeader.jsp"></c:import>
+<c:import url="/WEB-INF/views/template/header.jsp"></c:import>
+<c:import url="/WEB-INF/views/template/headerScript.jsp"></c:import>
 </head>
-<body>
-	<c:import url="/WEB-INF/views/sample/header.jsp"></c:import>
+<body class="sb-nav-fixed">
+	<c:import url="/WEB-INF/views/template/navbar.jsp"></c:import>
+	<div id="layoutSidenav">
+		<c:import url="/WEB-INF/views/template/sidenav.jsp"></c:import>
+		<div id="layoutSidenav_content">
+		<!-- 코드 작성 라인-->
+			<main>
+				<div class="container-fluid px-4">
+					<h1 class="mt-4">Register</h1>
+					<ol class="breadcrumb mb-4">
+						<li class="breadcrumb-item active">회원 등록</li>
+					</ol>
 
-	<div class="container">
-		<h1>회원가입 페이지</h1>
-			<div class = "row">
-				<form action="./joinMember" method="post">
+
+					<div class="card mb-4">
+						<div class="card-header">
+							<i class="fas fa-table me-1"></i> DataTable
+						</div>
+						<div class="card-body">
+
+							<div class="container">
+
+								<div class="row">
+									<form action="./joinMember" method="post">
 					<div class="mb-3">
 					 	<label for="user_id" class="form-label">회원 아이디</label>
 					  	<input type="text" class="form-control" id="user_id" name = "user_id">
@@ -43,9 +61,21 @@
 					<a href="/" class = "btn btn-outline-danger">취소</a>
 					
 				</form>	
-			</div>
-	</div>
+								</div>
 
-<c:import url="/WEB-INF/views/sample/bootFooter.jsp"></c:import>
+
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</main>
+
+
+		<!-- 코드 작성 라인 -->
+		<c:import url="/WEB-INF/views/template/footer.jsp"></c:import>
+		</div>		
+	</div>
+	<c:import url="/WEB-INF/views/template/footerScript.jsp"></c:import>
 </body>
 </html>

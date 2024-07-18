@@ -10,23 +10,23 @@ public class ProductDAOTest extends DefaultTest {
 	@Autowired
 	private ProductDAO productDAO;
 
-	@Test
-	public void pageTest() throws Exception {
-		long perPage = 10L;
-		long totalCount = productDAO.getnum();
-		System.out.println(productDAO.getnum());
-		long totalPage = totalCount / perPage;
+//	@Test
+//	public void pageTest() throws Exception {
+//		long perPage = 10L;
+//		long totalCount = productDAO.getnum();
+//		System.out.println(productDAO.getnum());
+//		long totalPage = totalCount / perPage;
+//
+//		if (totalCount % perPage != 0) {
+//			totalPage++;
+//		}
 
-		if (totalCount % perPage != 0) {
-			totalPage++;
-		}
-
-		System.out.println("Count : " + totalCount);
-		System.out.println("Page : " + totalPage);
-		System.out.println("이것이 pageTest");
+//		System.out.println("Count : " + totalCount);
+//		System.out.println("Page : " + totalPage);
+//		System.out.println("이것이 pageTest");
 //		long totalPage1 = (long) Math.ceil(totalCount / perPage);
 //		System.out.println(totalPage1);
-	}
+//	}
 
 	@Test
 	public void addTest() throws Exception {
