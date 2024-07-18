@@ -48,6 +48,13 @@
 											name="product_ex">
 									</div>
 
+									<div class="mb-3">
+										<button type="button" id="add" class="btn btn-primary">파일 추가</button>
+									</div>
+									<div id="result">
+
+									</div>
+
 
 									<button type="submit" class="btn btn-primary">등록</button>
 									<a href="./list" class="btn btn-outline-danger">취소</a>
@@ -68,5 +75,9 @@
 		</div>		
 	</div>
 	<c:import url="/WEB-INF/views/template/footerScript.jsp"></c:import>
+	<script src="/resources/js/commons/files.js"></script>
+	<script>
+		setMax(5);
+	</script>
 </body>
 </html>

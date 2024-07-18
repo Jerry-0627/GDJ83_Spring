@@ -39,9 +39,15 @@
 										</div>
 										<div class="mb-3">
 											<label for="user_pw" class="form-label">회원 비밀번호</label> <input
-												type="password" class="form-control" id="user_pw"
-												name="user_pw">
+												type="password" class="form-control" id="user_pw">
 												<div id="password-error" class="text-danger"></div>
+										</div>
+										<div class="mb-3">
+											<label for="user_pw" class="form-label">회원 비밀번호</label> <input
+												type="password" class="form-control" id="user_pw_check"
+												name="user_pw">
+												<div id="password-eqError" class="text-danger"></div>
+												<div id="password-eqError2" class="text-primary"></div>
 										</div>
 										<div class="mb-3">
 											<label for="user_name" class="form-label">회원 이름</label> <input
