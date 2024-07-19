@@ -32,7 +32,9 @@
 							<div class="container">
 
 								<div class="row">
-									<form action="./joinMember" method="post" id="frm">
+									<form action="./joinMember" method="post" id="frm" enctype="multipart/form-data">
+									<!-- 7.19 뒤에  enctype="multipart/form-data" 는 파일을 여러개로 짤라서 보내겠다라는 뜻-->
+									<!-- 잘라진 파일을 다운 받으려면 잘라진 파일을 합쳐주는 라이브러리를 다운 해야함. -->
 										<div class="mb-3">
 											<label for="user_id" class="form-label">회원 아이디</label> <input
 												type="text" class="form-control" id="user_id" name="user_id">

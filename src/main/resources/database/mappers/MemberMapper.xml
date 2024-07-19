@@ -5,6 +5,11 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
  <mapper namespace="com.jerry.app.member.MemberDAO">
+ 	<insert id="addFile" parameterType="MemberFileDTO">
+ 		INSERT INTO MEMBER_FILE_INFO (FILE_NUM, USER_ID, FILE_NAME, ORI_NAME)
+		VALUES (MEMBER_FILE_SEQ.NEXTVAL, #{user_id}, #{file_name}, #{ori_name})
+ 	</insert>
+ 
 	<insert id="joinMember" parameterType="MemberDTO">
 	  	INSERT INTO MEMBER_INFO VALUES (#{user_id}, #{user_pw}, #{user_name}, #{user_phone_num}, #{user_email}, #{user_address})
 	</insert>
@@ -17,11 +22,10 @@
  	</select>
  	
  	<select id="detail" parameterType="MemberDTO" resultMap="loginResult">
- 		SELECT M.*, A.*
+ 		SELECT M.*, A.*, F.*
  		FROM MEMBER_INFO M
- 			LEFT JOIN
- 			ACCOUNT_INFO A
- 			ON M.USER_ID = A.USER_ID
+ 			LEFT JOIN ACCOUNT_INFO A ON M.USER_ID = A.USER_ID
+ 			LEFT JOIN MEMBER_FILE_INFO F ON M.USER_ID = F.USER_ID
  		WHERE M.USER_ID = #{user_id}
  	</select>
 
@@ -35,6 +39,18 @@
  		<result column="USER_PHONE_NUM" property="user_phone_num"/>
  		<result column="USER_EMAIL" property="user_email"/>
  		<result column="USER_ADDRESS" property="user_address"/>
+ 		<!-- 1대 1의 관계 association-->
+ 		<!-- 1대 1의 관계를 먼저 쓰고 1대N읠 관계를 써야함 -->
+ 		<!-- ofType에는 뭘 적어야 하는가? -->
+ 		
+ 		<association property="memberFileDTO" javaType="MemberFileDTO">
+ 			<!-- id는 primary키에 해당하는 애를 집어넣어야함 -->
+ 			<id column="FILE_NUM" property="file_num"/>
+ 			<result column="FILE_NAME" property="file_name"/>
+ 			<result column="ORI_NAME" property="ori_name"/>
+ 		
+ 		</association>
+ 		
 		<!-- 1대 N의 관계일 때 -->
 		<!-- member는 하나만 나오니까 List로 안해도 되는데, account는 여러개 나오니까 List로 해줘야함-->
 		<collection property="dtos" javaType="java.util.List" ofType="AccountDTO">
@@ -43,6 +59,8 @@
 			<result column = "BALANCE" property="balance"/>
 			<result column = "ACCOUNT_DATE" property="account_date"/>
 		</collection>
+		
+		
  	</resultMap>
 
  
@@ -57,4 +75,6 @@
  	<delete id="delete">
  		DELETE FROM MEMBER_INFO WHERE USER_ID = #{user_id}
  	</delete>
+ 	
+ 	
  </mapper>

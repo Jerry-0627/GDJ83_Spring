@@ -21,6 +21,16 @@
 					<ol class="breadcrumb mb-4">
 						<li class="breadcrumb-item active">내 정보</li>
 					</ol>
+					<c:if test="${not empty member.memberFileDTO}">
+						<div>
+							<img alt="" src="/resources/upload/members/${member.memberFileDTO.file_name}">
+						</div>	
+					</c:if>
+					<c:if test="${empty member.memberFileDTO}">
+						<div>
+							<img alt="" src="/resources/upload/members/dog.jpg">
+						</div>	
+					</c:if>
 
 
 					<div class="card mb-4">

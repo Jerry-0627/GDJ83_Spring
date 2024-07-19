@@ -4,5 +4,15 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
+	<!-- 어느 페키지의 어느.. 를.. -->
+	<bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver">
+		<!-- 이 변수의 세터를 의미함 -->
+		<property name="defaultEncoding" value="UTF-8"></property>
+		<!-- 데이터의 값은 Byte 단위로 보내야함 -->
+		<property name="maxUploadSize" value="104857600"></property>
+		<!-- 데이터의 값은 Byte 단위로 보내야함 -->
+		<property name="maxUploadSizePerFile" value="20971520"></property>
 		
+	</bean>
+	
 </beans>
