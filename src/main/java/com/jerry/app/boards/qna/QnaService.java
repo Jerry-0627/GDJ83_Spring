@@ -37,36 +37,27 @@ public class QnaService implements BoardService {
 	public int doAdd(BoardDTO boardDTO, MultipartFile[] multipartFiles, HttpSession session) throws Exception {
 		// TODO Auto-generated method stub
 		Long num = qnaDAO.getBoardNum();
-		System.out.println("@@ qnaDAO.getBoardNum num : " + num);
 		boardDTO.setBoard_num(num);
 
 		int result = qnaDAO.doAdd(boardDTO);
-		System.out.println("@@ qnaDAO.doAdd 실행 결과 : " + result);
 
-		System.out.println("@@ multi : " + multipartFiles);
 		if (multipartFiles == null) {
 			return result;
 		}
 		ServletContext servletContext = session.getServletContext();
-		System.out.println("@@ 서블랫 콘텍스트 : " + servletContext);
 
 		String path = servletContext.getRealPath("resources/upload/qna");
-		System.out.println("@@ path : " + path);
 		for (MultipartFile f : multipartFiles) {
-			System.out.println("@@ f : " + f);
 			if (f.isEmpty()) {
-				System.out.println("@@ f : null");
 				continue;
 			}
 			String fileName = fileManager.fileSave(path, f);
-			System.out.println("@@ fileName : " + fileName);
 
 			BoardFileDTO boardFileDTO = new BoardFileDTO();
 			boardFileDTO.setBoard_num(num);
 			boardFileDTO.setFile_name(fileName);
 			boardFileDTO.setOri_name(f.getOriginalFilename());
 			result = qnaDAO.doAddFile(boardFileDTO);
-			System.out.println("@@ qnaDAO.doAddFile 실행 결과 : " + result);
 		}
 
 		return result;
