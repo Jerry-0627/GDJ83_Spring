@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.jerry.app.boards.BoardDTO;
 import com.jerry.app.member.MemberDTO;
@@ -119,11 +120,11 @@ public class NoticeController {
 	}
 
 	@RequestMapping(value = "add", method = RequestMethod.POST)
-	public String doAdd(HttpSession session, NoticeDTO noticeDTO, Model model) throws Exception {
+	public String doAdd(NoticeDTO noticeDTO, MultipartFile[] files, HttpSession session, Model model) throws Exception {
 
 		MemberDTO memberDTO = (MemberDTO) session.getAttribute("member");
 		noticeDTO.setBoard_writer(memberDTO.getUser_id());
-		model.addAttribute("doAdd", noticeService.doADD(noticeDTO));
+		model.addAttribute("doAdd", noticeService.doADD(noticeDTO, files, session));
 		String url = "commons/message";
 
 		/*

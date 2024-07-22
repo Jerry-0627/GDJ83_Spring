@@ -29,9 +29,19 @@ public class ProductDAO {
 		return sqlSession.selectOne(NAMESPACE + "getdetail", productDTO);
 	}
 
+	public Long getproductnum() throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "getproductnum");
+	}
+
 	public int doadd(ProductDTO productDTO) throws Exception {
 
 		return sqlSession.insert(NAMESPACE + "doadd", productDTO);
+
+	}
+
+	public int doaddfile(ProductFileDTO productFileDTO) throws Exception {
+
+		return sqlSession.insert(NAMESPACE + "doaddfile", productFileDTO);
 
 	}
 

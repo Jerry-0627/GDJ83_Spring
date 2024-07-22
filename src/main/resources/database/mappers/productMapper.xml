@@ -45,12 +45,38 @@
 			</where>
 	  </select>
 	  
-	  <select id="getdetail" resultType="ProductDTO" parameterType="ProductDTO">
-	  		SELECT * FROM PRODUCT_INFO WHERE PRODUCT_NUM = #{product_num}
+	  <select id="getdetail" parameterType="ProductDTO" resultMap="getDetailResult">
+			SELECT PI.*, PFI.*
+			FROM PRODUCT_INFO PI 
+				LEFT JOIN
+				PRODUCT_FILE_INFO PFI
+				ON (PI.PRODUCT_NUM = PFI.PRODUCT_NUM)
+			WHERE PI.PRODUCT_NUM = #{product_num}
+	  </select>
+	  
+	  <resultMap type="ProductDTO" id="getDetailResult">
+	  		<id column="PRODUCT_NUM" property="product_num"/>
+	  		<result column="PRODUCT_NAME" property="product_name"/>
+	  		<result column="PRODUCT_RATE" property="product_rate"/>
+	  		<result column="PRODUCT_EX" property="product_ex"/>
+	  		<collection property="product_file" javaType="java.util.List" ofType="ProductFileDTO">
+	  			<id column="FILE_NUM" property="file_num"/>
+	  			<result column="FILE_NAME" property="file_name"/>
+	  			<result column="ORI_NAME" property="ori_name"/>
+	  		</collection>
+	  </resultMap>
+	  
+	  <select id="getproductnum" resultType="Long">
+	  		SELECT PRODUCT_SEQ.NEXTVAL FROM DUAL
 	  </select>
 	  
 	  <insert id="doadd" parameterType="ProductDTO">
-	  		INSERT INTO PRODUCT_INFO VALUES (PRODUCT_SEQ.NEXTVAL, #{product_name}, #{product_rate}, #{product_ex})
+	  		INSERT INTO PRODUCT_INFO VALUES (#{product_num}, #{product_name}, #{product_rate}, #{product_ex})
+	  </insert>
+	  
+	  <insert id="doaddfile" parameterType="ProductFileDTO">
+	  		INSERT INTO PRODUCT_FILE_INFO
+	  		VALUES (PRODUCT_FILE_SEQ.NEXTVAL, #{product_num}, #{file_name}, #{ori_name})
 	  </insert>
 	  
 	  <delete id="dodelete" parameterType="ProductDTO">

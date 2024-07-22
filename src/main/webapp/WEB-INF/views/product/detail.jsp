@@ -56,6 +56,11 @@
 								<a href="./delete?product_num=${detail.product_num}"
 								class = "btn btn-outline-danger">상품 삭제</a>
 								</div>
+								<div>
+									<c:forEach items="${detail.product_file}" var="f">
+										<a class="btn btn-info" href="/resources/upload/products/${f.file_name}">${f.ori_name}</a>
+									</c:forEach>
+								</div>
 								
 							</div>
 						</div>

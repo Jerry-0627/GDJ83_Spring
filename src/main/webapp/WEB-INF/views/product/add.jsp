@@ -31,7 +31,7 @@
 
 							<div class="container">
 
-								<form action="./add" method="post">
+								<form action="./add" method="post" enctype="multipart/form-data">
 									<div class="mb-3">
 										<label for="product_name" class="form-label">상품 이름</label> <input
 											type="text" class="form-control" id="product_name"

@@ -1,17 +1,28 @@
 package com.jerry.app.product;
 
+import java.util.List;
+
 public class ProductDTO {
 
-	private Integer product_num;
+	private Long product_num;
 	private String product_name;
 	private double product_rate;
 	private String product_ex;
+	private List<ProductFileDTO> product_file;
 
-	public Integer getProduct_num() {
+	public List<ProductFileDTO> getProduct_file() {
+		return product_file;
+	}
+
+	public void setProduct_file(List<ProductFileDTO> product_file) {
+		this.product_file = product_file;
+	}
+
+	public Long getProduct_num() {
 		return product_num;
 	}
 
-	public void setProduct_num(Integer product_num) {
+	public void setProduct_num(Long product_num) {
 		this.product_num = product_num;
 	}
 

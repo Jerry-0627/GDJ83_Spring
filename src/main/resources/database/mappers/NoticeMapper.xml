@@ -51,9 +51,12 @@
 				</choose>
 	</select>
  	
- 	<select id="getDetail" parameterType="boardDTO" resultType="NoticeDTO">
- 		SELECT * FROM NOTICE_INFO
- 		WHERE BOARD_NUM = #{board_num}
+ 	<select id="getDetail" parameterType="boardDTO" resultMap="NoticeDTO">
+ 		SELECT NI.*, NFN.* 
+ 		FROM NOTICE_INFO NI
+ 			LEFT JOIN NOTICE_FILE_NUM NFN
+ 			ON (NI.BOARD_NUM = NFN.BOARD_NUM)
+ 		WHERE NI.BOARD_NUM = #{board_num}
  	</select>
  	
  	<update id="hitUpdate" parameterType="boardDTO">
@@ -73,11 +76,20 @@
 		WHERE BOARD_NUM = #{board_num}
  	</delete>
  	
+ 	<select id="getNoticeNum" resultType="Long">
+ 		SELECT BOARD_SEQ.NEXTVAL FROM DUAL
+ 	</select>
+ 	
  	<insert id="doAdd" parameterType="boardDTO">
 		INSERT INTO NOTICE_INFO
 		(BOARD_NUM, BOARD_WRITER, BOARD_TITLE, CREATE_DATE, BOARD_CONTENTS, BOARD_CATEGORY)
 		VALUES
-		(BOARD_SEQ.NEXTVAL, #{board_writer}, #{board_title}, SYSDATE, #{board_contents}, #{board_category})
+		(#{board_num}, #{board_writer}, #{board_title}, SYSDATE, #{board_contents}, 'Q')
+ 	</insert>
+ 	
+ 	<insert id="doAddFile" parameterType="NoticeFileDTO">
+ 		INSERT INTO NOTICE_FILE_INFO
+	  	VALUES (BOARD_FILE_SEQ.NEXTVAL, #{board_num}, #{file_name}, #{ori_name})
  	</insert>
  
  </mapper>

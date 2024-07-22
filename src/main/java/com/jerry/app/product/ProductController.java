@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.jerry.app.member.MemberDTO;
 import com.jerry.app.util.PageDTO;
@@ -44,8 +45,9 @@ public class ProductController {
 	}
 
 	@RequestMapping(value = "add", method = RequestMethod.POST)
-	public String doadd(ProductDTO productDTO, Model model) throws Exception {
-		int result = productService.doadd(productDTO);
+	public String doadd(ProductDTO productDTO, Model model, MultipartFile[] files, HttpSession session)
+			throws Exception {
+		int result = productService.doadd(productDTO, files, session);
 		String url = "";
 		if (result > 0) {
 			url = "redirect:./list";

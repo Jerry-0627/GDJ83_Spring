@@ -30,6 +30,10 @@ public class NoticeDAO implements BoardDAO {
 		return sqlSession.selectOne(NAMESPACE + "getTotalRowCount", pageDTO);
 	}
 
+	public Long getNoticeNum() throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "getNoticeNum");
+	}
+
 	@Override
 	public BoardDTO getDetail(BoardDTO boardDTO) throws Exception {
 		return sqlSession.selectOne(NAMESPACE + "getDetail", boardDTO);
@@ -54,4 +58,9 @@ public class NoticeDAO implements BoardDAO {
 	public int doAdd(BoardDTO boardDTO) throws Exception {
 		return sqlSession.insert(NAMESPACE + "doAdd", boardDTO);
 	}
+
+	public int doAddFile(NoticeFileDTO noticeFileDTO) throws Exception {
+		return sqlSession.insert(NAMESPACE + "doAddFile", noticeFileDTO);
+	}
+
 }
