@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.jerry.app.boards.BoardDAO;
 import com.jerry.app.boards.BoardDTO;
+import com.jerry.app.boards.BoardFileDTO;
 import com.jerry.app.util.PageDTO;
 
 @Repository
@@ -59,8 +60,8 @@ public class NoticeDAO implements BoardDAO {
 		return sqlSession.insert(NAMESPACE + "doAdd", boardDTO);
 	}
 
-	public int doAddFile(NoticeFileDTO noticeFileDTO) throws Exception {
-		return sqlSession.insert(NAMESPACE + "doAddFile", noticeFileDTO);
+	public int doAddFile(BoardFileDTO boardFileDTO) throws Exception {
+		return sqlSession.insert(NAMESPACE + "doAddFile", boardFileDTO);
 	}
 
 }

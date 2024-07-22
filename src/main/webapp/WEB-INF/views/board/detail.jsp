@@ -51,8 +51,8 @@
 				</textarea>
 			</div>
 			<div>
-				<c:forEach items="${getDetail.board_file}" var="f">
-					<a class="btn btn-info" href="/resources/upload/products/${f.file_name}">${f.ori_name}</a>
+				<c:forEach items="${getDetail.boardFileDTOs }" var="f">
+					<a href="/resources/upload/${board}/${f.file_name}">${f.ori_name}</a>
 				</c:forEach>
 			</div>
 				
@@ -66,13 +66,13 @@
 				</c:if>
 				<a type = "btn" class = "btn btn-outline-danger" href="./list">뒤로가기</a>
 			</div>	
+
 				
 		</div>
 
 			<!-- 코드 작성 라인 -->
 		<c:import url="/WEB-INF/views/template/footer.jsp"></c:import>
-		</div>		
-	</div>
+</div>		
 	<c:import url="/WEB-INF/views/template/footerScript.jsp"></c:import>
 </body>
 </html>

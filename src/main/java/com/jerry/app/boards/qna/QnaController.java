@@ -27,7 +27,7 @@ public class QnaController {
 
 	@ModelAttribute("board")
 	public String getBoard() {
-		return "QnA";
+		return "qna";
 	}
 
 	@GetMapping("list")

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.jerry.app.boards.BoardDAO;
 import com.jerry.app.boards.BoardDTO;
+import com.jerry.app.boards.BoardFileDTO;
 import com.jerry.app.util.PageDTO;
 
 //객체 만드는 어노테이션
@@ -44,9 +45,9 @@ public class QnaDAO implements BoardDAO {
 		return sqlSession.insert(NAMESPACE + "doAdd", boardDTO);
 	}
 
-	public int doAddFile(QnaFileDTO qnaFileDTO) throws Exception {
+	public int doAddFile(BoardFileDTO boardFileDTO) throws Exception {
 
-		return sqlSession.insert(NAMESPACE + "doAddFile", qnaFileDTO);
+		return sqlSession.insert(NAMESPACE + "doAddFile", boardFileDTO);
 	}
 
 	@Override

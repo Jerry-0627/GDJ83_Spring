@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.jerry.app.boards.BoardDTO;
+import com.jerry.app.boards.BoardFileDTO;
 import com.jerry.app.boards.BoardService;
 import com.jerry.app.files.FileManager;
 import com.jerry.app.util.PageDTO;
@@ -49,7 +50,7 @@ public class QnaService implements BoardService {
 		ServletContext servletContext = session.getServletContext();
 		System.out.println("@@ 서블랫 콘텍스트 : " + servletContext);
 
-		String path = servletContext.getRealPath("resources/upload/qnas");
+		String path = servletContext.getRealPath("resources/upload/qna");
 		System.out.println("@@ path : " + path);
 		for (MultipartFile f : multipartFiles) {
 			System.out.println("@@ f : " + f);
@@ -60,11 +61,11 @@ public class QnaService implements BoardService {
 			String fileName = fileManager.fileSave(path, f);
 			System.out.println("@@ fileName : " + fileName);
 
-			QnaFileDTO qnaFileDTO = new QnaFileDTO();
-			qnaFileDTO.setBoard_num(num);
-			qnaFileDTO.setFile_name(fileName);
-			qnaFileDTO.setOri_name(f.getOriginalFilename());
-			result = qnaDAO.doAddFile(qnaFileDTO);
+			BoardFileDTO boardFileDTO = new BoardFileDTO();
+			boardFileDTO.setBoard_num(num);
+			boardFileDTO.setFile_name(fileName);
+			boardFileDTO.setOri_name(f.getOriginalFilename());
+			result = qnaDAO.doAddFile(boardFileDTO);
 			System.out.println("@@ qnaDAO.doAddFile 실행 결과 : " + result);
 		}
 

@@ -51,13 +51,30 @@
 				</choose>
 	</select>
  	
- 	<select id="getDetail" parameterType="boardDTO" resultMap="NoticeDTO">
+ 	<select id="getDetail" parameterType="NoticeDTO" resultMap="detailResult">
  		SELECT NI.*, NFN.* 
  		FROM NOTICE_INFO NI
- 			LEFT JOIN NOTICE_FILE_NUM NFN
+ 			LEFT JOIN NOTICE_FILE_INFO NFN
  			ON (NI.BOARD_NUM = NFN.BOARD_NUM)
  		WHERE NI.BOARD_NUM = #{board_num}
  	</select>
+ 	
+ 	<resultMap type="NoticeDTO" id="detailResult">
+ 		<id column="BOARD_NUM" property="board_num"/>
+ 		<result column="BOARD_WRITER" property="board_writer"/>
+ 		<result column="BOARD_TITLE" property="board_title"/>
+ 		<result column="CREATE_DATE" property="create_date"/>
+ 		<result column="UPDATE_DATE" property="update_date"/>
+ 		<result column="BOARD_HIT" property="board_hit"/>
+ 		<result column="BOARD_CONTENTS" property="board_contents"/>
+ 		<result column="BOARD_CATEGORY" property="board_category"/>
+ 		<collection property="boardFileDTOs" javaType="java.util.List" ofType="BoardFileDTO">
+ 			<id column="FILE_NUM" property="file_num"/>
+ 			<result column="FILE_NAME" property="file_name"/>
+ 			<result column="ORI_NAME" property="ori_name"/>
+ 		</collection>
+ 		
+ 	</resultMap>
  	
  	<update id="hitUpdate" parameterType="boardDTO">
  		UPDATE NOTICE_INFO
@@ -87,7 +104,7 @@
 		(#{board_num}, #{board_writer}, #{board_title}, SYSDATE, #{board_contents}, 'Q')
  	</insert>
  	
- 	<insert id="doAddFile" parameterType="NoticeFileDTO">
+ 	<insert id="doAddFile" parameterType="BoardFileDTO">
  		INSERT INTO NOTICE_FILE_INFO
 	  	VALUES (BOARD_FILE_SEQ.NEXTVAL, #{board_num}, #{file_name}, #{ori_name})
  	</insert>

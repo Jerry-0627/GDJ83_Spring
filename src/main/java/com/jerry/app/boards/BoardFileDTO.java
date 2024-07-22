@@ -1,9 +1,8 @@
-package com.jerry.app.boards.notice;
+package com.jerry.app.boards;
 
 import com.jerry.app.files.FileDTO;
 
-public class NoticeFileDTO extends FileDTO {
-
+public class BoardFileDTO extends FileDTO{
 	private Long board_num;
 
 	public Long getBoard_num() {
@@ -13,4 +12,5 @@ public class NoticeFileDTO extends FileDTO {
 	public void setBoard_num(Long board_num) {
 		this.board_num = board_num;
 	}
+	
 }

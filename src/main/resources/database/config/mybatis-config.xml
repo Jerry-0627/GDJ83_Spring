@@ -17,10 +17,9 @@
   		<typeAlias type="com.jerry.app.account.ListOption" alias = "ListOption"/>
   		
   		<typeAlias type="com.jerry.app.boards.BoardDTO" alias = "BoardDTO"/>
+  		<typeAlias type="com.jerry.app.boards.BoardFileDTO" alias = "BoardFileDTO"/>
   		<typeAlias type="com.jerry.app.boards.notice.NoticeDTO" alias = "NoticeDTO"/>
-  		<typeAlias type="com.jerry.app.boards.notice.NoticeFileDTO" alias = "NoticeFileDTO"/>
   		<typeAlias type="com.jerry.app.boards.qna.QnaDTO" alias = "QnaDTO"/>
-  		<typeAlias type="com.jerry.app.boards.qna.QnaFileDTO" alias = "QnaFileDTO"/>
   		
   		
   		<typeAlias type="com.jerry.app.boards.notice.ExtraDTO" alias = "ExtraDTO"/>

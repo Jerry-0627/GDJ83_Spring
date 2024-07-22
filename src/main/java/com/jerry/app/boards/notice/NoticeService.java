@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.jerry.app.boards.BoardDAO;
 import com.jerry.app.boards.BoardDTO;
+import com.jerry.app.boards.BoardFileDTO;
 import com.jerry.app.files.FileManager;
 import com.jerry.app.util.PageDTO;
 
@@ -65,7 +66,7 @@ public class NoticeService {
 		}
 
 		ServletContext servletContext = session.getServletContext();
-		String path = servletContext.getRealPath("resources/upload/notices");
+		String path = servletContext.getRealPath("resources/upload/notice");
 
 		for (MultipartFile f : files) {
 			if (f.isEmpty()) {
@@ -73,11 +74,11 @@ public class NoticeService {
 			}
 			String fileNmae = filemanager.fileSave(path, f);
 			System.out.println("@@@ fileName : " + fileNmae);
-			NoticeFileDTO noticeFileDTO = new NoticeFileDTO();
-			noticeFileDTO.setBoard_num(num);
-			noticeFileDTO.setFile_name(fileNmae);
-			noticeFileDTO.setOri_name(f.getOriginalFilename());
-			result = noticeDAO.doAddFile(noticeFileDTO);
+			BoardFileDTO boardFileDTO = new BoardFileDTO();
+			boardFileDTO.setBoard_num(num);
+			boardFileDTO.setFile_name(fileNmae);
+			boardFileDTO.setOri_name(f.getOriginalFilename());
+			result = noticeDAO.doAddFile(boardFileDTO);
 			System.out.println("@@@ result : " + result);
 		}
 

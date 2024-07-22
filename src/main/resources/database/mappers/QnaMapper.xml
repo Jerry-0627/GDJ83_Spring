@@ -61,14 +61,35 @@
 	 
 	 </insert>
 	 
-	 <insert id="doAddFile" parameterType="QnaFileDTO">
+	 <insert id="doAddFile" parameterType="BoardFileDTO">
 	  		INSERT INTO QNA_FILE_INFO
 	  		VALUES (BOARD_FILE_SEQ.NEXTVAL, #{board_num}, #{file_name}, #{ori_name})
 	 </insert>
 	 
-	 <select id="getDetail" parameterType="QnaDTO" resultType="QnaDTO">
-	 	SELECT * FROM QNA_INFO WHERE BOARD_NUM = #{board_num} AND DEL = 0
+	 <select id="getDetail" parameterType="QnaDTO" resultMap="qnaDetailResult">
+	  	SELECT QI.*, QFN.* 
+ 		FROM QNA_INFO QI
+ 			LEFT JOIN QNA_FILE_INFO QFN
+ 			ON (QI.BOARD_NUM = QFN.BOARD_NUM)
+ 		WHERE QI.BOARD_NUM = #{board_num} and DEL = 0
 	 </select>
+ 	<resultMap type="QnaDTO" id="qnaDetailResult">
+ 		<id column="BOARD_NUM" property="board_num"/>
+ 		<result column="BOARD_WRITER" property="board_writer"/>
+ 		<result column="BOARD_TITLE" property="board_title"/>
+ 		<result column="CREATE_DATE" property="create_date"/>
+ 		<result column="UPDATE_DATE" property="update_date"/>
+ 		<result column="BOARD_HIT" property="board_hit"/>
+ 		<result column="BOARD_CONTENTS" property="board_contents"/>
+ 		<result column="BOARD_CATEGORY" property="board_category"/>
+ 		<collection property="boardFileDTOs" javaType="java.util.List" ofType="BoardFileDTO">
+ 			<id column="FILE_NUM" property="file_num"/>
+ 			<result column="FILE_NAME" property="file_name"/>
+ 			<result column="ORI_NAME" property="ori_name"/>
+ 		</collection>
+ 		
+ 	</resultMap>	 
+	 
 	 
 	 <update id="hitUpdate" parameterType="QnaDTO">
 	 	UPDATE QNA_INFO
