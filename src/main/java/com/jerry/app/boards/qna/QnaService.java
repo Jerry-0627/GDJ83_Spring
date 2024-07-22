@@ -98,13 +98,13 @@ public class QnaService implements BoardService {
 
 	public int reply(QnaDTO qnaDTO, MultipartFile[] multipartFiles, HttpSession session) throws Exception {
 		QnaDTO parent = (QnaDTO) qnaDAO.getDetail(qnaDTO);
+		System.out.println("@@@@ parent.getRef : " + parent.getRef());
 		// 1. step을 1씩 업데이트함
 		int result = qnaDAO.replyUpdate(parent);
 		System.out.println("실행은됨2");
 
 		// 2. 답글에 REF, STEP, DEPTH를 세팅
 		qnaDTO.setRef(parent.getRef());
-		System.out.println("@@@@ parent.getRef : " + parent.getRef());
 		qnaDTO.setStep(parent.getStep() + 1);
 		qnaDTO.setDepth(parent.getDepth() + 1);
 		result = qnaDAO.reply(qnaDTO);
@@ -124,6 +124,7 @@ public class QnaService implements BoardService {
 			BoardFileDTO boardFileDTO = new BoardFileDTO();
 			
 			boardFileDTO.setBoard_num(qnaDTO.getBoard_num());
+			boardFileDTO.setFile_name(fileName);
 			boardFileDTO.setOri_name(f.getOriginalFilename());
 			result = qnaDAO.doAddFile(boardFileDTO);
 			

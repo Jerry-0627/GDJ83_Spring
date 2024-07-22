@@ -71,7 +71,7 @@
  		FROM QNA_INFO QI
  			LEFT JOIN QNA_FILE_INFO QFN
  			ON (QI.BOARD_NUM = QFN.BOARD_NUM)
- 		WHERE QI.BOARD_NUM = #{board_num} and DEL = 0
+ 		WHERE QI.BOARD_NUM = #{board_num}
 	 </select>
  	<resultMap type="QnaDTO" id="qnaDetailResult">
  		<id column="BOARD_NUM" property="board_num"/>
@@ -82,6 +82,10 @@
  		<result column="BOARD_HIT" property="board_hit"/>
  		<result column="BOARD_CONTENTS" property="board_contents"/>
  		<result column="BOARD_CATEGORY" property="board_category"/>
+ 		<result column="REF" property="ref"/>
+  		<result column="STEP" property="step"/>
+  		<result column="DEPTH" property="depth"/>
+  		<result column="DEL" property="del"/>
  		<collection property="boardFileDTOs" javaType="java.util.List" ofType="BoardFileDTO">
  			<id column="FILE_NUM" property="file_num"/>
  			<result column="FILE_NAME" property="file_name"/>
