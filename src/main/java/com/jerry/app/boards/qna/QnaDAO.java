@@ -80,6 +80,7 @@ public class QnaDAO implements BoardDAO {
 	}
 
 	public int replyUpdate(QnaDTO qnaDTO) throws Exception {
+		System.out.println("실행은됨");
 		return sqlSession.update(NAMESPACE + "replyUpdate", qnaDTO);
 	}
 }
