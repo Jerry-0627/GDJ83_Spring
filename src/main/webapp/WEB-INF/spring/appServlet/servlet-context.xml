@@ -16,11 +16,22 @@
 	<resources mapping="/resources/**" location="/resources/" />
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	<!-- jsp를 찾아서 경로를 지정해주는 애임 -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	<!-- QQQ. InternalResourceViewResolver의 역할이 뭐지? -->
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
+		<!-- 나중에 추가한 애 7/23.1, 받아온 것을 자바로 만드는거?-->
+		<!-- value의 값이 낮을수록 우선으로 처리되는 것이다. 그래서 아래 7/23.2가 먼저 처리된다. -->
+		<beans:property name="order" value="1"></beans:property>
 	</beans:bean>
 	
+	<!-- 나중에 추가한 애 7/23.2 -->
+	<!-- 먼저 bean의 이름이 일치하는 것을 찾기 위해 723.2를 하고 그 다음에 723.1을 함 -->
+	<beans:bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+	<!-- QQQ. BeanNameViewResolver의 역할이 뭐지? -->
+		<beans:property name="order" value="0"></beans:property>
+	</beans:bean>
 	<context:component-scan base-package="com.jerry.app" />
 	
 	

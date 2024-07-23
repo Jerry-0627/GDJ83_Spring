@@ -86,4 +86,19 @@
 	  <update id="doupdate" parameterType="ProductDTO">
 			UPDATE PRODUCT_INFO SET PRODUCT_NAME = #{product_name}, PRODUCT_RATE=#{product_rate}, PRODUCT_EX=#{product_ex} WHERE PRODUCT_NUM = #{product_num} 
 	  </update>
+	  
+	  <insert id="addWish" parameterType="java.util.Map">
+	  		INSERT INTO WISH_INFO
+	  		VALUES(#{product_num}, #{user_id})	
+	  </insert>
+	  
+	  <select id="wishList" parameterType="MemberDTO" resultType="ProductDTO">
+	  		SELECT * FROM PRODUCT_INFO
+	  		WHERE PRODUCT_NUM IN (
+	  			SELECT PRODUCT_NUM FROM WISH_INFO WHERE USER_ID = #{user_id}
+	  		)
+	  </select>
+	  
+
+	  
   </mapper>

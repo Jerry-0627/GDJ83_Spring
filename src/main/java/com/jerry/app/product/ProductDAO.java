@@ -1,11 +1,13 @@
 package com.jerry.app.product;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.jerry.app.member.MemberDTO;
 import com.jerry.app.util.PageDTO;
 
 @Repository
@@ -52,5 +54,13 @@ public class ProductDAO {
 
 	public int doupdate(ProductDTO productDTO) throws Exception {
 		return sqlSession.update(NAMESPACE + "doupdate", productDTO);
+	}
+
+	public int addWish(Map<String, Object> map) throws Exception {
+		return sqlSession.insert(NAMESPACE + "addWish", map);
+	}
+
+	public List<ProductDTO> wishList(MemberDTO memberDTO) throws Exception {
+		return sqlSession.selectList(NAMESPACE + "wishList", memberDTO);
 	}
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.jerry.app.boards.BoardDAO;
 import com.jerry.app.boards.BoardDTO;
 import com.jerry.app.boards.BoardFileDTO;
+import com.jerry.app.files.FileDTO;
 import com.jerry.app.util.PageDTO;
 
 //객체 만드는 어노테이션
@@ -83,4 +84,11 @@ public class QnaDAO implements BoardDAO {
 		System.out.println("실행은됨");
 		return sqlSession.update(NAMESPACE + "replyUpdate", qnaDTO);
 	}
+
+	@Override
+	public FileDTO fileDetail(FileDTO fileDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(NAMESPACE + "fileDetail", fileDTO);
+	}
+
 }

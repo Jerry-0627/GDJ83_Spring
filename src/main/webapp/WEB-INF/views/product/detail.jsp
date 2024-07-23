@@ -55,11 +55,18 @@
 								class = "btn btn-outline-warning">상품 수정</a>
 								<a href="./delete?product_num=${detail.product_num}"
 								class = "btn btn-outline-danger">상품 삭제</a>
+								
+								<a type ="button" id="addWish" data-product-id="${detail.product_num}" href="#" class = "btn btn-warning">
+								<!-- 버튼으로 만들어도 상관없음 -->
+									관심목록에 추가</a>
 								</div>
 								<div>
 									<c:forEach items="${detail.product_file}" var="f">
 										<a class="btn btn-info" href="/resources/upload/products/${f.file_name}">${f.ori_name}</a>
 									</c:forEach>
+								</div>
+								<div id="wishResult">
+
 								</div>
 								
 							</div>
@@ -74,5 +81,6 @@
 		</div>		
 	</div>
 	<c:import url="/WEB-INF/views/template/footerScript.jsp"></c:import>
+	<script src="/resources/js/product/wish.js"></script>
 </body>
 </html>

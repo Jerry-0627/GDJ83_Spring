@@ -52,7 +52,7 @@
 			</div>
 			<div>
 				<c:forEach items="${getDetail.boardFileDTOs }" var="f">
-					<a href="/resources/upload/${board}/${f.file_name}">${f.ori_name}</a>
+					<a href="./fileDown?file_num=${f.file_num}">${f.ori_name}</a>
 				</c:forEach>
 			</div>
 				

@@ -2,6 +2,7 @@ package com.jerry.app.boards;
 
 import java.util.List;
 
+import com.jerry.app.files.FileDTO;
 import com.jerry.app.util.PageDTO;
 
 public interface BoardDAO {
@@ -30,5 +31,9 @@ public interface BoardDAO {
 
 	// detail
 	public abstract BoardDTO getDetail(BoardDTO boardDTO) throws Exception;
+
+	// fileDetail
+	FileDTO fileDetail(FileDTO fileDTO) throws Exception;
+	// interface라서 public abstract 생략 가능.
 
 }

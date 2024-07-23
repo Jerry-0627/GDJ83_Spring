@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.jerry.app.boards.BoardDTO;
+import com.jerry.app.files.FileDTO;
 import com.jerry.app.member.MemberDTO;
 import com.jerry.app.util.PageDTO;
 
@@ -95,4 +96,17 @@ public class QnaController {
 		int result = qnaService.delete(qndDTO);
 		return "redirect:./list";
 	}
+
+	@GetMapping("fileDown")
+	// a태크는 뜨로우니까 getmapping이라는데.. 잘 모르겠으니 공부하자
+	// 723. 아래 fileDown(FileDTO fileDTO...) 의 FileDTO 앞에 @ModelAtrribute가 생각되어 있다.
+	// 723. 변수명이 fileDTO이기 떄문에 key가 fileDTO로 들어가 있다... 이 내용은 나중에 또 할거하 하심.
+	public String fileDown(FileDTO fileDTO, Model model) throws Exception {
+		fileDTO = qnaService.fileDetail(fileDTO);
+		model.addAttribute("file", fileDTO);
+		// servletContext로 인해 바로 jsp로 가지 않고 fileDown으로 가서 실해오딘다.
+		// fileDown이라는 빈이 없으면.(클래스가 없으면) jsp에서 찾는다.
+		return "fileDown";
+	}
+
 }

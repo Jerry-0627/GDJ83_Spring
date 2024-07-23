@@ -1,6 +1,8 @@
 package com.jerry.app.product;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.jerry.app.files.FileManager;
+import com.jerry.app.member.MemberDTO;
 import com.jerry.app.util.PageDTO;
 
 @Service
@@ -80,5 +83,18 @@ public class ProductService {
 	public int doupdate(ProductDTO productDTO) throws Exception {
 		int result = productDAO.doupdate(productDTO);
 		return result;
+	}
+
+	public int addWish(Long product_num, String id) throws Exception {
+		// product_num과 id를 하나로 합쳐서 dao로 보내줘야 함
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("product_num", product_num);
+		map.put("user_id", id);
+		int result = productDAO.addWish(map);
+		return result;
+	}
+
+	public List<ProductDTO> wishList(MemberDTO memberDTO) throws Exception {
+		return productDAO.wishList(memberDTO);
 	}
 }

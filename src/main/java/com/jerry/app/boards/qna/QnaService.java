@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.jerry.app.boards.BoardDTO;
 import com.jerry.app.boards.BoardFileDTO;
 import com.jerry.app.boards.BoardService;
+import com.jerry.app.files.FileDTO;
 import com.jerry.app.files.FileManager;
 import com.jerry.app.util.PageDTO;
 
@@ -99,28 +100,34 @@ public class QnaService implements BoardService {
 		qnaDTO.setStep(parent.getStep() + 1);
 		qnaDTO.setDepth(parent.getDepth() + 1);
 		result = qnaDAO.reply(qnaDTO);
-		
-		//파일 저장
+
+		// 파일 저장
 		String path = session.getServletContext().getRealPath("resources/upload/qna");
-		
-		if(multipartFiles == null) {
+
+		if (multipartFiles == null) {
 			return result;
 		}
-		
-		for(MultipartFile f : multipartFiles) {
-			if(f.isEmpty()) {
+
+		for (MultipartFile f : multipartFiles) {
+			if (f.isEmpty()) {
 				continue;
 			}
 			String fileName = fileManager.fileSave(path, f);
 			BoardFileDTO boardFileDTO = new BoardFileDTO();
-			
+
 			boardFileDTO.setBoard_num(qnaDTO.getBoard_num());
 			boardFileDTO.setFile_name(fileName);
 			boardFileDTO.setOri_name(f.getOriginalFilename());
 			result = qnaDAO.doAddFile(boardFileDTO);
-			
+
 		}
 		return result;
+	}
+
+	@Override
+	public FileDTO fileDetail(FileDTO fileDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return qnaDAO.fileDetail(fileDTO);
 	}
 
 }

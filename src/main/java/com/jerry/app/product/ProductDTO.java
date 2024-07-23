@@ -9,6 +9,15 @@ public class ProductDTO {
 	private double product_rate;
 	private String product_ex;
 	private List<ProductFileDTO> product_file;
+	private List<ProductDTO> product_list;
+
+	public List<ProductDTO> getProduct_list() {
+		return product_list;
+	}
+
+	public void setProduct_list(List<ProductDTO> product_list) {
+		this.product_list = product_list;
+	}
 
 	public List<ProductFileDTO> getProduct_file() {
 		return product_file;

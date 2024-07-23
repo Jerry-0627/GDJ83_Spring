@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
@@ -100,4 +101,24 @@ public class ProductController {
 
 		return "commons/message";
 	}
+
+	@GetMapping("addWish")
+	public String addWish(Long product_num, HttpSession session, Model model) throws Exception {
+		MemberDTO memberDTO = (MemberDTO) session.getAttribute("member");
+
+		int result = productService.addWish(product_num, memberDTO.getUser_id());
+		model.addAttribute("msg", result);
+
+		return "commons/result";
+	}
+
+	@GetMapping("wishList")
+	public List<ProductDTO> wishList(HttpSession session, Model model) throws Exception {
+		MemberDTO memberDTO = (MemberDTO) session.getAttribute("member");
+		List<ProductDTO> result = productService.wishList(memberDTO);
+		model.addAttribute("list", result);
+
+		return result;
+	}
+
 }

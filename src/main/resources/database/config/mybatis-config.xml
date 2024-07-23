@@ -9,6 +9,7 @@
   		<typeAlias type="com.jerry.app.util.PageDTO" alias = "PageDTO"/>
   		<typeAlias type="com.jerry.app.product.ProductFileDTO" alias = "ProductFileDTO"/>
   		
+  		
   		<typeAlias type="com.jerry.app.member.MemberDTO" alias = "MemberDTO"/>
   		<typeAlias type="com.jerry.app.member.MemberFileDTO" alias = "MemberFileDTO"/>
   		

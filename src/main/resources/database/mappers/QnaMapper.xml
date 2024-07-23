@@ -133,5 +133,11 @@
 		UPDATE QNA_INFO SET DEL = 1 WHERE BOARD_NUM = #{board_num}
 	 	
 	 </delete>
+	 
+	 <select id="fileDetail" parameterType="FileDTO" resultType="FileDTO">
+	 	SELECT *
+	 	FROM QNA_FILE_INFO
+	 	WHERE FILE_NUM = #{file_num}
+	 </select>
  
   </mapper>
