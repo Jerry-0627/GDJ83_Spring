@@ -127,9 +127,9 @@ public class ProductController {
 		for (Long bn : product_num) {
 			System.out.println("@@ bn : " + bn);
 		}
-//		int delResult = productService.deleteWishList(product_num, memberDTO.getUser_id());
-//		System.out.println(product_num);
-//		model.addAttribute("msg", delResult);
+		int delResult = productService.deleteWishList(product_num, memberDTO.getUser_id());
+		System.out.println(product_num);
+		model.addAttribute("msg", delResult);
 
 		return "commons/result";
 

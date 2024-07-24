@@ -59,6 +59,7 @@
 								<a type ="button" id="addWish" data-product-id="${detail.product_num}" href="#" class = "btn btn-warning">
 								<!-- 버튼으로 만들어도 상관없음 -->
 									관심목록에 추가</a>
+								<a type = "button" href="./list">뒤로가기</a>
 								</div>
 								<div>
 									<c:forEach items="${detail.product_file}" var="f">

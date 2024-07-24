@@ -59,18 +59,41 @@ for(let c of checkOne){
 
 // @@@@@@ wish List 전체 삭제
 const deleteWishAll = document.getElementById("deleteWishAll");
+const wishListTr = document.getElementsByName("wishListTr");
 
 deleteWishAll.addEventListener("click", ()=>{
+    const e = [];
     let url="./deleteWishList?"
+
+
+    // 파라미터를 보내는거.
     for(let c of checkOne){
-        if(c.checked){
+        if(c.checked == true){
             url = url + "product_num=" + c.getAttribute("data-wish-id") + "&";
+            e.push(c);
         }
     }
-    const start = 0;
-    const last = url.length - 1;
-    url = url.substring(start, last);
-    console.log(url);
-    // fetch(url)
+    url = url.substring(0, url.length - 1);
+
+
+    // 비동기식 처리하는거.
+    fetch(url,{        
+        method:"GET"
+    }).then((r)=>{return r.text()})
+     .then((r)=>{
+        r=r.trim();
+        if(r>0){
+            for(let ele of e){
+                ele.parentNode.parentNode.remove();
+            }
+            alert("삭제를 성공하였다.");
+        }else if(r=0){
+            alert("삭제를 실패..1");
+        }else{
+            alert("삭제를 실패..2");
+
+        }
+    }).catch(()=>{alert("삭제를 실패..3")})
+
 
 })
