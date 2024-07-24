@@ -98,13 +98,16 @@ public class ProductService {
 		return productDAO.wishList(memberDTO);
 	}
 
-	public int deleteWishList(Long product_num, String user_id) throws Exception {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("product_num", product_num);
-		map.put("user_id", user_id);
-		int delResult = productDAO.deleteWishList(map);
+	public int deleteWishList(Long[] product_num, String user_id) throws Exception {
+		int result = 0;
+		for (Long bn : product_num) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("product_num", bn);
+			map.put("user_id", user_id);
+			result = productDAO.deleteWishList(map);
+		}
 
-		return delResult;
+		return result;
 
 	}
 

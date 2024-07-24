@@ -1,6 +1,5 @@
 const wishDelete = document.getElementsByClassName("wishDelete");
 
-
 for(let w of wishDelete){
     w.addEventListener("click", ()=>{
         let id = w.getAttribute("data-wish-id");
@@ -30,11 +29,13 @@ for(let w of wishDelete){
     });
 }
 
-// @@@ 724 @@@ 체크 박스
+
+// @@@@@@ 724 @@@@@@
+// @@@@@@ 체크 박스
 const checkAll = document.getElementById("checkAll");
 const checkOne = document.getElementsByClassName("checkOne");
 
-// @@@ checkAll 클릭 시 checkOne 전체 선택 또는 해제
+// @@ checkAll 클릭 시 checkOne 전체 선택 또는 해제
 checkAll.addEventListener("click", ()=>{
     console.log("checkAll 체크함");
     for(let c of checkOne){
@@ -42,7 +43,7 @@ checkAll.addEventListener("click", ()=>{
     }
 });
 
-// @@@ checkOne 클릭 시 checkAll 체크 여부 변경
+// @@ checkOne 클릭 시 checkAll 체크 여부 변경
 for(let c of checkOne){
     c.addEventListener("click", ()=>{
         let flag = true;
@@ -55,3 +56,21 @@ for(let c of checkOne){
         checkAll.checked = flag;
     }
 )}
+
+// @@@@@@ wish List 전체 삭제
+const deleteWishAll = document.getElementById("deleteWishAll");
+
+deleteWishAll.addEventListener("click", ()=>{
+    let url="./deleteWishList?"
+    for(let c of checkOne){
+        if(c.checked){
+            url = url + "product_num=" + c.getAttribute("data-wish-id") + "&";
+        }
+    }
+    const start = 0;
+    const last = url.length - 1;
+    url = url.substring(start, last);
+    console.log(url);
+    // fetch(url)
+
+})

@@ -122,12 +122,15 @@ public class ProductController {
 	}
 
 	@GetMapping("deleteWishList")
-	public String deleteWishList(HttpSession session, Long product_num, Model model) throws Exception {
+	public String deleteWishList(HttpSession session, Long[] product_num, Model model) throws Exception {
 		MemberDTO memberDTO = (MemberDTO) session.getAttribute("member");
-		int delResult = productService.deleteWishList(product_num, memberDTO.getUser_id());
-		System.out.println(product_num);
+		for (Long bn : product_num) {
+			System.out.println("@@ bn : " + bn);
+		}
+//		int delResult = productService.deleteWishList(product_num, memberDTO.getUser_id());
+//		System.out.println(product_num);
+//		model.addAttribute("msg", delResult);
 
-		model.addAttribute("msg", delResult);
 		return "commons/result";
 
 	}

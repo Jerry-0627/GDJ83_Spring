@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
@@ -132,6 +133,25 @@ public class memberController {
 			url = "commons/message";
 			model.addAttribute("result", "회원 탈퇴 실패");
 			model.addAttribute("url", "./myPage");
+		}
+		return url;
+	}
+
+	@GetMapping("join123")
+	public String join123(HttpSession session, Model model) throws Exception {
+		MemberDTO memberDTO = new MemberDTO();
+		memberDTO.setUser_id("123");
+		memberDTO.setUser_pw("123");
+		memberService.loginMemberService(memberDTO);
+		memberDTO = memberService.loginMemberService(memberDTO);
+
+		String url = "redirect:/";
+		if (memberDTO != null) {
+			session.setAttribute("member", memberDTO);
+		} else {
+			url = "commons/message";
+			model.addAttribute("result", "로그인에 실패했습니다.");
+			model.addAttribute("url", "/");
 		}
 		return url;
 	}

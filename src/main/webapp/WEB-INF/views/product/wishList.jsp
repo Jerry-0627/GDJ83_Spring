@@ -72,7 +72,8 @@
 										<c:forEach items="${list}" var="dto">
 											<tr>
 												<td>
-													<input class="checkOne" type="checkbox">
+													<input class="checkOne" type="checkbox" data-wish-id="${dto.product_num}">
+													<!--data-wish.. 는 데이터 속성이다.-->
 												</td>
 												<td>${dto.product_num}</th>
 												<td><a href="./detail?product_num=${dto.product_num}">${dto.product_name}</a></th>
@@ -84,7 +85,7 @@
 									</tbody>
 								</table>
 								<div>
-									<button type="button" class="btn btn-danger"> 전체 삭제</button>
+									<button type="button" class="btn btn-danger" id="deleteWishAll" > 전체 삭제</button>
 								</div>
 
 
