@@ -29,3 +29,29 @@ for(let w of wishDelete){
 
     });
 }
+
+// @@@ 724 @@@ 체크 박스
+const checkAll = document.getElementById("checkAll");
+const checkOne = document.getElementsByClassName("checkOne");
+
+// @@@ checkAll 클릭 시 checkOne 전체 선택 또는 해제
+checkAll.addEventListener("click", ()=>{
+    console.log("checkAll 체크함");
+    for(let c of checkOne){
+        c.checked = checkAll.checked
+    }
+});
+
+// @@@ checkOne 클릭 시 checkAll 체크 여부 변경
+for(let c of checkOne){
+    c.addEventListener("click", ()=>{
+        let flag = true;
+        for(let c2 of checkOne){
+            if(!c2.checked){
+                flag = false;
+                break;
+            }
+        }
+        checkAll.checked = flag;
+    }
+)}

@@ -59,7 +59,7 @@
 									<thead>
 										<tr>
 											<th>
-												<input type="checkbox">
+												<input id="checkAll" type="checkbox">
 											</th>
 											<th>product_num</th>
 											<th>product_name</th>
@@ -72,7 +72,7 @@
 										<c:forEach items="${list}" var="dto">
 											<tr>
 												<td>
-													<input type="checkbox">
+													<input class="checkOne" type="checkbox">
 												</td>
 												<td>${dto.product_num}</th>
 												<td><a href="./detail?product_num=${dto.product_num}">${dto.product_name}</a></th>
@@ -83,6 +83,9 @@
 										</c:forEach>
 									</tbody>
 								</table>
+								<div>
+									<button type="button" class="btn btn-danger"> 전체 삭제</button>
+								</div>
 
 
 								

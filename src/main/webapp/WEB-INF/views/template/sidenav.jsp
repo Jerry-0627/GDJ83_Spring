@@ -20,7 +20,7 @@
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="/product/list">Product List</a>
-                                    <a class="nav-link" href="layout-sidenav-light.html">만드는 중</a>
+                                    <a class="nav-link" href="/product/wishList">Wish List</a>
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
