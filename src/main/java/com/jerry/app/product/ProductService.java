@@ -100,12 +100,16 @@ public class ProductService {
 
 	public int deleteWishList(Long[] product_num, String user_id) throws Exception {
 		int result = 0;
-		for (Long bn : product_num) {
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("product_num", bn);
-			map.put("user_id", user_id);
-			result = productDAO.deleteWishList(map);
-		}
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("user_id", user_id);
+		map.put("product_ar", product_num);
+		result = productDAO.deleteWishList(map);
+//		for (Long bn : product_num) {
+//			Map<String, Object> map = new HashMap<String, Object>();
+//			map.put("product_num", bn);
+//			map.put("user_id", user_id);
+//			result = productDAO.deleteWishList(map);
+//		}
 
 		return result;
 

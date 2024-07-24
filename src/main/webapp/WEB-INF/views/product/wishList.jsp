@@ -87,8 +87,23 @@
 								<div>
 									<button type="button" class="btn btn-danger" id="deleteWishAll" > 전체 삭제</button>
 								</div>
+								<textarea rows="" cols=""></textarea>
+								<div class="col-12 mb-3" align="right"></div>
 
-
+</textarea>
+<c:forEach begin="0" end="10" step="1">
+<div class="col-12 mb-3" align="right">
+	<a href="/" class="btn btn-primary" type="btn">
+		답글달기
+	</a>
+	<a href="/" class="btn btn-primary" type="btn">
+		수정하기
+	</a>
+	<a href="/" class="btn btn-primary" type="btn">
+		삭제하기
+	</a>
+</div>
+</c:forEach>
 								
 								<div>
 									<nav aria-label="Page navigation example">

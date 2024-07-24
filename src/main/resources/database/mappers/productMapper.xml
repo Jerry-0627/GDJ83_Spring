@@ -100,8 +100,11 @@
 	  </select>
 	  
 	  <delete id="deleteWishList" parameterType="java.util.Map">
-	  		DELETE FROM WISH_INFO WI
-			WHERE USER_ID = #{user_id} AND PRODUCT_NUM = #{product_num}
+	  		DELETE FROM WISH_INFO WI WHERE USER_ID = #{user_id} AND 
+	  		PRODUCT_NUM IN
+			<foreach collection="product_ar" item="item" open="(" separator="," close=")">
+				#{item}
+			</foreach>
 	  </delete>
 	  
 
