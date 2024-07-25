@@ -8,6 +8,7 @@
   		<typeAlias type="com.jerry.app.product.ProductDTO" alias="ProductDTO"/>
   		<typeAlias type="com.jerry.app.util.PageDTO" alias = "PageDTO"/>
   		<typeAlias type="com.jerry.app.product.ProductFileDTO" alias = "ProductFileDTO"/>
+  		<typeAlias type="com.jerry.app.product.ProductCommentDTO" alias = "ProductCommentDTO"/>
   		
   		
   		<typeAlias type="com.jerry.app.member.MemberDTO" alias = "MemberDTO"/>
@@ -24,6 +25,8 @@
   		
   		
   		<typeAlias type="com.jerry.app.boards.notice.ExtraDTO" alias = "ExtraDTO"/>
+  		<typeAlias type="com.jerry.app.util.CommentPageDTO" alias = "CommentPageDTO"/>
+  		
   		
   		<typeAlias type="com.jerry.app.files.FileDTO" alias = "FileDTO"/>
   		

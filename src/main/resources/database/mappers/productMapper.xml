@@ -107,6 +107,35 @@
 			</foreach>
 	  </delete>
 	  
+	  <insert id="commentAdd" parameterType="ProductCommentDTO">
+		  	INSERT INTO COMMENT_INFO 
+			VALUES (BOARD_SEQ.NEXTVAL, #{product_num}, #{board_writer}, SYSDATE, #{board_contents})
+	  </insert>
+	  
+	  <select id="commentList" parameterType="CommentPageDTO" resultType="ProductCommentDTO">
+	  		SELECT * FROM
+	  		(
+		  		SELECT ROWNUM R, C.* FROM		
+		  		(
+		  			SELECT *
+		  			FROM COMMENT_INFO
+		  			WHERE PRODUCT_NUM = #{product_num}
+		  			ORDER BY CREATE_DATE DESC
+		  		)C
+		  	)
+		  	WHERE R BETWEEN #{startRow} AND #{lastRow} 
+	  </select>
+	  
+	  <select id="commentTotalCount" parameterType="CommentPageDTO" resultType="Long">
+	  		SELECT COUNT(BOARD_NUM)
+	  		FROM COMMENT_INFO
+	  		WHERE PRODUCT_NUM = #{product_num}
+	  </select>
+	  
+	  <delete id="commentDelete" parameterType="ProductCommentDTO">
+	  		DELETE FROM COMMENT_INFO
+			WHERE BOARD_NUM = #{board_num}
+	  </delete>
 
 	  
   </mapper>

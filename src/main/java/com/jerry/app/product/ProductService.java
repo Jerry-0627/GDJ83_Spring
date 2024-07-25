@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.jerry.app.files.FileManager;
 import com.jerry.app.member.MemberDTO;
+import com.jerry.app.util.CommentPageDTO;
 import com.jerry.app.util.PageDTO;
 
 @Service
@@ -115,4 +116,17 @@ public class ProductService {
 
 	}
 
+	public int commentAdd(ProductCommentDTO pCommentDTO) throws Exception {
+		return productDAO.commentAdd(pCommentDTO);
+	}
+
+	public List<ProductCommentDTO> commnetList(CommentPageDTO commentPageDTO) throws Exception {
+		commentPageDTO.makeRow();
+		commentPageDTO.makeNum(productDAO.commentTotalCount(commentPageDTO));
+		return productDAO.commentList(commentPageDTO);
+	}
+
+	public int commentDelete(ProductCommentDTO productCommentDTO) throws Exception {
+		return productDAO.commentDelete(productCommentDTO);
+	}
 }

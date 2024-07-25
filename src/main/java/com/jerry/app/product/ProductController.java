@@ -8,11 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.jerry.app.member.MemberDTO;
+import com.jerry.app.util.CommentPageDTO;
 import com.jerry.app.util.PageDTO;
 
 @Controller
@@ -133,6 +135,36 @@ public class ProductController {
 
 		return "commons/result";
 
+	}
+
+	@PostMapping("commentAdd")
+	public String commentAdd(ProductCommentDTO pCommentDTO, HttpSession session, Model model) throws Exception {
+		System.out.println("commentAdd board_num : " + pCommentDTO.getBoard_contents());
+		MemberDTO memberDTO = (MemberDTO) session.getAttribute("member");
+
+		pCommentDTO.setBoard_writer(memberDTO.getUser_id());
+
+		int result = productService.commentAdd(pCommentDTO);
+
+		System.out.println(result);
+
+		model.addAttribute("msg", result);
+		return "commons/result";
+	}
+
+	@GetMapping("commentList")
+	public void commentList(CommentPageDTO commentPageDTO, Model model) throws Exception {
+		List<ProductCommentDTO> commentlist = productService.commnetList(commentPageDTO);
+		model.addAttribute("commentList", commentlist);
+		model.addAttribute("pageDTO", commentPageDTO);
+	}
+
+	@PostMapping("commentDelete")
+	public String commentDelete(ProductCommentDTO productCommentDTO, Model model) throws Exception {
+		int result = productService.commentDelete(productCommentDTO);
+		System.out.println("commentDelete : " + result);
+		model.addAttribute("msg", result);
+		return "commons/result";
 	}
 
 }

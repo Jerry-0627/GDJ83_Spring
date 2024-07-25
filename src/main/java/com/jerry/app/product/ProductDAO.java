@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.jerry.app.member.MemberDTO;
+import com.jerry.app.util.CommentPageDTO;
 import com.jerry.app.util.PageDTO;
 
 @Repository
@@ -66,5 +67,21 @@ public class ProductDAO {
 
 	public int deleteWishList(Map<String, Object> map) throws Exception {
 		return sqlSession.delete(NAMESPACE + "deleteWishList", map);
+	}
+
+	public int commentAdd(ProductCommentDTO pCommentDTO) throws Exception {
+		return sqlSession.insert(NAMESPACE + "commentAdd", pCommentDTO);
+	}
+
+	public List<ProductCommentDTO> commentList(CommentPageDTO commentPageDTO) throws Exception {
+		return sqlSession.selectList(NAMESPACE + "commentList", commentPageDTO);
+	}
+
+	public Long commentTotalCount(CommentPageDTO commentPageDTO) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "commentTotalCount", commentPageDTO);
+	}
+
+	public int commentDelete(ProductCommentDTO productCommentDTO) throws Exception {
+		return sqlSession.delete(NAMESPACE + "commentDelete", productCommentDTO);
 	}
 }
