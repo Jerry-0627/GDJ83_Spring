@@ -167,4 +167,13 @@ public class ProductController {
 		return "commons/result";
 	}
 
+	@PostMapping("commentUpdate")
+	public String commentUpdate(ProductCommentDTO productCommentDTO, Model model) throws Exception {
+
+		int result = productService.commentUpdate(productCommentDTO);
+		System.out.println("commentUpdate : " + result);
+		model.addAttribute("msg", result);
+		return "commons/result";
+	}
+
 }

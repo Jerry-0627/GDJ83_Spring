@@ -21,14 +21,19 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${commentList}" var="list">
+			<c:forEach items="${commentList}" var="list" varStatus="i">
 				<tr>
 					<td>${list.board_num}</td>
 					<td>${list.product_num }</td>
 					<td>${list.board_writer }</td>
 					<td>${list.create_date }</td>
-					<td>${list.board_contents }</td>
-					<td><c:if test="${list.board_writer eq member.user_id}"> <button class="commentListBtn" data-commentListBtn = "${list.board_num}">X</button></c:if></td>
+					<td id="con${i.count}">${list.board_contents}</td>
+					<td><c:if test="${list.board_writer eq member.user_id}"><button class="btn btn-danger commentListBtn" 
+						data-commentListBtn = "${list.board_num}">X</button></c:if></td>
+					<td><c:if test="${list.board_writer eq member.user_id}"><button class="btn btn-outline-primary ups" 
+						data-update-con="con${i.count}"
+						data-commentListBtn = "${list.board_num}"
+						data-bs-toggle="modal" data-bs-target="#commentModal">수정</button></c:if></td>
 				</tr>
 			</c:forEach>
 		</tbody>

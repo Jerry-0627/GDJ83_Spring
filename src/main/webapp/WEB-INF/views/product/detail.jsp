@@ -60,7 +60,7 @@
 									<!-- 버튼으로 만들어도 상관없음 -->
 										관심목록에 추가</a>
 									<a type = "button" class="btn btn-success" href="./list">뒤로가기</a>
-									<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#commentModal">
+									<button id= "openModal"type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#commentModal">
 									상품평 입력
 									</button>
 								</div>

@@ -84,4 +84,8 @@ public class ProductDAO {
 	public int commentDelete(ProductCommentDTO productCommentDTO) throws Exception {
 		return sqlSession.delete(NAMESPACE + "commentDelete", productCommentDTO);
 	}
+
+	public int commentUpdate(ProductCommentDTO productCommentDTO) throws Exception {
+		return sqlSession.update(NAMESPACE + "commentUpdate", productCommentDTO);
+	}
 }

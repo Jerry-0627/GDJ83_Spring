@@ -136,6 +136,12 @@
 	  		DELETE FROM COMMENT_INFO
 			WHERE BOARD_NUM = #{board_num}
 	  </delete>
+	  
+	  <update id="commentUpdate" parameterType="ProductCommentDTO">
+	  		UPDATE COMMENT_INFO
+	  		SET BOARD_CONTENTS = #{board_contents}
+	  		WHERE BOARD_NUM = #{board_num}
+	  </update>
 
 	  
   </mapper>
