@@ -34,6 +34,36 @@
 	</beans:bean>
 	<context:component-scan base-package="com.jerry.app" />
 	
+	<!--  7.30 인터셉터  -->
+	<beans:bean class="com.jerry.app.interceptors.WriterInterceptor" name="WriterInterceptor"></beans:bean>
+	
+	<interceptors>
+		<interceptor>
+			<!-- 어떤 url이 왔을 때 -->
+			<!-- mapping이 가장 처음에 나와야 한다. 절대로 순서를 바꾸면 안된다 -->
+			<mapping path="/product/*"/>
+			<!-- 뭐는 제외하고 싶을 때  exclude0mapping -->
+			<exclude-mapping path="/product/add"/>
+			<!-- 참조빈을 만들어 객체를 참조 시킴 -->
+			<beans:ref bean="testInterceptor"/>
+		</interceptor>
+		<interceptor>
+			<mapping path="/product/*"/>
+			<mapping path="/notice/*"/>
+			<exclude-mapping path="/product/list"/>
+			<exclude-mapping path="/product/detail"/>
+			<exclude-mapping path="/notice/list"/>
+			<exclude-mapping path="/notice/detail"/>
+			<!-- 여기서 객체를 만드는 것 -->
+			<beans:bean class="com.jerry.app.interceptors.AdminInterceptor"></beans:bean>
+			
+		</interceptor>
+		<interceptor>
+			<mapping path="/qna/update"/>
+			<beans:ref bean="WriterInterceptor"/>
+		</interceptor>
+	</interceptors>
+	
 	
 	
 </beans:beans>

@@ -13,6 +13,7 @@
 	<c:import url="/WEB-INF/views/template/navbar.jsp"></c:import>
 	<div id="layoutSidenav">
 		<c:import url="/WEB-INF/views/template/sidenav.jsp"></c:import>
+		<c:import url="/WEB-INF/views/template/Summer.jsp"></c:import>
 		<div id="layoutSidenav_content">
 		<!-- 코드 작성 라인-->
 			<main>
@@ -43,9 +44,10 @@
 											name="product_rate">
 									</div>
 									<div class="mb-3">
-										<label for="product_ex" class="form-label">상품 설명</label> <input
-											type="text" class="form-control" id="product_ex"
-											name="product_ex">
+										<label for="product_ex" class="form-label">상품 설명</label> 
+										<textarea
+											class="form-control" id="product_ex"
+											name="product_ex" row="5"></textarea>
 									</div>
 
 									<div class="mb-3">
@@ -78,6 +80,7 @@
 	<script src="/resources/js/commons/files.js"></script>
 	<script>
 		setMax(5);
+		$("#product_ex").summernote();
 	</script>
 </body>
 </html>

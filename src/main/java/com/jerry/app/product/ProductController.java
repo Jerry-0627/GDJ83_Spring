@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,9 +49,9 @@ public class ProductController {
 	}
 
 	@RequestMapping(value = "add", method = RequestMethod.POST)
-	public String doadd(ProductDTO productDTO, Model model, MultipartFile[] files, HttpSession session)
+	public String doadd(ProductDTO productDTO, Model model, MultipartFile[] attach, HttpSession session)
 			throws Exception {
-		int result = productService.doadd(productDTO, files, session);
+		int result = productService.doadd(productDTO, attach, session);
 		String url = "";
 		if (result > 0) {
 			url = "redirect:./list";
@@ -174,6 +175,23 @@ public class ProductController {
 		System.out.println("commentUpdate : " + result);
 		model.addAttribute("msg", result);
 		return "commons/result";
+	}
+
+	// null포인트 예외면 여기서 처리하자~ 라는 의미이다.
+	@ExceptionHandler(NullPointerException.class)
+	public void exceptionHandler() {
+
+	}
+
+	@ExceptionHandler(Exception.class)
+	public void exceptionHandler2() {
+
+	}
+
+	// 최상위 에러 처리
+	@ExceptionHandler(Throwable.class)
+	public void exceptionHandler3() {
+
 	}
 
 }

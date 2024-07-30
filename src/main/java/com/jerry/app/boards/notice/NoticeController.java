@@ -20,6 +20,7 @@ import com.jerry.app.util.PageDTO;
 @RequestMapping(value = "/notice/*")
 public class NoticeController {
 
+	// 모델 컨트롤러의 메서드가 실행되기 전에 이게 가장 먼저 실행됨. 전역 처리!
 	@ModelAttribute("board")
 	public String getBoard() {
 		return "notice";
