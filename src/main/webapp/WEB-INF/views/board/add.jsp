@@ -8,6 +8,18 @@
 <title>Insert title here</title>
 <c:import url="/WEB-INF/views/template/header.jsp"></c:import>
 <c:import url="/WEB-INF/views/template/headerScript.jsp"></c:import>
+<style>
+	.ck.ck-editor{
+	   max-width: 1000px;
+  }
+  .ck-editor__editable {
+     min-height: 400px;
+     max-height: 600px;
+  }
+  .ck-content { 
+	  font-size: 12px; 
+	 }
+</style>
 </head>
 <body class="sb-nav-fixed">
 	<c:import url="/WEB-INF/views/template/navbar.jsp"></c:import>
@@ -30,7 +42,7 @@
 			</div>
 			<div class="mb-3">
 				<label for="board_contents" class="form-label">내용</label>
-				<textarea rows="" cols="" class="form-control" id="board_contents" name = "board_contents"></textarea>
+				<textarea rows="" cols="" class="form-control" id="editor" name = "board_contents"></textarea>
 			</div>
 			
 			<button type="button" id="add" class="btn btn-primary">사진 파일 추가</button>
@@ -50,10 +62,25 @@
 		</div>		
 	</div>
 	<c:import url="/WEB-INF/views/template/footerScript.jsp"></c:import>
+	<script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
 	<script type="text/javascript" src="/resources/js/commons/files.js"></script>
 	<script>
 		setMax(5);
+		ClassicEditor.create( 
+				document.getElementById( 'editor' ), {
+					extraPlugins: [MyCustomUploadAdapterPlugin]
+		       },
+			   
+		     )
+			 .then(editor=>{
+				window.editor=editor
+			 })
+			 
+			 .catch(error=>{
+					console.log('error')
+			 });	
+			
 	</script>
-	
+	<script src="/resources/js/commons/ckeditor" type="text/javascript"></script>
 </body>
 </html>

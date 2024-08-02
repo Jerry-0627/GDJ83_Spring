@@ -13,7 +13,7 @@ public class ExceptionController {
 
 	@ExceptionHandler(Throwable.class)
 	public String exceprion(Model model) {
-		return "errors/error_400";
+	return "errors/error_400";
 	}
 
 }
